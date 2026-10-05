@@ -1,61 +1,113 @@
-import Link from "next/link";
 import type { ComponentProps, ReactNode } from "react";
+import { Magnetic } from "@/components/motion/Magnetic";
+import { TransitionLink } from "@/components/shell/PageTransition";
 
-type Variant = "solid" | "outline" | "onDark";
+type Tone = "ink" | "light" | "solid";
 
-const base =
-  "inline-flex items-center justify-center gap-2 rounded-xs px-6 py-3 text-xs font-medium uppercase tracking-[0.18em] transition-colors duration-200 disabled:cursor-not-allowed disabled:opacity-45";
-
-const variants: Record<Variant, string> = {
-  solid: "bg-bordeaux text-cream hover:bg-bordeaux-deep",
-  outline:
-    "border border-ink/25 text-ink hover:border-ink hover:bg-ink hover:text-cream",
-  onDark: "border border-cream/35 text-cream hover:bg-cream hover:text-ink",
+const tones: Record<Tone, { pill: string; disc: string }> = {
+  /** Dark hairline on the light rose backgrounds. */
+  ink: {
+    pill: "border-ink/30 text-ink hover:border-ink",
+    disc: "bg-ink text-cream",
+  },
+  /** White hairline on the brand pink and over photography. */
+  light: {
+    pill: "border-white/60 text-white hover:border-white",
+    disc: "bg-white text-ink",
+  },
+  solid: {
+    pill: "border-ink bg-ink text-cream",
+    disc: "bg-cream text-ink",
+  },
 };
 
-type ButtonAsLink = {
+const pill =
+  "group inline-flex items-center gap-4 rounded-full border py-2 pr-2 pl-6 text-[0.6875rem] font-medium tracking-[0.22em] uppercase transition-colors duration-500";
+
+function Arrow() {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      className="h-3.5 w-3.5 transition-transform duration-500 ease-expo group-hover:translate-x-0.5"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.5"
+      aria-hidden
+    >
+      <path d="M5 12h14M13 6l6 6-6 6" />
+    </svg>
+  );
+}
+
+function Inner({ tone, children }: { tone: Tone; children: ReactNode }) {
+  return (
+    <>
+      <span>{children}</span>
+      <span
+        className={`flex h-9 w-9 items-center justify-center rounded-full transition-transform duration-500 ease-expo group-hover:scale-110 ${tones[tone].disc}`}
+      >
+        <Arrow />
+      </span>
+    </>
+  );
+}
+
+type PillLinkProps = {
   href: string;
-  variant?: Variant;
+  tone?: Tone;
   className?: string;
   children: ReactNode;
 };
 
-export function ButtonLink({
+/**
+ * The site's call to action: a hairline pill that ends in a filled disc, and
+ * leans towards the pointer. Internal links get the page transition; external
+ * ones open as ordinary anchors.
+ */
+export function PillLink({
   href,
-  variant = "solid",
+  tone = "ink",
   className = "",
   children,
-}: ButtonAsLink) {
-  const external = /^https?:\/\//.test(href) || href.startsWith("mailto:");
-  const classes = `${base} ${variants[variant]} ${className}`;
-
-  if (external) {
-    return (
-      <a href={href} className={classes} rel="noreferrer noopener">
-        {children}
-      </a>
-    );
-  }
+}: PillLinkProps) {
+  const classes = `${pill} ${tones[tone].pill} ${className}`;
+  const external = /^(https?:|mailto:|tel:)/.test(href);
 
   return (
-    <Link href={href} className={classes}>
-      {children}
-    </Link>
+    <Magnetic>
+      {external ? (
+        <a
+          href={href}
+          className={classes}
+          {...(href.startsWith("http")
+            ? { target: "_blank", rel: "noreferrer noopener" }
+            : {})}
+        >
+          <Inner tone={tone}>{children}</Inner>
+        </a>
+      ) : (
+        <TransitionLink href={href} className={classes}>
+          <Inner tone={tone}>{children}</Inner>
+        </TransitionLink>
+      )}
+    </Magnetic>
   );
 }
 
-export function Button({
-  variant = "solid",
+export function PillButton({
+  tone = "solid",
   className = "",
   children,
   ...props
-}: ComponentProps<"button"> & { variant?: Variant }) {
+}: ComponentProps<"button"> & { tone?: Tone }) {
   return (
-    <button
-      {...props}
-      className={`${base} ${variants[variant]} ${className}`}
-    >
-      {children}
-    </button>
+    <Magnetic>
+      <button
+        {...props}
+        className={`${pill} ${tones[tone].pill} disabled:cursor-not-allowed disabled:opacity-50 ${className}`}
+      >
+        <Inner tone={tone}>{children}</Inner>
+      </button>
+    </Magnetic>
   );
 }

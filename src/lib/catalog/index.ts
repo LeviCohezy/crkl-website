@@ -28,11 +28,11 @@ export async function getWineSlugs(): Promise<string[]> {
 }
 
 export const styleLabels: Record<WineStyle, string> = {
-  red: "Red",
-  white: "White",
+  red: "Rood",
+  white: "Wit",
   "rosé": "Rosé",
-  orange: "Orange",
-  sparkling: "Sparkling",
+  orange: "Oranje",
+  sparkling: "Mousserend",
 };
 
 /** "CRKL Blanc 2023" — vintage appended only when there is one. */

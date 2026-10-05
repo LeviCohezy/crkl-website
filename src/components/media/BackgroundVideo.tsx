@@ -2,9 +2,10 @@
 
 import { useEffect, useRef, useState } from "react";
 import { imageUrl, videoUrl } from "@/lib/media";
+import { playMuted } from "@/lib/video";
 
 type BackgroundVideoProps = {
-  /** Path under public/videos, e.g. "hero/crkl-hero.mp4". */
+  /** Path under public/videos, e.g. "hero/crkl-hero-tafel.mp4". */
   src: string;
   /** Path under public/images, used as the poster frame. */
   poster?: string;
@@ -14,9 +15,8 @@ type BackgroundVideoProps = {
 /**
  * Muted, looping background video.
  *
- * Silently removes itself if the file is missing or the browser refuses to
- * play it, leaving whatever sits behind it visible. Honours
- * prefers-reduced-motion by holding on the poster frame instead of playing.
+ * Plays only while it is on screen, removes itself if the file is missing,
+ * and honours prefers-reduced-motion by holding on the poster frame.
  */
 export function BackgroundVideo({
   src,
@@ -29,14 +29,20 @@ export function BackgroundVideo({
   useEffect(() => {
     const video = videoRef.current;
     if (!video) return;
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
 
-    const reduced = window.matchMedia("(prefers-reduced-motion: reduce)");
-    if (reduced.matches) {
-      video.pause();
-      return;
-    }
-    // Autoplay can still be refused; that is not an error worth surfacing.
-    void video.play().catch(() => {});
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          playMuted(video);
+        } else {
+          video.pause();
+        }
+      },
+      { threshold: 0.05 },
+    );
+    observer.observe(video);
+    return () => observer.disconnect();
   }, []);
 
   if (failed) return null;
@@ -47,7 +53,6 @@ export function BackgroundVideo({
       className={`h-full w-full object-cover ${className}`}
       src={videoUrl(src)}
       poster={poster ? imageUrl(poster) : undefined}
-      autoPlay
       muted
       loop
       playsInline

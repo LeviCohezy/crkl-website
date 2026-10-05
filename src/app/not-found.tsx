@@ -1,24 +1,32 @@
-import { ButtonLink } from "@/components/ui/Button";
-import { Container } from "@/components/ui/Container";
+import Link from "next/link";
+
+const LETTERS = ["4", "0", "4"];
 
 export default function NotFound() {
   return (
-    <main className="flex flex-1 items-center bg-cream py-32">
-      <Container width="narrow" className="text-center">
-        <p className="eyebrow text-bordeaux">404</p>
-        <h1 className="font-display mt-4 text-4xl font-light sm:text-5xl">
-          This bottle isn&rsquo;t in the cellar
-        </h1>
-        <p className="mt-5 text-stone">
-          The page you were looking for has moved or never existed.
-        </p>
-        <div className="mt-10 flex justify-center gap-3">
-          <ButtonLink href="/">Back home</ButtonLink>
-          <ButtonLink href="/wines" variant="outline">
-            See the wines
-          </ButtonLink>
-        </div>
-      </Container>
+    <main className="flex min-h-svh flex-1 flex-col items-center justify-center bg-blush px-6 py-32 text-center text-white">
+      <p
+        aria-hidden
+        className="font-display flex gap-[4vw] text-[30vw] leading-[0.8] font-light sm:text-[22vw]"
+      >
+        {LETTERS.map((letter, index) => (
+          <span key={index} className="outline-text">
+            {letter}
+          </span>
+        ))}
+      </p>
+      <h1 className="font-display mt-10 text-4xl font-light sm:text-5xl">
+        Deze tafel bestaat niet
+      </h1>
+      <p className="mt-4 max-w-sm text-white/95">
+        De pagina die u zocht is verhuisd of heeft nooit bestaan.
+      </p>
+      <Link
+        href="/"
+        className="eyebrow mt-10 rounded-full bg-white px-8 py-4 text-ink transition-transform duration-500 ease-expo hover:scale-105"
+      >
+        Terug naar de startpagina
+      </Link>
     </main>
   );
 }

@@ -3,6 +3,11 @@
 The marketing site is built so that commerce can be added without rewriting it.
 This is the plan, the seams that already exist, and the order to do it in.
 
+CRKL is a restaurant, so the first things the shop is likely to sell are
+bottles from the cellar and gift vouchers. Vouchers are currently sold through
+Tablefever (linked from `/reserveren`); the wines in the catalogue are
+placeholders. Decide what is actually for sale before starting Phase 1.
+
 Nothing here is installed yet — no Stripe dependency, no database, no auth. That
 is deliberate: dead scaffolding rots. What exists instead are the boundaries.
 
@@ -15,7 +20,7 @@ is deliberate: dead scaffolding rots. What exists instead are the boundaries.
 | Prices as integer cents | `WineCommerce.priceCents`, `src/lib/format.ts` | Same unit Stripe uses — no float rounding bugs later. |
 | Reserved route groups | `src/app/(shop)`, `src/app/(account)` | Cart/checkout and account pages get their own chrome without touching the marketing layout in `src/app/(site)/layout.tsx`. |
 | Env template | `.env.example` | Stripe/DB/auth variables are listed and commented out. |
-| Disabled buy button | `src/app/(site)/wines/[slug]/page.tsx` | One clearly-marked block to replace with a real add-to-cart. |
+| Disabled buy button | `src/app/(site)/wijn/[slug]/page.tsx` | One clearly-marked block to replace with a real add-to-cart. |
 
 ## Phase 1 — Products as the source of truth
 

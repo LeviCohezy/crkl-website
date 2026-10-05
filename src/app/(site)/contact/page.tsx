@@ -1,94 +1,142 @@
 import type { Metadata } from "next";
-import { ButtonLink } from "@/components/ui/Button";
-import { Container } from "@/components/ui/Container";
-import { SectionHeading } from "@/components/ui/SectionHeading";
+import { Reveal } from "@/components/motion/Reveal";
+import { RotatingBadge } from "@/components/motion/RotatingBadge";
+import { EnquiryForm } from "@/components/sections/EnquiryForm";
+import { PageHero } from "@/components/sections/PageHero";
+import { ReserveCta } from "@/components/sections/ReserveCta";
+import { PillLink } from "@/components/ui/Button";
+import { shoot } from "@/lib/photos";
 import { site } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "Contact",
   description:
-    "Trade enquiries, allocations and press requests for CRKL wine.",
+    "CRKL, Diksmuidsesteenweg 351a, 8800 Roeselare. Adres, openingsuren, route en contact.",
+  alternates: { canonical: "/contact" },
 };
 
-const enquiries = [
-  {
-    title: "Trade & on-trade",
-    body: "Restaurants, wine bars and retailers: ask for the current trade sheet, allocations and sample availability.",
-  },
-  {
-    title: "Private orders",
-    body: "Case orders by email until the online shop opens. Tell us what you are after and we will come back with what is in the cellar.",
-  },
-  {
-    title: "Press",
-    body: "Tasting samples, high-resolution images and founder interviews on request.",
-  },
-];
+const mapQuery = encodeURIComponent(
+  `${site.name} restaurant, ${site.contact.street}, ${site.contact.city}`,
+);
 
 export default function ContactPage() {
   return (
-    <div className="bg-cream py-20 sm:py-28">
-      <Container width="wide">
-        <SectionHeading
-          as="h1"
-          eyebrow="Contact"
-          title="Talk to us directly"
-          intro="We answer our own email, usually within two working days."
-        />
+    <>
+      <PageHero
+        eyebrow="Contact"
+        title={"Tot in\n*Roeselare*"}
+        intro="Dankzij onze centrale ligging in Roeselare en ruime parkeermogelijkheden is het restaurant vlot bereikbaar."
+        image={{
+          src: shoot.dec25(20),
+          alt: "Tafel bij het raam, onder de bollamp",
+        }}
+        shape="arch"
+        badge="Kom langs"
+      />
 
-        <div className="mt-14 grid gap-14 lg:grid-cols-[1fr_1.2fr]">
-          <div>
-            <p className="eyebrow text-stone">Email</p>
-            <a
-              href={`mailto:${site.contact.email}`}
-              className="font-display mt-3 block text-2xl font-light break-all text-ink transition-colors hover:text-bordeaux sm:text-3xl"
-            >
-              {site.contact.email}
-            </a>
+      <section className="overflow-hidden bg-mist py-28 sm:py-36">
+        <div className="mx-auto grid max-w-[100rem] items-center gap-16 px-6 sm:px-10 lg:grid-cols-2 lg:gap-24">
+          {/* The map, in a circle, tinted to the palette. */}
+          <Reveal className="relative mx-auto w-full max-w-[36rem]">
+            <div className="aspect-square overflow-hidden rounded-full bg-petal">
+              <iframe
+                title="Kaart met de ligging van CRKL"
+                src={`https://www.google.com/maps?q=${mapQuery}&z=15&output=embed`}
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+                className="map-tint h-full w-full scale-[1.15] border-0"
+              />
+            </div>
+            <div className="pointer-events-none absolute -top-6 -right-2 h-28 w-28 text-rosewood sm:h-36 sm:w-36">
+              <RotatingBadge text="Diksmuidsesteenweg 351a" className="h-full w-full" />
+            </div>
+          </Reveal>
 
-            {site.contact.phone ? (
-              <>
-                <p className="eyebrow mt-10 text-stone">Phone</p>
-                <a
-                  href={`tel:${site.contact.phone.replace(/\s/g, "")}`}
-                  className="mt-3 block text-lg text-ink transition-colors hover:text-bordeaux"
-                >
+          <div className="grid gap-12 sm:grid-cols-2">
+            <Reveal>
+              <p className="eyebrow text-rosewood">Adres</p>
+              <p className="font-display mt-5 text-3xl leading-snug font-light">
+                {site.contact.street}
+                <br />
+                {site.contact.city}
+              </p>
+              <div className="mt-7">
+                <PillLink href={site.links.route}>Route</PillLink>
+              </div>
+            </Reveal>
+
+            <Reveal delay={0.08}>
+              <p className="eyebrow text-rosewood">Bereik ons</p>
+              <p className="font-display mt-5 text-3xl leading-snug font-light">
+                <a href={`tel:${site.contact.phoneHref}`} className="link-line">
                   {site.contact.phone}
                 </a>
-              </>
-            ) : null}
+              </p>
+              <p className="mt-2">
+                <a href={`mailto:${site.contact.email}`} className="link-line">
+                  {site.contact.email}
+                </a>
+              </p>
+              <p className="mt-5 flex gap-5 text-sm">
+                {site.social.map((item) => (
+                  <a
+                    key={item.href}
+                    href={item.href}
+                    target="_blank"
+                    rel="noreferrer noopener"
+                    className="link-line"
+                  >
+                    {item.label}
+                  </a>
+                ))}
+              </p>
+            </Reveal>
 
-            <p className="eyebrow mt-10 text-stone">Where we are</p>
-            <address className="mt-3 text-sm leading-relaxed text-ink-soft/85 not-italic">
-              {site.contact.address.map((line) => (
-                <span key={line} className="block">
-                  {line}
-                </span>
-              ))}
-            </address>
-
-            <div className="mt-10">
-              <ButtonLink href={`mailto:${site.contact.email}`}>
-                Write to us
-              </ButtonLink>
-            </div>
+            <Reveal delay={0.16} className="sm:col-span-2">
+              <p className="eyebrow text-rosewood">Openingsuren</p>
+              <dl className="mt-5 grid gap-6 border-t border-ink/15 pt-6 sm:grid-cols-2">
+                <div>
+                  <dt className="text-sm text-stone">Lunch · {site.hours.lunch.days}</dt>
+                  <dd className="font-display mt-1 text-3xl font-light">
+                    {site.hours.lunch.hours}
+                  </dd>
+                </div>
+                <div>
+                  <dt className="text-sm text-stone">Diner · {site.hours.dinner.days}</dt>
+                  <dd className="font-display mt-1 text-3xl font-light">
+                    {site.hours.dinner.hours}
+                  </dd>
+                </div>
+              </dl>
+              <p className="mt-6 max-w-md text-sm leading-relaxed text-ink-soft">
+                {site.hours.closed}. {site.hours.note}
+              </p>
+            </Reveal>
           </div>
-
-          <ul className="grid gap-8 sm:grid-cols-2 lg:grid-cols-1">
-            {enquiries.map((item) => (
-              <li
-                key={item.title}
-                className="border-t border-ink/15 pt-6 lg:max-w-xl"
-              >
-                <h2 className="font-display text-xl font-light">{item.title}</h2>
-                <p className="mt-3 text-sm leading-relaxed text-ink-soft/80">
-                  {item.body}
-                </p>
-              </li>
-            ))}
-          </ul>
         </div>
-      </Container>
-    </div>
+      </section>
+
+      <section className="bg-petal py-28 sm:py-36">
+        <div className="mx-auto grid max-w-[100rem] gap-14 px-6 sm:px-10 lg:grid-cols-12 lg:gap-8">
+          <Reveal className="lg:col-span-4">
+            <p className="eyebrow text-rosewood">Schrijf ons</p>
+            <h2 className="font-display mt-6 text-[clamp(2.2rem,4.4vw,4rem)] leading-[1.06] font-light">
+              Een vraag, een <em>idee</em>, een feest
+            </h2>
+            <p className="mt-6 max-w-xs leading-relaxed text-ink-soft">
+              Voor een tafel gebruikt u het snelst het reservatieformulier.
+            </p>
+            <div className="mt-8">
+              <PillLink href="/reserveren">Reserveren</PillLink>
+            </div>
+          </Reveal>
+          <div className="lg:col-span-7 lg:col-start-6">
+            <EnquiryForm kind="contact" />
+          </div>
+        </div>
+      </section>
+
+      <ReserveCta />
+    </>
   );
 }

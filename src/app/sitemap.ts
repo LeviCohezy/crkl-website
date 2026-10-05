@@ -8,13 +8,17 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
   return [
     { url: `${siteUrl}/`, lastModified: now, priority: 1 },
-    { url: `${siteUrl}/wines`, lastModified: now, priority: 0.9 },
-    { url: `${siteUrl}/about`, lastModified: now, priority: 0.7 },
-    { url: `${siteUrl}/contact`, lastModified: now, priority: 0.6 },
+    { url: `${siteUrl}/menu`, lastModified: now, priority: 0.9 },
+    { url: `${siteUrl}/reserveren`, lastModified: now, priority: 0.9 },
+    { url: `${siteUrl}/verhaal`, lastModified: now, priority: 0.7 },
+    { url: `${siteUrl}/leveranciers`, lastModified: now, priority: 0.6 },
+    { url: `${siteUrl}/wijn`, lastModified: now, priority: 0.6 },
+    { url: `${siteUrl}/galerij`, lastModified: now, priority: 0.5 },
+    { url: `${siteUrl}/contact`, lastModified: now, priority: 0.7 },
     ...slugs.map((slug) => ({
-      url: `${siteUrl}/wines/${slug}`,
+      url: `${siteUrl}/wijn/${slug}`,
       lastModified: now,
-      priority: 0.8,
+      priority: 0.4,
     })),
   ];
 }

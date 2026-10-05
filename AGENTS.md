@@ -21,3 +21,11 @@ This block is written and re-added by `next dev` — verify at `node_modules/nex
 - Money is integer cents everywhere, formatted with `formatPrice()`.
 - Colours and type come from the tokens in `src/app/globals.css`. No raw hex in
   components.
+- The site is in Dutch (Flemish, "u" form). Facts live in `src/lib/site.ts`
+  and `src/lib/menu.ts`; do not invent hours, prices, names or dishes — add to
+  `CONTENT_TODO.md` instead.
+- Name photographs through `shoot.*` in `src/lib/photos.ts` rather than typing
+  the `©` filenames by hand.
+- Internal links use `TransitionLink` (or `PillLink`) so they get the page
+  transition. Scroll scenes use GSAP from `src/lib/gsap.ts`, wrapped in
+  `gsap.matchMedia()` with `MOTION_OK` so reduced motion gets a static layout.
