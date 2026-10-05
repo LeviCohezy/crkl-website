@@ -1,26 +1,290 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+/* ---------------------------------------------------------------------------
+   Brand tokens. These are placeholders built to look deliberate — swap the
+   hex values for the real CRKL palette and the whole site follows.
+   Every token becomes a utility: --color-bordeaux → bg-bordeaux, text-bordeaux.
+--------------------------------------------------------------------------- */
+@theme {
+  --color-ink: #17110f;
+  --color-ink-soft: #2b211d;
+  --color-cream: #f7f2e9;
+  --color-cream-dim: #ebe3d5;
+  --color-bordeaux: #6b1f2e;
+  --color-bordeaux-deep: #431320;
+  --color-brass: #b4894a;
+  --color-stone: #87786d;
+
+  /* Brand pink */
+  --color-blush: #c59a9a;
+  --color-blush-deep: #a97b7b;
+
+  --radius-xs: 2px;
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --font-display: var(--font-display), ui-serif, Georgia, serif;
+  --font-sans: var(--font-sans), ui-sans-serif, system-ui, sans-serif;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    background-color: var(--color-cream);
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  ::selection {
+    background-color: var(--color-bordeaux);
+    color: var(--color-cream);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-brass);
+    outline-offset: 3px;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      transition-duration: 0.01ms !important;
+    }
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+@layer components {
+  /* Small-caps label used above section headings. */
+  .eyebrow {
+    font-size: 0.6875rem;
+    font-weight: 500;
+    letter-spacing: 0.26em;
+    text-transform: uppercase;
+  }
+
+  /* Frosted bar, as in the reference header. */
+  .glass-dark {
+    background-color: color-mix(in oklab, var(--color-ink) 38%, transparent);
+    backdrop-filter: blur(16px) saturate(140%);
+    -webkit-backdrop-filter: blur(16px) saturate(140%);
+    border: 1px solid rgb(255 255 255 / 0.2);
+  }
+
+  .glass-light {
+    background-color: color-mix(in oklab, var(--color-cream) 68%, transparent);
+    backdrop-filter: blur(16px) saturate(140%);
+    -webkit-backdrop-filter: blur(16px) saturate(140%);
+    border: 1px solid rgb(23 17 15 / 0.12);
+  }
+
+  /* Film grain. Keeps large empty areas from reading as flat while the real
+     photography is still missing. Needs a positioned parent. */
+  .grain::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    pointer-events: none;
+    opacity: 0.3;
+    mix-blend-mode: overlay;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+  }
+
+  /* Stand-in atmospheres for sections whose footage/photography hasn't
+     landed yet. Delete once the real assets are in. */
+  .wash-cellar {
+    background:
+      radial-gradient(65% 80% at 18% 15%, rgb(107 31 46 / 0.6), transparent 62%),
+      radial-gradient(55% 65% at 82% 28%, rgb(180 137 74 / 0.28), transparent 60%),
+      linear-gradient(165deg, #2a1d1a 0%, #17110f 70%);
+  }
+
+  .wash-cream {
+    background:
+      radial-gradient(70% 70% at 80% 10%, rgb(180 137 74 / 0.18), transparent 60%),
+      radial-gradient(60% 60% at 10% 80%, rgb(107 31 46 / 0.1), transparent 65%),
+      var(--color-cream);
+  }
+
+  /* ── Letter hero ──────────────────────────────────────────────────────
+     Four columns on the brand pink, each holding one outlined letter.
+     Hovering a column fills its letter and reveals that column's image,
+     faded out towards the bottom.
+
+     The glyph colour is one variable: set data-glyph="ink" on .letter-hero
+     to switch the whole section from white letters to near-black.        */
+
+  .letter-hero {
+    --letter-ink: #ffffff;
+  }
+
+  .letter-hero[data-glyph="ink"] {
+    --letter-ink: #171110;
+  }
+
+  .letter-col {
+    position: relative;
+    overflow: hidden;
+    border-color: color-mix(in oklab, var(--letter-ink) 28%, transparent);
+  }
+
+  /* Measured off the reference: the image emerges from the background over
+     the top ~22%, holds, then dissolves back into it between 76% and 90%,
+     leaving the bottom tenth as flat brand pink. */
+  .letter-reveal {
+    opacity: 0;
+    transition: opacity 800ms cubic-bezier(0.22, 1, 0.36, 1);
+    -webkit-mask-image: linear-gradient(
+      to bottom,
+      transparent 0%,
+      #000 22%,
+      #000 76%,
+      transparent 90%
+    );
+    mask-image: linear-gradient(
+      to bottom,
+      transparent 0%,
+      #000 22%,
+      #000 76%,
+      transparent 90%
+    );
+  }
+
+  .letter-glyph {
+    color: transparent;
+    -webkit-text-stroke: 1px var(--letter-ink);
+    transition: color 700ms cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  .letter-caption {
+    color: var(--letter-ink);
+  }
+
+  @media (hover: hover) {
+    .letter-col:hover .letter-reveal {
+      opacity: 1;
+    }
+    .letter-col:hover .letter-image {
+      transform: scale(1);
+    }
+    .letter-col:hover .letter-glyph {
+      color: var(--letter-ink);
+    }
+  }
+
+  /* No hover to give: show a hint of each image instead of nothing. */
+  @media (hover: none) {
+    .letter-reveal {
+      opacity: 0.45;
+    }
+  }
+
+  .letter-image {
+    transform: scale(1.08);
+    transition: transform 1200ms cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  /* Stand-in for a column whose photograph hasn't landed yet — a deeper
+     rose, so it still reads against the pink. */
+  .wash-reveal {
+    background:
+      radial-gradient(70% 55% at 50% 35%, rgb(138 92 92 / 0.55), transparent 72%),
+      linear-gradient(to bottom, rgb(120 78 78 / 0.4), transparent 80%);
+  }
+
+  /* ── White reveal ─────────────────────────────────────────────────────
+     A soft-edged circle opening from the bottom-left corner while the hero
+     stays pinned, until the viewport is white. JS only writes two numbers:
+     --p (wash progress) and --c (content progress). Everything else is CSS,
+     so nothing re-renders per frame.
+
+     Stops are percentages of the gradient's farthest corner — the top-right
+     — so --p of 1 covers the whole viewport whatever its aspect ratio.      */
+
+  .reveal-stage {
+    --p: 0;
+    --c: 0;
+  }
+
+  .reveal-wash {
+    background: radial-gradient(
+      circle at 0% 100%,
+      #fff calc(var(--p) * 132% - 16%),
+      rgb(255 255 255 / 0) calc(var(--p) * 132%)
+    );
+  }
+
+  .reveal-content {
+    opacity: var(--c);
+    transform: translateY(calc((1 - var(--c)) * 1.5rem));
+  }
+
+  /* Statement parallax — both copies of the line read the same variable, so
+     they drift together and never separate. Applied inside the counter-rotated
+     box, so "up" means up the page, not up the tilted video. */
+  .statement-shift {
+    transform: translateY(var(--statement-shift, 0px));
+    will-change: transform;
+  }
+
+  /* ── Vertical produce tickers ─────────────────────────────────────────
+     Two slow columns flanking the kitchen section. The list is rendered
+     twice inside the track, so -50% lands exactly on the duplicate and the
+     loop is seamless.                                                     */
+  .ticker-mask {
+    -webkit-mask-image: linear-gradient(
+      to bottom,
+      transparent 0%,
+      #000 16%,
+      #000 84%,
+      transparent 100%
+    );
+    mask-image: linear-gradient(
+      to bottom,
+      transparent 0%,
+      #000 16%,
+      #000 84%,
+      transparent 100%
+    );
+  }
+
+  .ticker-track {
+    animation: ticker-up 46s linear infinite;
+  }
+
+  .ticker-track-slow {
+    animation: ticker-up 64s linear infinite reverse;
+  }
+
+  @keyframes ticker-up {
+    from {
+      transform: translateY(0);
+    }
+    to {
+      transform: translateY(-50%);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .ticker-track,
+    .ticker-track-slow {
+      animation: none;
+    }
+  }
+
+  /* Oversized letterform sitting behind a section as texture. */
+  .ghost-letter {
+    font-size: clamp(22rem, 46vw, 56rem);
+    line-height: 0.75;
+    letter-spacing: 0.02em;
+  }
 }

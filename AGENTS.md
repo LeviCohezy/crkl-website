@@ -7,3 +7,17 @@ This version has breaking changes — APIs, conventions, and file structure may 
 This block is written and re-added by `next dev` — verify at `node_modules/next/dist/server/lib/generate-agent-files.js`. Removing it from a diff only re-creates the uncommitted change; committing it with your work keeps the tree clean.
 
 <!-- END:nextjs-agent-rules -->
+
+## CRKL project notes
+
+- Read `README.md` for the layout and `docs/` for the two decisions that shape
+  this codebase: `MEDIA.md` (asset conventions) and `ECOMMERCE-ROADMAP.md`
+  (how the shop gets added).
+- Never hardcode `/images/...` or `/videos/...` paths. Use `imageUrl()` /
+  `videoUrl()` from `src/lib/media.ts`, or the `MediaImage` / `BackgroundVideo`
+  components, so the asset library can move to a CDN in one env change.
+- Read the catalogue through `src/lib/catalog/index.ts`, never by importing
+  `wines.ts` directly. Those functions are async so the data source can change.
+- Money is integer cents everywhere, formatted with `formatPrice()`.
+- Colours and type come from the tokens in `src/app/globals.css`. No raw hex in
+  components.

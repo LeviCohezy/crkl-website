@@ -39,3 +39,11 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# keep the template committed
+!.env.example
+
+# media library — too big for git, see docs/MEDIA.md
+/public/images/all/
+/public/videos/all/
+/public/inspiration/
