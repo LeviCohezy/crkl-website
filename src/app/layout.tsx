@@ -1,6 +1,11 @@
 import type { Metadata, Viewport } from "next";
 import { Cormorant_Garamond, Inter } from "next/font/google";
 import "./globals.css";
+import { Cursor } from "@/components/shell/Cursor";
+import { PageTransition } from "@/components/shell/PageTransition";
+import { Preloader } from "@/components/shell/Preloader";
+import { ScrollProgress } from "@/components/shell/ScrollProgress";
+import { SmoothScroll } from "@/components/shell/SmoothScroll";
 import { site, siteUrl } from "@/lib/site";
 
 const display = Cormorant_Garamond({
@@ -37,7 +42,7 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: "#c59a9a",
+  themeColor: "#dfbbb3",
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
@@ -47,7 +52,15 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       className={`${display.variable} ${sans.variable} h-full antialiased`}
     >
       <body className="flex min-h-full flex-col">
-        {children}
+        <SmoothScroll>
+          <PageTransition>
+            <Preloader />
+            {children}
+            <ScrollProgress />
+            <Cursor />
+            <div aria-hidden className="grain-layer" />
+          </PageTransition>
+        </SmoothScroll>
         {/* Without scripts there is no intro to play, so no curtain either. */}
         <noscript>
           <style>{".preloader{display:none}"}</style>

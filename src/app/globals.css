@@ -2,33 +2,28 @@
 
 /* ---------------------------------------------------------------------------
    Brand tokens. CRKL is rose: the dining room's two-tone curtains, the chairs,
-   the napkins. Blush is the brand pink; everything else is a tint or a shade
-   of it, plus one warm near-black for type.
+   the napkins. Blush (#DFBBB3) is the brand's dusty rose and clay (#B26A5C)
+   its accent, both as given in the wireframe; the rest are tints of the rose
+   plus one warm near-black for type.
+
+   Blush is light — type on it is ink, never white.
    Every token becomes a utility: --color-blush → bg-blush, text-blush.
 --------------------------------------------------------------------------- */
 @theme {
-  --color-blush: #c59a9a;
-  --color-blush-deep: #a97b7b;
-  --color-rosewood: #6f4a4b;
-  --color-petal: #ecd9d6;
-  --color-mist: #f8f0ee;
-  --color-cream: #fdfaf8;
-  --color-ink: #2b1c1d;
-  --color-ink-soft: #4d3838;
-  --color-stone: #927a79;
+  --color-blush: #dfbbb3;
+  --color-clay: #b26a5c;
+  --color-rosewood: #7c463c;
+  --color-petal: #f2e2dd;
+  --color-mist: #faf4f1;
+  --color-cream: #fefcfa;
+  --color-ink: #2a1c1a;
+  --color-ink-soft: #57423e;
+  --color-stone: #96827c;
 
   --ease-expo: cubic-bezier(0.16, 1, 0.3, 1);
   --ease-soft: cubic-bezier(0.22, 1, 0.36, 1);
 
-  --animate-spin-slow: spin 22s linear infinite;
-  --animate-marquee: marquee 38s linear infinite;
   --animate-grain: grain 1.2s steps(6) infinite;
-
-  @keyframes marquee {
-    to {
-      transform: translateX(-50%);
-    }
-  }
 
   @keyframes grain {
     0% {
@@ -71,7 +66,7 @@
   }
 
   ::selection {
-    background-color: var(--color-blush-deep);
+    background-color: var(--color-clay);
     color: var(--color-cream);
   }
 
@@ -114,12 +109,6 @@
     text-transform: uppercase;
   }
 
-  /* Hairline letterforms — the hero's resting state, reused as texture. */
-  .outline-text {
-    -webkit-text-fill-color: transparent;
-    -webkit-text-stroke: 1px currentColor;
-  }
-
   /* A link whose rule draws in from the left on hover. */
   .link-line {
     background-image: linear-gradient(currentColor, currentColor);
@@ -141,79 +130,69 @@
     inset: -20%;
     z-index: 80;
     pointer-events: none;
-    opacity: 0.11;
+    opacity: 0.09;
     mix-blend-mode: multiply;
-    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='220' height='220'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0.17 0 0 0 0 0.11 0 0 0 0 0.11 0 0 0 0.9 0'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='220' height='220'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0.16 0 0 0 0 0.11 0 0 0 0 0.1 0 0 0 0.9 0'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
     animation: var(--animate-grain);
   }
 
-  /* ── Letter hero ──────────────────────────────────────────────────────
-     Four columns on the brand pink, each holding one outlined letter.
-     Hovering a column fills its letter and reveals that column's image,
-     dissolved into the pink top and bottom.                              */
-
-  .letter-col {
-    position: relative;
-    overflow: hidden;
-    border-color: rgb(255 255 255 / 0.28);
-  }
-
-  .letter-reveal {
+  /* ── Hero slider ──────────────────────────────────────────────────────
+     Each slide wipes up over the last and then drifts slowly back from a
+     slight zoom for as long as it is on screen.                          */
+  .slide {
     opacity: 0;
-    transition: opacity 800ms var(--ease-soft);
-    -webkit-mask-image: linear-gradient(
-      to bottom,
-      transparent 0%,
-      #000 22%,
-      #000 76%,
-      transparent 90%
-    );
-    mask-image: linear-gradient(
-      to bottom,
-      transparent 0%,
-      #000 22%,
-      #000 76%,
-      transparent 90%
-    );
+    z-index: 0;
   }
 
-  .letter-glyph {
-    color: transparent;
-    -webkit-text-stroke: 1px #fff;
-    transition: color 700ms var(--ease-soft);
+  .slide[data-state="prev"] {
+    opacity: 1;
+    z-index: 1;
   }
 
-  .letter-image {
-    transform: scale(1.08);
-    transition: transform 1200ms var(--ease-soft);
+  .slide[data-state="active"] {
+    opacity: 1;
+    z-index: 2;
+    animation: slide-in 1.7s var(--ease-expo) both;
   }
 
-  @media (hover: hover) {
-    .letter-col:hover .letter-reveal {
-      opacity: 1;
+  .slide[data-state="active"] .slide-image {
+    animation: slide-drift 9s linear both;
+  }
+
+  @keyframes slide-in {
+    from {
+      clip-path: inset(100% 0 0 0);
     }
-    .letter-col:hover .letter-image {
+    to {
+      clip-path: inset(0 0 0 0);
+    }
+  }
+
+  @keyframes slide-timer {
+    from {
+      transform: scaleX(0);
+    }
+    to {
+      transform: scaleX(1);
+    }
+  }
+
+  @keyframes slide-drift {
+    from {
+      transform: scale(1.12);
+    }
+    to {
       transform: scale(1);
     }
-    .letter-col:hover .letter-glyph {
-      color: #fff;
-    }
   }
 
-  /* No hover to give: show a hint of each image instead of nothing. */
-  @media (hover: none) {
-    .letter-reveal {
-      opacity: 0.26;
-    }
-  }
-
-  /* The hero is a scroll scene; without motion it is a single screen. */
-  .hero-track {
-    height: 320svh;
+  /* The signature dish is a scroll scene; without motion it is one screen. */
+  .signature-track {
+    height: 260svh;
   }
 
   @media (prefers-reduced-motion: reduce) {
-    .hero-track {
+    .signature-track {
       height: 100svh;
     }
   }
@@ -242,7 +221,7 @@
   .field {
     width: 100%;
     border: 0;
-    border-bottom: 1px solid rgb(43 28 29 / 0.25);
+    border-bottom: 1px solid color-mix(in oklab, var(--color-ink) 28%, transparent);
     border-radius: 0;
     background: transparent;
     padding: 0.85rem 0;
@@ -252,7 +231,7 @@
   }
 
   .field::placeholder {
-    color: rgb(43 28 29 / 0.35);
+    color: color-mix(in oklab, var(--color-ink) 38%, transparent);
   }
 
   .field:focus {

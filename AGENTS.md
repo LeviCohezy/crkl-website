@@ -12,20 +12,33 @@ This block is written and re-added by `next dev` — verify at `node_modules/nex
 
 - Read `README.md` for the layout and `docs/` for the two decisions that shape
   this codebase: `MEDIA.md` (asset conventions) and `ECOMMERCE-ROADMAP.md`
-  (how the shop gets added).
+  (what the shop still needs).
+- **The wireframe decides structure**: which pages exist, which sections each
+  has, and in what order (`wireframes-crkl-v3`, summarised in the README's
+  page table). Layout and styling are the site's own. Do not add, drop or
+  reorder sections without being asked.
+- **Elegance first.** Whitespace, type and photography do the work. Circles
+  and other shapes are rare accents — today there is one circle on the site
+  (the signature dish on the homepage). Do not add decorative shapes, rounded
+  image masks or rotating badges.
+- Build pages from `src/components/sections/`; give each section a `Band`
+  tone (white / tint / dark / brand) to keep the wireframe's pacing.
 - Never hardcode `/images/...` or `/videos/...` paths. Use `imageUrl()` /
   `videoUrl()` from `src/lib/media.ts`, or the `MediaImage` / `BackgroundVideo`
-  components, so the asset library can move to a CDN in one env change.
+  components, so the asset library can move to a CDN in one env change. Name
+  photographs through `shoot.*` in `src/lib/photos.ts` rather than typing the
+  `©` filenames by hand.
 - Read the catalogue through `src/lib/catalog/index.ts`, never by importing
-  `wines.ts` directly. Those functions are async so the data source can change.
+  `products.ts` directly. Those functions are async so the data source can
+  change. The cart (`src/lib/cart.ts`) stores slugs and quantities only —
+  always look prices up again.
 - Money is integer cents everywhere, formatted with `formatPrice()`.
 - Colours and type come from the tokens in `src/app/globals.css`. No raw hex in
-  components.
-- The site is in Dutch (Flemish, "u" form). Facts live in `src/lib/site.ts`
-  and `src/lib/menu.ts`; do not invent hours, prices, names or dishes — add to
-  `CONTENT_TODO.md` instead.
-- Name photographs through `shoot.*` in `src/lib/photos.ts` rather than typing
-  the `©` filenames by hand.
-- Internal links use `TransitionLink` (or `PillLink`) so they get the page
-  transition. Scroll scenes use GSAP from `src/lib/gsap.ts`, wrapped in
-  `gsap.matchMedia()` with `MOTION_OK` so reduced motion gets a static layout.
+  components. Blush is light: type on it is ink, never white.
+- The site is in Dutch (Flemish, "u" form; `/trouwen` says "jullie"). Facts
+  live in `src/lib/site.ts` and `src/lib/menu.ts`; do not invent hours,
+  prices, names, dishes, reviews or quotes — add to `CONTENT_TODO.md` instead.
+- Internal links use `TransitionLink` (or `ArrowLink` / `SolidLink`) so they
+  get the page transition. Scroll scenes use GSAP from `src/lib/gsap.ts`,
+  wrapped in `gsap.matchMedia()` with `MOTION_OK` so reduced motion gets a
+  static layout.

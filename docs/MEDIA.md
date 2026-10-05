@@ -29,18 +29,16 @@ through it.
 ## The films on the site
 
 The raw films in `videos/all/` are portrait phone footage, up to 44 MB each.
-The site never plays those. It plays seven short loops cut from them, scaled
+The site never plays those. It plays five short loops cut from them, scaled
 to 720 px wide, silent, 0.5–1.9 MB each — small enough to live in git:
 
 | File | Cut from | Used |
 | --- | --- | --- |
-| `hero/crkl-hero-keuken.mp4` | `CRKL_Asperges.mp4`, 0:07–0:21 | hero, left |
-| `hero/crkl-hero-tafel.mp4` | `Video-5960.mp4`, 0:01–0:11 | hero, centre (and the only one on phones) |
-| `hero/crkl-hero-zaal.mp4` | `Video-74689.mp4`, 0:04–0:11 | hero, right |
-| `clips/crkl-dresseren.mp4` | `Video-71392.mp4`, 0:02–0:13 | homepage statement |
-| `clips/crkl-wijn.mp4` | `Video-11519.mp4`, 0:00–0:10 | menu page, wine section |
-| `clips/crkl-citroen.mp4` | `CRKL_Citroen.mp4`, 0:03–0:09 | spare |
-| `clips/crkl-pass.mp4` | `Video-8938.mp4`, 0:00–0:14 | spare |
+| `hero/crkl-hero-keuken.mp4` | `CRKL_Asperges.mp4`, 0:07–0:21 | homepage, "De chef" |
+| `hero/crkl-hero-tafel.mp4` | `Video-5960.mp4`, 0:01–0:11 | `/lunch`, "De formule" |
+| `hero/crkl-hero-zaal.mp4` | `Video-74689.mp4`, 0:04–0:11 | `/over-ons`, "Het verhaal" |
+| `clips/crkl-dresseren.mp4` | `Video-71392.mp4`, 0:02–0:13 | `/diner`, the statement |
+| `clips/crkl-wijn.mp4` | `Video-11519.mp4`, 0:00–0:10 | `/diner`, "Wijnbegeleiding" |
 
 Each has a poster frame of the same name in `images/hero/`. The cuts avoid
 the parts of the raw films that have captions burned in. To make another:
@@ -53,9 +51,9 @@ ffmpeg -ss 1.2 -i public/videos/hero/name.mp4 -frames:v 1 -q:v 4 \
        public/images/hero/name.jpg
 ```
 
-The hero shows three portrait films side by side on a wide screen — three
-9:16 frames make almost exactly one 16:9 — so each plays near its native
-resolution instead of one being stretched across the viewport.
+The films are portrait, so they are shown in portrait frames beside text
+(`SplitMedia` with a `video`) rather than stretched across a wide screen. The
+homepage hero is a slider of photographs for the same reason.
 
 ## Rules of thumb
 

@@ -16,6 +16,8 @@ type MediaImageProps = {
   imageClassName?: string;
   /** Shown while the real asset is still missing. */
   fallbackLabel?: string;
+  /** CSS object-position, for a crop far from the photograph's own ratio. */
+  focus?: string;
 };
 
 /**
@@ -34,6 +36,7 @@ export function MediaImage({
   className = "",
   imageClassName = "",
   fallbackLabel,
+  focus,
 }: MediaImageProps) {
   const [failed, setFailed] = useState(false);
 
@@ -48,6 +51,7 @@ export function MediaImage({
           priority={priority}
           onError={() => setFailed(true)}
           className={`object-cover ${imageClassName}`}
+          style={focus ? { objectPosition: focus } : undefined}
         />
       ) : (
         <span

@@ -3,48 +3,53 @@
 The marketing site is built so that commerce can be added without rewriting it.
 This is the plan, the seams that already exist, and the order to do it in.
 
-CRKL is a restaurant, so the first things the shop is likely to sell are
-bottles from the cellar and gift vouchers. Vouchers are currently sold through
-Tablefever (linked from `/reserveren`); the wines in the catalogue are
-placeholders. Decide what is actually for sale before starting Phase 1.
+CRKL is a restaurant; the shop sells gift boxes and the gift voucher. The
+voucher is sold through Tablefever today and links out. The three gift boxes
+in the catalogue are placeholders — names, contents and prices are invented
+so the flow can be seen working. Settle the real range before Phase 1.
 
-Nothing here is installed yet — no Stripe dependency, no database, no auth. That
-is deliberate: dead scaffolding rots. What exists instead are the boundaries.
+The pages already exist, following the wireframe: `/shop`, `/shop/[slug]`,
+`/geschenkbox`, `/cart`, `/checkout`, `/order-confirmation`, `/account`. What
+is missing is everything behind them — no Stripe dependency, no database, no
+auth. That is deliberate: dead scaffolding rots. What exists are the pages
+and the boundaries.
 
 ## The seams already in place
 
 | Seam | Where | Why it matters |
 | --- | --- | --- |
-| Async catalogue queries | `src/lib/catalog/index.ts` | `getWines()` / `getWine()` are already `async`. Swap the local array for a DB or Stripe products and no page changes. |
-| Optional commerce block | `src/lib/catalog/types.ts` → `WineCommerce` | Price, stock and Stripe ids live apart from editorial fields. Already holds `stripeProductId` / `stripePriceId`. |
-| Prices as integer cents | `WineCommerce.priceCents`, `src/lib/format.ts` | Same unit Stripe uses — no float rounding bugs later. |
-| Reserved route groups | `src/app/(shop)`, `src/app/(account)` | Cart/checkout and account pages get their own chrome without touching the marketing layout in `src/app/(site)/layout.tsx`. |
+| Async catalogue queries | `src/lib/catalog/index.ts` | `getProducts()` / `getProduct()` are already `async`. Swap the local array for a DB or Stripe products and no page changes. |
+| Optional commerce block | `src/lib/catalog/types.ts` → `ProductCommerce` | Price, stock and Stripe ids live apart from editorial fields. Already holds `stripeProductId` / `stripePriceId`. |
+| Prices as integer cents | `ProductCommerce.priceCents`, `src/lib/format.ts` | Same unit Stripe uses — no float rounding bugs later. |
+| A cart that stores no prices | `src/lib/cart.ts` | Slugs and quantities in localStorage. Every amount is looked up in the catalogue again, so the cart cannot change what something costs. Replace this file with a server-side cart and nothing else moves. |
+| A checkout that stops before payment | `src/components/shop/CheckoutFlow.tsx` | Steps one and two work. Step three is one clearly-marked block that says payment is not active — replace it with the Stripe redirect. |
+| A confirmation page waiting for an order | `src/components/shop/OrderConfirmation.tsx` | Renders a `PlacedOrder` read from `sessionStorage`; nothing writes one yet, so it shows its "no order" state. |
+| Checkout chrome | `src/app/(shop)/layout.tsx` | The tunnel: logo, phone, legal links, nothing else. |
+| An account shell | `src/components/shop/AccountView.tsx` | Tabs and the logged-out state, form disabled. |
 | Env template | `.env.example` | Stripe/DB/auth variables are listed and commented out. |
-| Disabled buy button | `src/app/(site)/wijn/[slug]/page.tsx` | One clearly-marked block to replace with a real add-to-cart. |
 
 ## Phase 1 — Products as the source of truth
 
-Decide where a wine's commercial data lives. Two workable answers:
+Decide where a product's commercial data lives. Two workable answers:
 
-1. **Stripe as the catalogue.** Create a Product + Price per wine in Stripe,
-   paste the ids into `wines.ts`. Editorial copy stays in the repo. Simplest,
+1. **Stripe as the catalogue.** Create a Product + Price per item in Stripe,
+   paste the ids into `products.ts`. Editorial copy stays in the repo. Simplest,
    and good for ~20 SKUs.
-2. **Database as the catalogue.** Wines in Postgres (Neon/Supabase + Drizzle or
-   Prisma), mirrored to Stripe. Worth it once stock levels, vintages and
-   allocations need to change without a deploy.
+2. **Database as the catalogue.** Products in Postgres (Neon/Supabase + Drizzle or
+   Prisma), mirrored to Stripe. Worth it once stock levels and the range need
+   to change without a deploy.
 
 Either way, only `src/lib/catalog/index.ts` changes. Add stock handling to
-`WineCommerce.inStock`.
+`ProductCommerce.inStock`.
 
 ## Phase 2 — Cart and checkout
 
+The pages are built; this phase connects them.
+
 ```
-src/app/(shop)/
-├── layout.tsx          minimal chrome: logo, cart, no big footer
-├── cart/page.tsx
-└── checkout/
-    ├── page.tsx
-    └── success/page.tsx
+src/app/(site)/cart/page.tsx                 exists — browser-side cart
+src/app/(shop)/checkout/page.tsx             exists — stops before payment
+src/app/(site)/order-confirmation/page.tsx   exists — waits for an order
 ```
 
 - `npm i stripe @stripe/stripe-js`
@@ -74,18 +79,15 @@ src/app/api/stripe/webhook/route.ts
 
 ## Phase 4 — Accounts and order history
 
+`/account` exists as a shell (`src/app/(site)/account/page.tsx`): tabs and the
+logged-out state. This phase adds the session, the real panels and
+
 ```
-src/app/(account)/
-├── layout.tsx          auth guard + account nav
-├── login/page.tsx
-├── account/page.tsx
-└── account/orders/
-    ├── page.tsx
-    └── [orderId]/page.tsx
+src/app/(site)/account/orders/[orderId]/page.tsx
 ```
 
 - Auth: Auth.js (NextAuth v5) or Better Auth. Email magic links are a good fit
-  for a wine shop — no password resets to support.
+  for a small shop — no password resets to support.
 - **Route protection in Next 16:** the `middleware.ts` convention is deprecated
   and renamed to **`proxy.ts`** at the project root, exporting a function named
   `proxy`. The `edge` runtime is not supported there; it runs on Node.
@@ -96,10 +98,11 @@ src/app/(account)/
 
 ## Phase 5 — Shop polish
 
-- Age verification gate (18+/legal drinking age) — a legal requirement for
-  alcohol sales in most markets. A cookie-backed interstitial is enough.
-- Stock-aware buttons, waitlist for allocated wines.
-- `Product` JSON-LD on wine pages, with real price and availability, once the
+- Age verification gate (18+/legal drinking age) if the boxes contain
+  alcohol — a legal requirement for alcohol sales in most markets. A
+  cookie-backed interstitial is enough.
+- Stock-aware buttons.
+- `Product` JSON-LD on product pages, with real price and availability, once the
   shop is live. Adding it before that risks Merchant/rich-result penalties.
 - Order confirmation emails (Resend + React Email).
 - Mixed cases, gift boxes, discount codes.

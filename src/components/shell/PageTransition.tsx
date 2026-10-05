@@ -18,74 +18,57 @@ type Navigate = (href: string) => void;
 
 const TransitionContext = createContext<Navigate | null>(null);
 
-/** Navigate with the circle wipe from anywhere, e.g. after closing the menu. */
-export function useTransitionNavigate(): Navigate {
-  const router = useRouter();
-  const navigate = useContext(TransitionContext);
-  return navigate ?? ((href) => router.push(href));
-}
-
 const LETTERS = ["C", "R", "K", "L"];
 
+/** Bring a #hash target into view, or go to the top when there is none. */
+function settleScroll() {
+  const id = window.location.hash.slice(1);
+  const target = id ? document.getElementById(id) : null;
+  const lenis = getLenis();
+
+  if (target) {
+    if (lenis) lenis.scrollTo(target, { immediate: true, force: true });
+    else target.scrollIntoView();
+  } else if (lenis) {
+    lenis.scrollTo(0, { immediate: true, force: true });
+  }
+}
+
 /**
- * Route changes as one gesture: a rose circle opens from wherever you clicked
- * until it covers the screen, the route swaps underneath, and a hole opens
- * from the centre onto the new page.
- *
- * Covering uses `clip-path`, uncovering uses a radial mask — the same circle,
- * once as the shape and once as the hole in it.
+ * Route changes as one slow gesture: a rose curtain rises over the page with
+ * the monogram on it, the route swaps underneath, and the curtain carries on
+ * upwards off the new page.
  */
 export function PageTransition({ children }: { children: ReactNode }) {
   const router = useRouter();
   const pathname = usePathname();
-  const overlay = useRef<HTMLDivElement>(null);
+  const curtain = useRef<HTMLDivElement>(null);
   const phase = useRef<"idle" | "covering" | "covered" | "revealing">("idle");
   const arrived = useRef(false);
-  const pointer = useRef<{ x: number; y: number } | null>(null);
   const failsafe = useRef(0);
 
-  useEffect(() => {
-    const onDown = (event: PointerEvent) => {
-      pointer.current = { x: event.clientX, y: event.clientY };
-    };
-    window.addEventListener("pointerdown", onDown, { passive: true });
-    return () => window.removeEventListener("pointerdown", onDown);
-  }, []);
-
   const reveal = useCallback(() => {
-    const el = overlay.current;
+    const el = curtain.current;
     if (!el || phase.current !== "covered") return;
     phase.current = "revealing";
     window.clearTimeout(failsafe.current);
 
-    getLenis()?.scrollTo(0, { immediate: true, force: true });
+    settleScroll();
     ScrollTrigger.refresh();
 
-    const reach = Math.hypot(window.innerWidth, window.innerHeight) / 2 + 60;
-    const hole = { r: 0 };
-    const letters = el.querySelectorAll("[data-letter]");
-
-    el.style.clipPath = "none";
-    gsap.to(letters, {
+    gsap.to(el.querySelectorAll("[data-letter]"), {
       yPercent: -110,
       duration: 0.5,
       ease: "power3.in",
       stagger: 0.04,
     });
-    gsap.to(hole, {
-      r: reach,
-      duration: 1.1,
-      delay: 0.25,
-      ease: "power3.inOut",
-      onUpdate: () => {
-        const mask = `radial-gradient(circle at 50% 50%, transparent ${hole.r}px, #000 ${hole.r + 1.5}px)`;
-        el.style.maskImage = mask;
-        el.style.webkitMaskImage = mask;
-      },
+    gsap.to(el, {
+      yPercent: -100,
+      duration: 1.05,
+      delay: 0.2,
+      ease: "power4.inOut",
       onComplete: () => {
         gsap.set(el, { autoAlpha: 0 });
-        el.style.maskImage = "";
-        el.style.webkitMaskImage = "";
         phase.current = "idle";
         getLenis()?.start();
       },
@@ -94,7 +77,7 @@ export function PageTransition({ children }: { children: ReactNode }) {
 
   const navigate = useCallback<Navigate>(
     (href) => {
-      const el = overlay.current;
+      const el = curtain.current;
       const target = new URL(href, window.location.href);
       const samePage = target.pathname === window.location.pathname;
       const still = window.matchMedia(
@@ -111,30 +94,21 @@ export function PageTransition({ children }: { children: ReactNode }) {
       arrived.current = false;
       getLenis()?.stop();
 
-      const { innerWidth: w, innerHeight: h } = window;
-      const { x, y } = pointer.current ?? { x: w / 2, y: h / 2 };
-      const reach = Math.hypot(Math.max(x, w - x), Math.max(y, h - y)) + 20;
-      const circle = { r: 0 };
       const letters = el.querySelectorAll("[data-letter]");
-
-      gsap.set(el, { autoAlpha: 1 });
+      gsap.set(el, { autoAlpha: 1, yPercent: 100 });
       gsap.set(letters, { yPercent: 110 });
-      el.style.clipPath = `circle(0px at ${x}px ${y}px)`;
 
       gsap.to(letters, {
         yPercent: 0,
         duration: 0.8,
-        delay: 0.3,
+        delay: 0.35,
         ease: "expo.out",
         stagger: 0.06,
       });
-      gsap.to(circle, {
-        r: reach,
-        duration: 0.9,
-        ease: "power3.inOut",
-        onUpdate: () => {
-          el.style.clipPath = `circle(${circle.r}px at ${x}px ${y}px)`;
-        },
+      gsap.to(el, {
+        yPercent: 0,
+        duration: 0.85,
+        ease: "power4.inOut",
         onComplete: () => {
           phase.current = "covered";
           router.push(href);
@@ -147,7 +121,7 @@ export function PageTransition({ children }: { children: ReactNode }) {
     [router, reveal],
   );
 
-  // The new route has rendered: give it two frames to lay out, then open.
+  // The new route has rendered: give it two frames to lay out, then lift.
   useEffect(() => {
     arrived.current = true;
     if (phase.current !== "covered") return;
@@ -167,9 +141,9 @@ export function PageTransition({ children }: { children: ReactNode }) {
       {children}
 
       <div
-        ref={overlay}
+        ref={curtain}
         aria-hidden
-        className="pointer-events-none invisible fixed inset-0 z-[90] flex items-center justify-center bg-blush-deep text-cream"
+        className="pointer-events-none invisible fixed inset-0 z-[90] flex items-center justify-center bg-blush text-ink"
       >
         <div className="font-display grid grid-cols-2 gap-x-5 gap-y-1 text-4xl leading-none font-light sm:text-5xl">
           {LETTERS.map((letter) => (
@@ -186,8 +160,9 @@ export function PageTransition({ children }: { children: ReactNode }) {
 }
 
 /**
- * `next/link` with the circle wipe. Use it for every internal link; hash
- * links and modified clicks fall through to the normal behaviour.
+ * `next/link` with the page transition. Use it for every internal link;
+ * same-page hash links and modified clicks fall through to the normal
+ * behaviour.
  */
 export function TransitionLink({
   href,
@@ -202,7 +177,6 @@ export function TransitionLink({
       {...props}
       onNavigate={(event) => {
         onNavigate?.(event);
-        // Outside the provider (e.g. the 404 page) this is a plain link.
         if (!navigate || typeof href !== "string" || href.startsWith("#")) return;
         event.preventDefault();
         navigate(href);

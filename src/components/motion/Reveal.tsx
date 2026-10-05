@@ -29,7 +29,7 @@ export function Reveal({ children, delay = 0, y = 28, className }: RevealProps) 
 }
 
 type SplitTextProps = {
-  /** Use "\n" for a line break and *asterisks* for an italic word. */
+  /** Use "\n" for a line break and *asterisks* around words to set in italic. */
   text: string;
   as?: "h1" | "h2" | "h3" | "p";
   className?: string;
@@ -39,6 +39,26 @@ type SplitTextProps = {
   /** With `immediate`: hold the words back until this turns true. */
   ready?: boolean;
 };
+
+type Word = { text: string; italic: boolean; order: number };
+
+/**
+ * Break a title into lines of words. An italic run can span several words:
+ * it opens on a leading asterisk and closes on a trailing one.
+ */
+function parse(text: string): Word[][] {
+  let order = 0;
+  let slanted = false;
+
+  return text.split("\n").map((line) =>
+    line.split(" ").map((raw) => {
+      if (raw.startsWith("*")) slanted = true;
+      const italic = slanted;
+      if (/\*[.,;:!?]?$/.test(raw)) slanted = false;
+      return { text: raw.replace(/\*/g, ""), italic, order: order++ };
+    }),
+  );
+}
 
 /**
  * A heading whose words rise out of their own baseline, one after another.
@@ -53,8 +73,7 @@ export function SplitText({
   ready = true,
 }: SplitTextProps) {
   const Tag = motion[as];
-  const lines = text.split("\n");
-  let index = 0;
+  const lines = parse(text);
 
   const state = immediate
     ? { animate: ready ? ("shown" as const) : ("hidden" as const) }
@@ -67,35 +86,30 @@ export function SplitText({
     <Tag className={className} initial="hidden" {...state} aria-label={text.replace(/[*\n]/g, " ")}>
       {lines.map((line, l) => (
         <span key={l} aria-hidden className="block">
-          {line.split(" ").map((raw, w) => {
-            const italic = /^\*.*\*[.,]?$/.test(raw);
-            const word = raw.replace(/\*/g, "");
-            const order = index++;
-            return (
-              <span
-                key={w}
-                className="-mb-[0.18em] inline-block overflow-hidden pb-[0.18em] align-bottom"
-              >
-                <motion.span
-                  className={`inline-block ${italic ? "italic" : ""}`}
-                  variants={{
-                    hidden: { y: "115%" },
-                    shown: {
-                      y: "0%",
-                      transition: {
-                        duration: 1.15,
-                        delay: delay + order * 0.055,
-                        ease: EXPO,
-                      },
+          {line.map((word) => (
+            <span
+              key={word.order}
+              className="-mb-[0.18em] inline-block overflow-hidden pb-[0.18em] align-bottom"
+            >
+              <motion.span
+                className={`inline-block ${word.italic ? "italic" : ""}`}
+                variants={{
+                  hidden: { y: "115%" },
+                  shown: {
+                    y: "0%",
+                    transition: {
+                      duration: 1.15,
+                      delay: delay + word.order * 0.055,
+                      ease: EXPO,
                     },
-                  }}
-                >
-                  {word}
-                </motion.span>
-                {" "}
-              </span>
-            );
-          })}
+                  },
+                }}
+              >
+                {word.text}
+              </motion.span>
+              {"\u00A0"}
+            </span>
+          ))}
         </span>
       ))}
     </Tag>

@@ -2,111 +2,117 @@ import type { ComponentProps, ReactNode } from "react";
 import { Magnetic } from "@/components/motion/Magnetic";
 import { TransitionLink } from "@/components/shell/PageTransition";
 
-type Tone = "ink" | "light" | "solid";
-
-const tones: Record<Tone, { pill: string; disc: string }> = {
-  /** Dark hairline on the light rose backgrounds. */
-  ink: {
-    pill: "border-ink/30 text-ink hover:border-ink",
-    disc: "bg-ink text-cream",
-  },
-  /** White hairline on the brand pink and over photography. */
-  light: {
-    pill: "border-white/60 text-white hover:border-white",
-    disc: "bg-white text-ink",
-  },
-  solid: {
-    pill: "border-ink bg-ink text-cream",
-    disc: "bg-cream text-ink",
-  },
-};
-
-const pill =
-  "group inline-flex items-center gap-4 rounded-full border py-2 pr-2 pl-6 text-[0.6875rem] font-medium tracking-[0.22em] uppercase transition-colors duration-500";
+type Tone = "ink" | "light";
 
 function Arrow() {
   return (
     <svg
       viewBox="0 0 24 24"
-      className="h-3.5 w-3.5 transition-transform duration-500 ease-expo group-hover:translate-x-0.5"
+      className="h-3.5 w-3.5 transition-transform duration-500 ease-expo group-hover:translate-x-1.5"
       fill="none"
       stroke="currentColor"
-      strokeWidth="1.5"
+      strokeWidth="1.25"
       aria-hidden
     >
-      <path d="M5 12h14M13 6l6 6-6 6" />
+      <path d="M3 12h18M14 5l7 7-7 7" />
     </svg>
   );
 }
 
-function Inner({ tone, children }: { tone: Tone; children: ReactNode }) {
-  return (
-    <>
-      <span>{children}</span>
-      <span
-        className={`flex h-9 w-9 items-center justify-center rounded-full transition-transform duration-500 ease-expo group-hover:scale-110 ${tones[tone].disc}`}
-      >
-        <Arrow />
-      </span>
-    </>
-  );
-}
+const line: Record<Tone, string> = {
+  /** On the light rose backgrounds. */
+  ink: "border-ink/30 text-ink hover:border-ink",
+  /** On the brand pink and over photography. */
+  light: "border-white/55 text-white hover:border-white",
+};
 
-type PillLinkProps = {
+const solid: Record<Tone, string> = {
+  ink: "bg-ink text-cream hover:bg-rosewood",
+  light: "bg-white text-ink hover:bg-cream",
+};
+
+const lineBase =
+  "group eyebrow inline-flex items-center gap-4 border-b pb-3 transition-colors duration-500";
+const solidBase =
+  "group eyebrow inline-flex h-14 items-center gap-5 px-9 transition-colors duration-500";
+
+type LinkProps = {
   href: string;
   tone?: Tone;
   className?: string;
   children: ReactNode;
 };
 
-/**
- * The site's call to action: a hairline pill that ends in a filled disc, and
- * leans towards the pointer. Internal links get the page transition; external
- * ones open as ordinary anchors.
- */
-export function PillLink({
+function Anchor({
   href,
-  tone = "ink",
-  className = "",
+  className,
   children,
-}: PillLinkProps) {
-  const classes = `${pill} ${tones[tone].pill} ${className}`;
+}: {
+  href: string;
+  className: string;
+  children: ReactNode;
+}) {
   const external = /^(https?:|mailto:|tel:)/.test(href);
 
   return (
-    <Magnetic>
+    <Magnetic strength={0.2}>
       {external ? (
         <a
           href={href}
-          className={classes}
+          className={className}
           {...(href.startsWith("http")
             ? { target: "_blank", rel: "noreferrer noopener" }
             : {})}
         >
-          <Inner tone={tone}>{children}</Inner>
+          {children}
+          <Arrow />
         </a>
       ) : (
-        <TransitionLink href={href} className={classes}>
-          <Inner tone={tone}>{children}</Inner>
+        <TransitionLink href={href} className={className}>
+          {children}
+          <Arrow />
         </TransitionLink>
       )}
     </Magnetic>
   );
 }
 
-export function PillButton({
-  tone = "solid",
+/**
+ * The site's everyday link: small capitals on a hairline, with an arrow that
+ * steps forward on hover. It leans slightly towards the pointer. Internal
+ * links get the page transition; external ones are ordinary anchors.
+ */
+export function ArrowLink({ href, tone = "ink", className = "", children }: LinkProps) {
+  return (
+    <Anchor href={href} className={`${lineBase} ${line[tone]} ${className}`}>
+      {children}
+    </Anchor>
+  );
+}
+
+/** The one filled button per view — reserving a table, mostly. */
+export function SolidLink({ href, tone = "ink", className = "", children }: LinkProps) {
+  return (
+    <Anchor href={href} className={`${solidBase} ${solid[tone]} ${className}`}>
+      {children}
+    </Anchor>
+  );
+}
+
+export function SolidButton({
+  tone = "ink",
   className = "",
   children,
   ...props
 }: ComponentProps<"button"> & { tone?: Tone }) {
   return (
-    <Magnetic>
+    <Magnetic strength={0.2}>
       <button
         {...props}
-        className={`${pill} ${tones[tone].pill} disabled:cursor-not-allowed disabled:opacity-50 ${className}`}
+        className={`${solidBase} ${solid[tone]} disabled:cursor-not-allowed disabled:opacity-50 ${className}`}
       >
-        <Inner tone={tone}>{children}</Inner>
+        {children}
+        <Arrow />
       </button>
     </Magnetic>
   );

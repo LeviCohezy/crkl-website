@@ -1,19 +1,19 @@
 import type { Metadata } from "next";
-import { BackgroundVideo } from "@/components/media/BackgroundVideo";
-import { MediaImage } from "@/components/media/MediaImage";
-import { Drift } from "@/components/motion/Parallax";
-import { Reveal, SplitText, Unveil } from "@/components/motion/Reveal";
-import { MenuScene } from "@/components/sections/MenuScene";
+import { Reveal } from "@/components/motion/Reveal";
+import { Band, Head } from "@/components/sections/Band";
+import { Cards } from "@/components/sections/Cards";
+import { Faq } from "@/components/sections/Faq";
+import { ReservationBand } from "@/components/sections/FormBand";
+import { MenuTabs } from "@/components/sections/MenuTabs";
 import { PageHero } from "@/components/sections/PageHero";
-import { ReserveCta } from "@/components/sections/ReserveCta";
-import { PillLink } from "@/components/ui/Button";
-import { plates } from "@/lib/menu";
+import { SplitMedia } from "@/components/sections/SplitMedia";
+import { faq } from "@/lib/faq";
 import { shoot } from "@/lib/photos";
 
 export const metadata: Metadata = {
   title: "Menu",
   description:
-    "Het tasting menu en de lunch van CRKL in Roeselare: Menu CRKL+, Menu Carré+ en de lunchformule, met wijnpairing.",
+    "Het seizoensmenu van CRKL in Roeselare: lunchformule, Menu Carré+ en Menu CRKL+, met wijnpairing. Prijzen inbegrepen.",
   alternates: { canonical: "/menu" },
 };
 
@@ -21,111 +21,65 @@ export default function MenuPage() {
   return (
     <>
       <PageHero
-        eyebrow="Lunch & diner"
-        title={"Het\n*menu*"}
+        eyebrow="Het menu"
+        title={"Het menu van\n*dit seizoen*"}
         intro="Ontdek het tasting menu van CRKL, waar seizoensgebonden ingrediënten en verfijnde smaken centraal staan."
-        image={{
-          src: shoot.maart26(36),
-          alt: "Vis met gekleurde toetsen op een wit bord",
-        }}
-        badge="Dagvers · Seizoen"
+        cta={{ href: "#reserveer", label: "Reserveer" }}
+        image={{ src: shoot.maart26(36), alt: "Vis met gekleurde toetsen op een wit bord" }}
       />
 
-      <MenuScene />
+      {/* The captions describe the photographs — see CONTENT_TODO.md. */}
+      <Cards
+        tone="tint"
+        eyebrow="Signature gerechten"
+        title={"Waar de keuken\n*voor staat*"}
+        cards={[
+          {
+            label: "Lente",
+            title: "Asperge",
+            body: "Met citroen, venkel en dille.",
+            photo: { src: shoot.mei25(22), alt: "Witte asperge met citroen en dille" },
+          },
+          {
+            label: "Van de grill",
+            title: "Langoustine",
+            body: "Aan tafel afgewerkt, onder de rook.",
+            photo: { src: shoot.maart26(6), alt: "Langoustine op de grill, rook boven de tafel" },
+          },
+          {
+            label: "Winter",
+            title: "Rund",
+            body: "Met schorseneer, kroket en jus.",
+            photo: { src: shoot.jan26(19), alt: "Rundvlees met schorseneer en jus" },
+          },
+        ]}
+      />
 
-      {/* ── In het glas ──────────────────────────────────────────────── */}
-      <section className="overflow-hidden bg-petal py-28 sm:py-40">
-        <div className="mx-auto grid max-w-[100rem] items-center gap-16 px-6 sm:px-10 lg:grid-cols-2 lg:gap-24">
-          <div className="relative mx-auto w-full max-w-md">
-            <Unveil className="rounded-t-full">
-              <div className="aspect-[3/4] bg-blush">
-                <BackgroundVideo src="clips/crkl-wijn.mp4" poster="hero/crkl-wijn.jpg" />
-              </div>
-            </Unveil>
-            <Drift distance={-50} className="absolute -right-6 -bottom-10 w-2/5 sm:-right-14">
-              <MediaImage
-                src={shoot.juni25(35)}
-                alt="Cocktail in de zon tegen een witte muur"
-                aspect="aspect-square"
-                className="rounded-full"
-                sizes="(min-width: 1024px) 14vw, 40vw"
-              />
-            </Drift>
-          </div>
+      <Band tone="white" id="kaart">
+        <Head
+          eyebrow="Het menu"
+          title={"Lunch, diner\n& *dranken*"}
+          intro="Het menu ligt vast, de gerechten niet: ze volgen wat het seizoen aanreikt."
+        />
+        <Reveal delay={0.1} className="mt-16">
+          <MenuTabs />
+        </Reveal>
+      </Band>
 
-          <div>
-            <Reveal>
-              <p className="eyebrow text-rosewood">In het glas</p>
-            </Reveal>
-            <SplitText
-              text={"Bij elke gang\n*het juiste glas*"}
-              className="font-display mt-6 text-[clamp(2.4rem,5vw,4.75rem)] leading-[1.06] font-light"
-            />
-            <Reveal delay={0.15}>
-              <p className="mt-8 max-w-md text-lg leading-relaxed text-ink-soft">
-                Kies bij uw menu voor de wijnpairing tot en met het
-                hoofdgerecht, of voor een aangepast non-alcoholisch sap. Wie
-                liever zelf kiest, krijgt de kaart.
-              </p>
-            </Reveal>
-            <Reveal delay={0.25} className="mt-10">
-              <PillLink href="/wijn">Wijn &amp; aperitief</PillLink>
-            </Reveal>
-          </div>
-        </div>
-      </section>
+      <SplitMedia
+        tone="tint"
+        eyebrow="Wijn & champagne"
+        title={"Bij elke gang\n*het juiste glas*"}
+        body={[
+          "Kies bij uw menu voor de wijnpairing tot en met het hoofdgerecht, of voor een aangepast non-alcoholisch sap.",
+          "CRKL is ambassadeur van Champagne Pompadour — het aperitief begint er graag mee.",
+        ]}
+        link={{ href: "/champagne-pompadour", label: "Ambassadeur Champagne Pompadour" }}
+        photo={{ src: shoot.juni25(6), alt: "De sommelier proeft een glas witte wijn" }}
+      />
 
-      {/* ── Het seizoen op het bord ──────────────────────────────────── */}
-      <section className="bg-mist py-28 sm:py-40">
-        <div className="mx-auto max-w-[100rem] px-6 sm:px-10">
-          <div className="flex flex-wrap items-end justify-between gap-8">
-            <div>
-              <Reveal>
-                <p className="eyebrow text-rosewood">Het seizoen op het bord</p>
-              </Reveal>
-              <SplitText
-                text={"Wat het seizoen\n*aanreikt*"}
-                className="font-display mt-6 text-[clamp(2.4rem,5.4vw,5rem)] leading-[1.04] font-light"
-              />
-            </div>
-            <Reveal className="max-w-sm">
-              <p className="leading-relaxed text-ink-soft">
-                Het menu ligt vast, de gerechten niet: ze volgen wat onze
-                leveranciers op dat moment op hun best hebben. Allergieën of
-                dieetwensen? Laat het ons weten bij uw reservatie.
-              </p>
-            </Reveal>
-          </div>
-
-          <ul className="mt-20 grid grid-cols-2 gap-x-5 gap-y-14 lg:grid-cols-4 lg:gap-x-8">
-            {plates.map((plate, index) => {
-              const round = index % 3 === 1;
-              return (
-                <li key={plate.name} className={index % 2 ? "lg:mt-20" : ""}>
-                  <Unveil
-                    shape={round ? "circle" : "block"}
-                    delay={(index % 4) * 0.07}
-                    className={round ? "rounded-full" : ""}
-                  >
-                    <MediaImage
-                      src={plate.src}
-                      alt={plate.alt}
-                      aspect={round ? "aspect-square" : "aspect-[4/5]"}
-                      sizes="(min-width: 1024px) 23vw, 46vw"
-                      imageClassName="transition-transform duration-[1400ms] ease-expo hover:scale-105"
-                    />
-                  </Unveil>
-                  <p className="eyebrow mt-5 text-stone">{plate.season}</p>
-                  <p className="font-display mt-2 text-2xl font-light">{plate.name}</p>
-                  <p className="mt-1 text-sm text-ink-soft">{plate.components}</p>
-                </li>
-              );
-            })}
-          </ul>
-        </div>
-      </section>
-
-      <ReserveCta />
+      <ReservationBand />
+      <Faq items={faq.menu} />
     </>
   );
 }

@@ -2,6 +2,13 @@
 
 import { site } from "@/lib/site";
 
+export type EnquiryKind =
+  | "reservatie"
+  | "the-room"
+  | "event"
+  | "trouwen"
+  | "contact";
+
 export type EnquiryState = {
   status: "idle" | "sent" | "invalid" | "unavailable";
   /** Field name → message, when `status` is "invalid". */
@@ -10,11 +17,20 @@ export type EnquiryState = {
   mailto?: string;
 };
 
+const subjects: Record<EnquiryKind, string> = {
+  reservatie: "Reservatie-aanvraag",
+  "the-room": "Aanvraag The Room",
+  event: "Aanvraag event",
+  trouwen: "Aanvraag trouwen in CRKL",
+  contact: "Bericht via de website",
+};
+
 const labels: Record<string, string> = {
   kind: "Aanvraag",
   date: "Datum",
-  service: "Moment",
-  guests: "Aantal personen",
+  time: "Uur",
+  guests: "Aantal gasten",
+  occasion: "Gelegenheid",
   name: "Naam",
   email: "E-mail",
   phone: "Telefoon",
@@ -26,8 +42,13 @@ function text(data: FormData, key: string): string {
   return typeof value === "string" ? value.trim().slice(0, 2000) : "";
 }
 
+function isKind(value: string): value is EnquiryKind {
+  return value in subjects;
+}
+
 /**
- * Handles both the reservation request and the contact form.
+ * Handles every form on the site: the table reservation, the three event
+ * enquiries and the contact form.
  *
  * There is no booking system or mail service wired up yet. Until there is,
  * set ENQUIRY_WEBHOOK_URL and each valid request is POSTed there as JSON
@@ -42,12 +63,14 @@ export async function sendEnquiry(
   // Honeypot: real visitors never see this field.
   if (text(data, "website")) return { status: "sent" };
 
-  const kind = text(data, "kind") === "reservatie" ? "reservatie" : "contact";
+  const raw = text(data, "kind");
+  const kind: EnquiryKind = isKind(raw) ? raw : "contact";
   const fields: Record<string, string> = {
-    kind: kind === "reservatie" ? "Reservatie" : "Contact",
+    kind: subjects[kind],
     date: text(data, "date"),
-    service: text(data, "service"),
+    time: text(data, "time"),
     guests: text(data, "guests"),
+    occasion: text(data, "occasion"),
     name: text(data, "name"),
     email: text(data, "email"),
     phone: text(data, "phone"),
@@ -59,12 +82,13 @@ export async function sendEnquiry(
   if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(fields.email)) {
     errors.email = "Vul een geldig e-mailadres in.";
   }
-  if (kind === "reservatie") {
+  if (kind === "contact") {
+    if (!fields.message) errors.message = "Schrijf een kort bericht.";
+  } else {
     if (!fields.date) errors.date = "Kies een datum.";
     if (!fields.guests) errors.guests = "Met hoeveel komt u?";
-  } else if (!fields.message) {
-    errors.message = "Schrijf een kort bericht.";
   }
+  if (kind === "reservatie" && !fields.time) errors.time = "Kies een uur.";
   if (Object.keys(errors).length > 0) return { status: "invalid", errors };
 
   const lines = Object.entries(fields)
@@ -86,10 +110,9 @@ export async function sendEnquiry(
     }
   }
 
-  const subject =
-    kind === "reservatie"
-      ? `Reservatie-aanvraag ${fields.date} — ${fields.name}`
-      : `Bericht via de website — ${fields.name}`;
+  const subject = [subjects[kind], fields.date, fields.name]
+    .filter(Boolean)
+    .join(" — ");
 
   return {
     status: "unavailable",

@@ -3,24 +3,19 @@
 import { AnimatePresence, motion } from "motion/react";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
-import { MediaImage } from "@/components/media/MediaImage";
-import { Magnetic } from "@/components/motion/Magnetic";
 import { TransitionLink } from "@/components/shell/PageTransition";
+import { useCartCount } from "@/lib/cart";
 import { getLenis } from "@/lib/lenis";
-import { site } from "@/lib/site";
+import { reserveHref, site } from "@/lib/site";
 
 const EXPO = [0.16, 1, 0.3, 1] as const;
 const SWEEP = [0.76, 0, 0.24, 1] as const;
 
-/** Frosted chip the three header pieces share. */
-const chip =
-  "pointer-events-auto bg-cream/80 text-ink backdrop-blur-md transition-colors duration-500 hover:bg-cream";
-
-function Monogram({ className = "" }: { className?: string }) {
+function Monogram() {
   return (
     <span
       aria-hidden
-      className={`font-display grid grid-cols-2 place-items-center leading-none ${className}`}
+      className="font-display grid grid-cols-2 place-items-center gap-x-1.5 gap-y-0.5 text-[0.9375rem] leading-none"
     >
       <span>C</span>
       <span>R</span>
@@ -31,33 +26,28 @@ function Monogram({ className = "" }: { className?: string }) {
 }
 
 /**
- * Three floating pieces instead of a bar: reserve on the left, the monogram
- * in a circle at the centre, the menu on the right. They slip away while you
- * scroll down and return the moment you scroll up.
+ * The sticky header: monogram, the seven pages, the phone number and one
+ * filled "Reserveer" — reservation and phone are always one click away.
  *
- * The menu itself is a full-screen rose sheet that opens as a circle from the
- * menu button, with a round photograph that follows the link you are on.
+ * Over the homepage hero it is clear with white type; everywhere else, and
+ * as soon as you scroll, it is a pale bar with a hairline under it. On a
+ * phone the pages move into a full-screen sheet and "Reserveer" becomes a
+ * bar pinned to the bottom of the screen.
  */
 export function Header() {
   const pathname = usePathname();
+  const count = useCartCount();
   const [open, setOpen] = useState(false);
-  const [tucked, setTucked] = useState(false);
-  const [preview, setPreview] = useState(0);
+  const [scrolled, setScrolled] = useState(false);
 
-  // Hide on the way down, show on the way up.
   useEffect(() => {
-    let last = window.scrollY;
-    const onScroll = () => {
-      const y = window.scrollY;
-      if (Math.abs(y - last) < 6) return;
-      setTucked(y > last && y > 120);
-      last = y;
-    };
+    const onScroll = () => setScrolled(window.scrollY > 40);
+    onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  // Escape closes the menu; the page behind it holds still.
+  // Escape closes the sheet; the page behind it holds still.
   useEffect(() => {
     if (!open) return;
 
@@ -76,198 +66,177 @@ export function Header() {
     };
   }, [open]);
 
-  const toggle = () => {
-    if (!open) {
-      const current = site.nav.findIndex((item) => item.href === pathname);
-      setPreview(current < 0 ? 0 : current);
-    }
-    setOpen((value) => !value);
-  };
+  const reserve = reserveHref(pathname);
+  const clear = pathname === "/" && !scrolled && !open;
 
-  /** Let the page-transition circle cover the screen before the sheet goes. */
+  /** Let the page-transition curtain cover the screen before the sheet goes. */
   const closeAfterCover = (href: string) => {
-    window.setTimeout(() => setOpen(false), href === pathname ? 0 : 950);
+    window.setTimeout(() => setOpen(false), href === pathname ? 0 : 900);
   };
 
   return (
     <>
       <header
-        className={`pointer-events-none fixed inset-x-0 top-0 z-[70] grid grid-cols-[1fr_auto_1fr] items-center p-4 transition-transform duration-700 ease-expo sm:p-6 ${
-          tucked && !open ? "-translate-y-[130%]" : "translate-y-0"
+        className={`fixed inset-x-0 top-0 z-[70] border-b transition-colors duration-700 ${
+          clear
+            ? "border-transparent text-white"
+            : "border-ink/10 bg-cream/90 text-ink backdrop-blur-md"
         }`}
       >
-        <div className="justify-self-start">
-          <Magnetic strength={0.25}>
-            <TransitionLink
-              href="/reserveren"
-              onClick={() => closeAfterCover("/reserveren")}
-              className={`${chip} eyebrow flex h-12 items-center rounded-full px-5 sm:px-7`}
-            >
-              Reserveer
-            </TransitionLink>
-          </Magnetic>
-        </div>
-
-        <Magnetic strength={0.25}>
+        <div className="mx-auto flex h-16 max-w-[100rem] items-center justify-between gap-6 px-6 sm:px-10 lg:h-20">
           <TransitionLink
             href="/"
             aria-label="CRKL — naar de startpagina"
             onClick={() => closeAfterCover("/")}
-            className={`${chip} flex h-14 w-14 items-center justify-center rounded-full`}
           >
-            <Monogram className="gap-x-1.5 gap-y-0.5 text-[0.8125rem]" />
+            <Monogram />
           </TransitionLink>
-        </Magnetic>
 
-        <div className="justify-self-end">
-          <Magnetic strength={0.25}>
+          <nav aria-label="Hoofdnavigatie" className="hidden lg:block">
+            <ul className="flex items-center gap-7 xl:gap-9">
+              {site.nav.map((item) => (
+                <li key={item.href}>
+                  <TransitionLink
+                    href={item.href}
+                    aria-current={pathname === item.href ? "page" : undefined}
+                    className="eyebrow link-line pb-1.5"
+                  >
+                    {item.label}
+                  </TransitionLink>
+                </li>
+              ))}
+            </ul>
+          </nav>
+
+          <div className="flex items-center gap-5 sm:gap-7">
+            <a
+              href={`tel:${site.contact.phoneHref}`}
+              className="link-line hidden pb-1 text-sm tabular-nums xl:inline"
+            >
+              {site.contact.phone}
+            </a>
+            {count > 0 ? (
+              <TransitionLink href="/cart" className="eyebrow link-line pb-1.5">
+                Mand ({count})
+              </TransitionLink>
+            ) : null}
+            <TransitionLink
+              href={reserve}
+              className={`eyebrow hidden h-10 items-center px-5 transition-colors duration-500 sm:flex ${
+                clear
+                  ? "bg-white text-ink hover:bg-cream"
+                  : "bg-ink text-cream hover:bg-rosewood"
+              }`}
+            >
+              Reserveer
+            </TransitionLink>
+
             <button
               type="button"
-              onClick={toggle}
+              onClick={() => setOpen((value) => !value)}
               aria-expanded={open}
               aria-controls="site-menu"
-              className={`${chip} eyebrow group flex h-12 items-center gap-4 rounded-full pr-4 pl-5 sm:pl-7`}
+              className="eyebrow group flex h-10 items-center gap-3 lg:hidden"
             >
-              <span className="hidden sm:inline">{open ? "Sluit" : "Menu"}</span>
-              <span className="sr-only sm:hidden">{open ? "Sluit menu" : "Open menu"}</span>
-              <span aria-hidden className="relative block h-3 w-6">
+              <span>{open ? "Sluit" : "Menu"}</span>
+              <span aria-hidden className="relative block h-2.5 w-6">
                 <span
                   className={`absolute inset-x-0 top-0 h-px bg-current transition-transform duration-500 ease-expo ${
-                    open ? "translate-y-[5.5px] rotate-45" : "group-hover:translate-x-1"
+                    open ? "translate-y-[4.5px] rotate-45" : ""
                   }`}
                 />
                 <span
                   className={`absolute inset-x-0 bottom-0 h-px bg-current transition-transform duration-500 ease-expo ${
-                    open ? "-translate-y-[5.5px] -rotate-45" : "group-hover:-translate-x-1"
+                    open ? "-translate-y-[4.5px] -rotate-45" : ""
                   }`}
                 />
               </span>
             </button>
-          </Magnetic>
+          </div>
         </div>
       </header>
 
+      {/* ── The sheet, below lg ──────────────────────────────────────────── */}
       <AnimatePresence>
         {open ? (
           <motion.div
             key="menu"
             id="site-menu"
             data-lenis-prevent
-            className="fixed inset-0 z-[60] overflow-y-auto bg-blush text-white"
-            initial={{ clipPath: "circle(0% at 94% 6%)" }}
-            animate={{ clipPath: "circle(150% at 94% 6%)" }}
-            exit={{ clipPath: "circle(0% at 94% 6%)" }}
-            transition={{ duration: 0.95, ease: SWEEP }}
+            className="fixed inset-0 z-[60] overflow-y-auto bg-mist text-ink lg:hidden"
+            initial={{ clipPath: "inset(0% 0% 100% 0%)" }}
+            animate={{ clipPath: "inset(0% 0% 0% 0%)" }}
+            exit={{ clipPath: "inset(0% 0% 100% 0%)" }}
+            transition={{ duration: 0.85, ease: SWEEP }}
           >
-            <div className="mx-auto flex min-h-full max-w-[100rem] flex-col px-6 pt-28 pb-8 sm:px-10 lg:pt-32">
-              <div className="grid flex-1 items-center gap-10 lg:grid-cols-[1.15fr_1fr]">
-                <nav aria-label="Hoofdnavigatie">
-                  <ul>
-                    {site.nav.map((item, index) => {
-                      const current = item.href === pathname;
-                      return (
-                        <li key={item.href} className="overflow-hidden">
-                          <motion.div
-                            initial={{ y: "110%" }}
-                            animate={{ y: "0%" }}
-                            exit={{ y: "-110%" }}
-                            transition={{
-                              duration: 0.9,
-                              delay: 0.25 + index * 0.06,
-                              ease: EXPO,
-                            }}
-                          >
-                            <TransitionLink
-                              href={item.href}
-                              aria-current={current ? "page" : undefined}
-                              onClick={() => closeAfterCover(item.href)}
-                              onMouseEnter={() => setPreview(index)}
-                              onFocus={() => setPreview(index)}
-                              className="group flex items-baseline gap-5 py-1.5 sm:gap-8"
-                            >
-                              <span className="eyebrow w-6 text-white/70 tabular-nums">
-                                {String(index + 1).padStart(2, "0")}
-                              </span>
-                              <span
-                                className={`font-display text-[clamp(2.4rem,7.2vh,5.25rem)] leading-[1.05] font-light transition-[translate,opacity] duration-700 ease-expo group-hover:translate-x-3 ${
-                                  current ? "italic" : "opacity-90 group-hover:opacity-100"
-                                }`}
-                              >
-                                {item.label}
-                              </span>
-                            </TransitionLink>
-                          </motion.div>
-                        </li>
-                      );
-                    })}
-                  </ul>
-                </nav>
-
-                {/* The photograph that follows the link you are on. */}
-                <motion.div
-                  className="relative mx-auto hidden aspect-square w-[min(34vw,62vh)] lg:block"
-                  initial={{ scale: 0.6, opacity: 0 }}
-                  animate={{ scale: 1, opacity: 1 }}
-                  exit={{ scale: 0.8, opacity: 0 }}
-                  transition={{ duration: 1.1, delay: 0.2, ease: EXPO }}
-                >
+            <div className="flex min-h-full flex-col px-6 pt-28 pb-28 sm:px-10">
+              <nav aria-label="Hoofdnavigatie">
+                <ul>
                   {site.nav.map((item, index) => (
-                    <div
-                      key={item.href}
-                      className={`absolute inset-0 overflow-hidden rounded-full transition-[opacity,scale] duration-700 ease-expo ${
-                        index === preview ? "scale-100 opacity-100" : "scale-110 opacity-0"
-                      }`}
-                    >
-                      <MediaImage
-                        src={item.image}
-                        alt=""
-                        aspect="h-full"
-                        sizes="34vw"
-                      />
-                    </div>
+                    <li key={item.href} className="overflow-hidden">
+                      <motion.div
+                        initial={{ y: "110%" }}
+                        animate={{ y: "0%" }}
+                        transition={{
+                          duration: 0.9,
+                          delay: 0.2 + index * 0.05,
+                          ease: EXPO,
+                        }}
+                      >
+                        <TransitionLink
+                          href={item.href}
+                          aria-current={pathname === item.href ? "page" : undefined}
+                          onClick={() => closeAfterCover(item.href)}
+                          className={`font-display block py-1.5 text-[clamp(2.25rem,9vw,3.5rem)] leading-[1.1] font-light ${
+                            pathname === item.href ? "italic" : ""
+                          }`}
+                        >
+                          {item.label}
+                        </TransitionLink>
+                      </motion.div>
+                    </li>
                   ))}
-                </motion.div>
-              </div>
+                </ul>
+              </nav>
 
               <motion.div
-                className="mt-10 grid gap-6 border-t border-white/35 pt-6 text-sm sm:grid-cols-3"
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0 }}
-                transition={{ duration: 0.9, delay: 0.55, ease: EXPO }}
+                className="mt-10 border-t border-ink/15 pt-8"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ duration: 0.9, delay: 0.55 }}
               >
-                <p>
-                  {site.contact.street}
-                  <br />
-                  {site.contact.city}
-                </p>
-                <p>
-                  <a href={`tel:${site.contact.phoneHref}`} className="link-line">
-                    {site.contact.phone}
-                  </a>
-                  <br />
-                  <a href={`mailto:${site.contact.email}`} className="link-line">
-                    {site.contact.email}
-                  </a>
-                </p>
-                <p className="flex gap-6 sm:justify-end">
-                  {site.social.map((item) => (
-                    <a
-                      key={item.href}
-                      href={item.href}
-                      target="_blank"
-                      rel="noreferrer noopener"
-                      className="link-line self-start"
-                    >
-                      {item.label}
-                    </a>
+                <ul className="flex flex-wrap gap-x-8 gap-y-3">
+                  {site.more.map((item) => (
+                    <li key={item.href}>
+                      <TransitionLink
+                        href={item.href}
+                        onClick={() => closeAfterCover(item.href)}
+                        className="eyebrow"
+                      >
+                        {item.label}
+                      </TransitionLink>
+                    </li>
                   ))}
+                </ul>
+                <p className="mt-8 text-sm leading-relaxed text-ink-soft">
+                  {site.contact.street}, {site.contact.city}
+                  <br />
+                  <a href={`tel:${site.contact.phoneHref}`}>{site.contact.phone}</a>
                 </p>
               </motion.div>
             </div>
           </motion.div>
         ) : null}
       </AnimatePresence>
+
+      {/* ── Reserve bar, phones only ─────────────────────────────────────── */}
+      <TransitionLink
+        href={reserve}
+        onClick={() => closeAfterCover(reserve)}
+        className="eyebrow fixed inset-x-0 bottom-0 z-[65] flex h-14 items-center justify-center bg-ink text-cream sm:hidden"
+      >
+        Reserveer een tafel
+      </TransitionLink>
     </>
   );
 }

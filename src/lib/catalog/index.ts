@@ -1,7 +1,7 @@
-import { wines } from "./wines";
-import type { Wine, WineStyle } from "./types";
+import { products } from "./products";
+import type { Product, ProductCategory } from "./types";
 
-export type { Wine, WineCommerce, WineStyle } from "./types";
+export type { Product, ProductCategory, ProductCommerce } from "./types";
 
 /**
  * The catalogue data access layer.
@@ -11,31 +11,26 @@ export type { Wine, WineCommerce, WineStyle } from "./types";
  * product API instead.
  */
 
-export async function getWines(): Promise<Wine[]> {
-  return wines;
+export async function getProducts(): Promise<Product[]> {
+  return products;
 }
 
-export async function getFeaturedWines(limit = 3): Promise<Wine[]> {
-  return wines.filter((wine) => wine.featured).slice(0, limit);
+export async function getProductsByCategory(
+  category: ProductCategory,
+): Promise<Product[]> {
+  return products.filter((product) => product.category === category);
 }
 
-export async function getWine(slug: string): Promise<Wine | null> {
-  return wines.find((wine) => wine.slug === slug) ?? null;
+export async function getProduct(slug: string): Promise<Product | null> {
+  return products.find((product) => product.slug === slug) ?? null;
 }
 
-export async function getWineSlugs(): Promise<string[]> {
-  return wines.map((wine) => wine.slug);
+export async function getProductSlugs(): Promise<string[]> {
+  return products.map((product) => product.slug);
 }
 
-export const styleLabels: Record<WineStyle, string> = {
-  red: "Rood",
-  white: "Wit",
-  "rosé": "Rosé",
-  orange: "Oranje",
-  sparkling: "Mousserend",
+export const categoryLabels: Record<ProductCategory, string> = {
+  geschenkbox: "Geschenkbox",
+  cadeaubon: "Cadeaubon",
+  overige: "Overige",
 };
-
-/** "CRKL Blanc 2023" — vintage appended only when there is one. */
-export function wineTitle(wine: Wine): string {
-  return wine.vintage ? `${wine.name} ${wine.vintage}` : wine.name;
-}

@@ -1,24 +1,24 @@
 import type { MetadataRoute } from "next";
-import { getWineSlugs } from "@/lib/catalog";
-import { siteUrl } from "@/lib/site";
+import { getProductSlugs } from "@/lib/catalog";
+import { site, siteUrl } from "@/lib/site";
 
+/** Cart, checkout, account and the draft legal pages are left out on purpose. */
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const slugs = await getWineSlugs();
+  const slugs = await getProductSlugs();
   const now = new Date();
+  const pages = [...site.nav, ...site.more, ...site.credentials];
 
   return [
     { url: `${siteUrl}/`, lastModified: now, priority: 1 },
-    { url: `${siteUrl}/menu`, lastModified: now, priority: 0.9 },
-    { url: `${siteUrl}/reserveren`, lastModified: now, priority: 0.9 },
-    { url: `${siteUrl}/verhaal`, lastModified: now, priority: 0.7 },
-    { url: `${siteUrl}/leveranciers`, lastModified: now, priority: 0.6 },
-    { url: `${siteUrl}/wijn`, lastModified: now, priority: 0.6 },
-    { url: `${siteUrl}/galerij`, lastModified: now, priority: 0.5 },
-    { url: `${siteUrl}/contact`, lastModified: now, priority: 0.7 },
-    ...slugs.map((slug) => ({
-      url: `${siteUrl}/wijn/${slug}`,
+    ...pages.map((page) => ({
+      url: `${siteUrl}${page.href}`,
       lastModified: now,
-      priority: 0.4,
+      priority: 0.8,
+    })),
+    ...slugs.map((slug) => ({
+      url: `${siteUrl}/shop/${slug}`,
+      lastModified: now,
+      priority: 0.5,
     })),
   ];
 }

@@ -4,9 +4,9 @@ Website for CRKL, a gastronomic restaurant in Roeselare. Built with Next.js 16
 (App Router, Turbopack), React 19, TypeScript and Tailwind CSS v4, with GSAP,
 Lenis and Motion for the scroll scenes and transitions. The site is in Dutch.
 
-It is structured so that an online shop — Stripe checkout, customer accounts,
-order history — can be added without rebuilding it. See
-[`docs/ECOMMERCE-ROADMAP.md`](docs/ECOMMERCE-ROADMAP.md).
+Pages, sections and their order follow the wireframe (`wireframes-crkl-v3`,
+22 July 2026). The visual layout is the site's own: rose, quiet, typographic,
+with photography doing most of the work.
 
 **Before going live, read [`CONTENT_TODO.md`](CONTENT_TODO.md)** — it lists
 every piece of copy and data that still needs a human check.
@@ -36,16 +36,32 @@ placeholder and the site still works.
 
 ## Pages
 
-| Route | What it is |
+Each page's sections are in the order the wireframe gives them.
+
+| Route | Sections |
 | --- | --- |
-| `/` | Letter hero that opens into three films, the house statement, the seasons as a sticky plate-by-plate scene, hosts, a horizontal gallery band, suppliers, reservation call |
-| `/menu` | The three menus as a sticky scene, wine pairing, the season wall |
-| `/verhaal` | The story in five chapters with a pinned frame, the team, recognition |
-| `/leveranciers` | The four suppliers, each with the dining-room chair on location |
-| `/wijn`, `/wijn/[slug]` | Aperitif, and the catalogue (placeholder wines) |
-| `/galerij` | Filterable gallery with lightbox, press contact |
-| `/reserveren` | Reservation request, The Room, gift voucher |
-| `/contact` | Address, hours, map, contact form |
+| `/` | hero slider · trust band · reviews · six "mogelijkheden" tiles · the chef · dishes · signature dish · menu statement · reservation form · practical info |
+| `/menu` | hero · signature dishes · the menu in tabs (Lunch / Diner / Dranken) · wine & champagne · reservation form · FAQ |
+| `/lunch` | hero · reviews · the formula · lunch menu · dishes · reservation form · FAQ |
+| `/diner` | hero · philosophy statement · dinner menu · wine pairing · dishes · reviews · reservation form · FAQ |
+| `/the-room` | hero · the room · set-ups · gallery · quote · two-step enquiry form · FAQ |
+| `/events` | hero · kinds of events · approach · gallery · quote · enquiry form · FAQ |
+| `/trouwen` | hero · the day · building blocks · gallery · quote · four steps · two-step enquiry form · FAQ |
+| `/over-ons` | hero · the story · kitchen & team · the team · recognition · contact form |
+| `/champagne-pompadour` | hero · the story · chef's quote · reservation form |
+| `/gastro-rsl` | hero · why a member · together · reservation form |
+| `/geschenkbox` | hero · what is in it · choose a box · how it works · reviews · FAQ |
+| `/shop`, `/shop/[slug]` | title and filters · product grid · delivery band; product detail |
+| `/contact` | title · how to reach us · contact form · FAQ |
+| `/cart` | title · line items · summary · cross-sell · trust band |
+| `/checkout` | minimal header · steps · form · order summary · trust line · minimal footer |
+| `/order-confirmation` | confirmation · recap · next step |
+| `/account` | title and tabs · content panel · help band |
+| `/privacy`, `/terms`, `/cookies`, `/accessibility` | title · contents · text (one shared template) |
+| 404 | statement · four exits |
+
+Review cards and quote spotlights render nothing until real quotes are added
+to `src/lib/reviews.ts`.
 
 ## Layout
 
@@ -56,66 +72,106 @@ public/
 │   └── hero/          poster frames for the films
 └── videos/
     ├── all/           the raw films — NOT in git
-    ├── hero/          the three hero loops, cut and compressed
-    └── clips/         shorter loops used further down the pages
+    ├── hero/          three loops, cut and compressed
+    └── clips/         two more
 src/
 ├── app/
-│   ├── (site)/        the public site, one folder per page
-│   ├── (shop)/        reserved — cart & checkout
-│   ├── (account)/     reserved — login & order history
-│   ├── layout.tsx     fonts, global metadata
+│   ├── (site)/        every public page, with the header and footer
+│   ├── (shop)/        the checkout tunnel, with its own bare chrome
+│   ├── layout.tsx     fonts, metadata, smooth scroll, transition, curtain
 │   ├── globals.css    brand tokens (colours, type, easings)
+│   ├── not-found.tsx
 │   ├── robots.ts
 │   └── sitemap.ts
 ├── components/
 │   ├── shell/         smooth scroll, page transition, preloader, header, footer, cursor
 │   ├── motion/        reusable animation primitives
-│   ├── home/          homepage sections
-│   ├── sections/      sections shared between pages
+│   ├── sections/      the section types every page is assembled from
+│   ├── home/          the homepage's own scenes
+│   ├── shop/          product card, cart, checkout, account
 │   ├── media/         image and video wrappers
-│   └── ui/            buttons
+│   └── ui/            links and buttons
 └── lib/
     ├── site.ts        address, hours, nav, links — the facts
-    ├── menu.ts        the menus and their prices
-    ├── suppliers.ts   the supplier stories
-    ├── photos.ts      names every photograph used; the gallery lives here
-    ├── catalog/       the wine catalogue + its data access layer
-    ├── enquiry.ts     server action behind both forms
+    ├── menu.ts        the menu and its prices
+    ├── reviews.ts     guest reviews and quotes (empty until supplied)
+    ├── faq.ts         the questions under each page
+    ├── photos.ts      names every photograph used
+    ├── catalog/       the shop's products + their data access layer
+    ├── cart.ts        the browser-side cart
+    ├── enquiry.ts     server action behind every form
     ├── media.ts       resolves every image/video URL
     ├── gsap.ts        GSAP with its plugins registered once
-    └── format.ts      price and volume formatting
+    └── format.ts      price formatting
 ```
 
 ## Where to change things
 
 | You want to… | Edit |
 | --- | --- |
-| Change hours, address, phone, nav, social links | `src/lib/site.ts` |
-| Change a menu or a price | `src/lib/menu.ts` |
-| Change the plates in the season scene | `plates` in `src/lib/menu.ts` |
-| Add or remove a gallery photo | `gallery` in `src/lib/photos.ts` |
-| Change a supplier | `src/lib/suppliers.ts` |
-| Add or change a wine | `src/lib/catalog/wines.ts` |
+| Change hours, address, phone, nav, links, the Google rating | `src/lib/site.ts` |
+| Change the menu or a price, add the dishes | `src/lib/menu.ts` |
+| Add guest reviews or quotes | `src/lib/reviews.ts` |
+| Change a FAQ answer | `src/lib/faq.ts` |
+| Add or change a product | `src/lib/catalog/products.ts` |
+| Change the copy on a page | that page's `page.tsx` under `src/app/(site)/` |
 | Change brand colours or fonts | `src/app/globals.css`, `src/app/layout.tsx` |
-| Swap a hero film | `heroMedia` in `src/lib/site.ts` — see [`docs/MEDIA.md`](docs/MEDIA.md) |
 | Make the forms deliver somewhere | set `ENQUIRY_WEBHOOK_URL` — see `src/lib/enquiry.ts` |
-| Add a page | a folder with `page.tsx` under `src/app/(site)/` |
+| Add a page | a folder with `page.tsx` under `src/app/(site)/`, built from `components/sections/` |
+
+## Sections
+
+Every page is assembled from the same small set, so a new page is mostly a
+list:
+
+| Component | Wireframe archetype |
+| --- | --- |
+| `PageHero` | hero split |
+| `TrustBand` | band |
+| `Reviews`, `Spotlight` | review cards, quote statement |
+| `Tiles` | immersive tiles |
+| `SplitMedia` | split media (photo or film) |
+| `Gallery` | gallery |
+| `Cards` | card grid |
+| `Steps` | steps |
+| `Statement`, `VideoStatement` | statement on the dark band |
+| `MenuTabs`, `MenuExcerpt` | editorial menu |
+| `ReservationBand`, `FormBand` | form on the brand tint |
+| `Praktisch` | hours, address, map |
+| `Faq` | accordion |
+| `LegalPage` | title · contents · text |
+
+`Band` gives each of them one of four backgrounds — white, tinted, dark,
+brand — which is how the page pacing in the wireframe is kept.
 
 ## Motion
+
+Deliberately few moves, repeated:
 
 | What | Where |
 | --- | --- |
 | Smooth scroll (Lenis on GSAP's ticker) | `components/shell/SmoothScroll.tsx` |
-| Page transition: circle wipe from the click, hole opening onto the new page | `components/shell/PageTransition.tsx` — use `TransitionLink` for internal links |
-| Opening curtain, once per page load | `components/shell/Preloader.tsx` |
-| Hero: pinned letters, round window opening into three films | `components/home/Hero.tsx` |
-| Sticky scenes (plates, menus, story chapters) | `home/SeasonScroller.tsx`, `sections/MenuScene.tsx`, `sections/StoryChapters.tsx` |
-| Pinned horizontal gallery | `components/home/GalleryBand.tsx` |
-| Word-by-word headings, image unveils, parallax, magnetic buttons, marquee, rotating ring | `components/motion/` |
-| Cursor, scroll-progress ring, grain | `components/shell/Cursor.tsx`, `ScrollProgress.tsx`, `.grain-layer` in `globals.css` |
+| Page transition: a rose curtain rises, the route swaps, it lifts away | `components/shell/PageTransition.tsx` — use `TransitionLink` for internal links |
+| Opening curtain with the monogram, once per page load | `components/shell/Preloader.tsx` |
+| Hero: four slides that wipe over one another and drift | `components/home/HomeHero.tsx` |
+| Dishes: a pinned row that scrolls sideways | `components/home/DishBand.tsx` |
+| Signature dish: a round window that opens to the full photograph — the one circle on the site | `components/home/Signature.tsx` |
+| Statement: a tilted film with a two-colour line across it | `components/home/VideoStatement.tsx` |
+| Headings that rise word by word, images uncovered from their bottom edge, parallax, links that lean to the pointer | `components/motion/` |
+| Cursor ring, scroll-progress hairline, grain | `components/shell/`, `.grain-layer` in `globals.css` |
 
 Everything respects `prefers-reduced-motion`: scroll scenes collapse to static
 layouts, the intro and transitions are skipped, films hold on their poster.
+
+## What does not work yet
+
+- **Payment.** The cart is real (browser-side); checkout's last step says
+  online payment is not active and offers the order as an e-mail.
+- **Accounts.** `/account` shows the logged-out state with the form disabled.
+- **Form delivery.** Without `ENQUIRY_WEBHOOK_URL`, forms validate and then
+  hand the visitor a pre-written e-mail.
+
+See [`docs/ECOMMERCE-ROADMAP.md`](docs/ECOMMERCE-ROADMAP.md).
 
 ## Notes
 
@@ -126,6 +182,7 @@ layouts, the intro and transitions are skipped, films hold on their poster.
 - `npm audit` reports advisories in `eslint-config-next`'s dependency tree.
   They are dev-only and the only "fix" is downgrading ESLint config to v14 —
   not worth it. Nothing ships to users.
-- The first version of this repo was scaffolded as a wine-house site. That
-  version and the "v2" homepage concept the current design grew out of are in
-  git history (commit "Snapshot existing work").
+- Earlier versions are in git history: the wine-house scaffold and "v2"
+  homepage concept (commit "Snapshot existing work"), and a first restaurant
+  build made before the wireframe was found (commit "Build the CRKL
+  restaurant site").
