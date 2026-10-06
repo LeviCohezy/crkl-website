@@ -23,10 +23,14 @@ This block is written and re-added by `next dev` — verify at `node_modules/nex
   catalog in the README. The "find it" accents (`Ring`, `Square`, `Eyebrow`,
   `Hollow` in `components/motion/Accents.tsx`) are hairline geometry, at most
   one per section. No rounded image masks, rotating badges or filled shapes.
-- **Pink dominant, brown sparing.** Backgrounds are the three pinks (mist,
-  petal, blush). `clay` is for hairlines, outlined accents and a few words;
-  `ink` is for type and one small dark panel per page — never a full dark
-  band. The footer is blush.
+- **White first, pink second, brown almost never.** Backgrounds are white
+  (`cream`), the brand pink (`blush`) and its tint (`petal`). Every rule,
+  border, divider, leader and button outline uses `line` / `line-strong`
+  (pale pinks) or white — never ink, never black. `clay` appears only in the
+  hairline accents (`Ring`, `Square`, `Hollow`), two or three per page; ink
+  is for type. Primary buttons are pink pills with a sweep fill; the nav,
+  the reserve pill and floating cards are frosted glass (`.glass`).
+  Photographs have 16 px corners unless they meet the viewport edge.
 - Build pages from `src/components/sections/`; give each section a `Band`
   tone (white / tint / dark / brand) to keep the wireframe's pacing.
 - Never hardcode `/images/...` or `/videos/...` paths. Use `imageUrl()` /

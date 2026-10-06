@@ -27,7 +27,7 @@ function Field({
       <span className="eyebrow text-ink-soft">{label}</span>
       {children}
       {error ? (
-        <span role="alert" className="mt-2 block text-sm text-rosewood">
+        <span role="alert" className="mt-2 block text-sm text-stone">
           {error}
         </span>
       ) : null}
@@ -115,7 +115,7 @@ export function EnquiryForm({
             {state.mailto ? (
               <a
                 href={state.mailto}
-                className="eyebrow mt-8 inline-flex h-14 items-center bg-ink px-9 text-cream"
+                className="eyebrow sweep mt-8 inline-flex h-14 items-center rounded-full bg-blush px-9 text-ink [--sweep:var(--color-line-strong)]"
               >
                 Open de e-mail
               </a>
@@ -142,7 +142,7 @@ export function EnquiryForm({
       {steps ? (
         <p className="eyebrow mb-8 flex items-center gap-4 text-ink-soft tabular-nums">
           <span className={first ? "text-ink" : ""}>01 Datum &amp; gasten</span>
-          <span aria-hidden className="h-px w-10 bg-current" />
+          <span aria-hidden className="h-px w-10 bg-line-strong" />
           <span className={first ? "" : "text-ink"}>02 Uw gegevens</span>
         </p>
       ) : null}

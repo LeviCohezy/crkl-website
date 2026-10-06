@@ -63,7 +63,7 @@ export function Spotlight({ quote }: { quote: Quote | null }) {
           <p className="font-display text-[clamp(1.9rem,4vw,3.75rem)] leading-[1.16] font-light">
             “{quote.quote}”
           </p>
-          <footer className="eyebrow mt-10 text-rosewood">{quote.attribution}</footer>
+          <footer className="eyebrow mt-10 text-stone">{quote.attribution}</footer>
         </blockquote>
       </Reveal>
     </Band>

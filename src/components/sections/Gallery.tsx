@@ -53,7 +53,7 @@ export function Gallery({
         <ul className="grid grid-cols-2 lg:grid-cols-4">
           {photos.slice(0, 4).map((photo, index) => (
             <li key={photo.src} className="group relative">
-              <Unveil delay={index * 0.08}>
+              <Unveil delay={index * 0.08} radius="rounded-none">
                 <MediaImage
                   src={photo.src}
                   alt={photo.alt}
@@ -61,6 +61,7 @@ export function Gallery({
                   sizes="(min-width: 1024px) 25vw, 50vw"
                   imageClassName="transition-transform duration-[1800ms] ease-expo group-hover:scale-[1.04]"
                   focus={photo.focus}
+                  radius="rounded-none"
                 />
               </Unveil>
               {captions?.[index] ? (

@@ -6,21 +6,25 @@
    its accent, both as given in the wireframe; the rest are tints of the rose
    plus one warm near-black for type.
 
-   Blush is light — type on it is ink, never white. The three pinks (mist,
-   petal, blush) carry the site; clay is kept for a few words, hairlines and
-   the outlined accents, and ink for type and one small dark panel per page.
+   White carries the site; the brand pink (blush) is the second colour and
+   petal its tint. Lines are never dark: every rule, border and leader uses
+   `line` / `line-strong` (pale pinks) or white. Clay is kept for a few
+   hairline accents per page — the thin rings and slipped frames — and ink
+   is for type only.
    Every token becomes a utility: --color-blush → bg-blush, text-blush.
 --------------------------------------------------------------------------- */
 @theme {
   --color-blush: #dfbbb3;
   --color-clay: #b26a5c;
   --color-rosewood: #7c463c;
-  --color-petal: #f1e1dc;
-  --color-mist: #f8eeeb;
-  --color-cream: #fdf8f6;
+  --color-petal: #f7ebe8;
+  --color-mist: #fcfafa;
+  --color-cream: #ffffff;
   --color-ink: #2a1c1a;
   --color-ink-soft: #5a4642;
-  --color-stone: #9a8782;
+  --color-stone: #9d8c88;
+  --color-line: #efe2de;
+  --color-line-strong: #e4cfc9;
 
   --ease-expo: cubic-bezier(0.16, 1, 0.3, 1);
   --ease-soft: cubic-bezier(0.22, 1, 0.36, 1);
@@ -56,11 +60,18 @@
 
 @layer base {
   html {
-    background-color: var(--color-mist);
+    background-color: var(--color-cream);
+  }
+
+  /* Fraunces: soft serifs, optical size left to the browser. */
+  .font-display {
+    font-variation-settings: "SOFT" 60;
+    font-optical-sizing: auto;
+    letter-spacing: -0.012em;
   }
 
   body {
-    background-color: var(--color-mist);
+    background-color: var(--color-cream);
     color: var(--color-ink);
     font-family: var(--font-sans);
     -webkit-font-smoothing: antialiased;
@@ -113,7 +124,7 @@
 
   /* A link whose rule draws in from the left on hover. */
   .link-line {
-    background-image: linear-gradient(currentColor, currentColor);
+    background-image: linear-gradient(var(--color-blush), var(--color-blush));
     background-position: 0 100%;
     background-repeat: no-repeat;
     background-size: 0% 1px;
@@ -129,7 +140,7 @@
      Hairline geometry you have to notice: a thin ring, a faint square,
      an outlined number. Sparing — see components/motion/Accents.tsx.      */
   .ring {
-    border: 1px solid color-mix(in oklab, var(--color-clay) 38%, transparent);
+    border: 1px solid color-mix(in oklab, var(--color-clay) 32%, transparent);
     border-radius: 9999px;
   }
 
@@ -140,6 +151,55 @@
   .hollow {
     -webkit-text-fill-color: transparent;
     -webkit-text-stroke: 1px color-mix(in oklab, var(--color-clay) 55%, transparent);
+  }
+
+  /* A little more grain on the heroes, over the photograph. */
+  .hero-grain::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 5;
+    pointer-events: none;
+    opacity: 0.22;
+    mix-blend-mode: overlay;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='180' height='180'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='1.1' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+  }
+
+  /* Frosted glass for things that float over the page. */
+  .glass {
+    background-color: color-mix(in oklab, white 82%, transparent);
+    backdrop-filter: blur(18px) saturate(140%);
+    -webkit-backdrop-filter: blur(18px) saturate(140%);
+    border: 1px solid color-mix(in oklab, white 70%, transparent);
+  }
+
+  .glass-dark {
+    background-color: color-mix(in oklab, white 14%, transparent);
+    backdrop-filter: blur(18px) saturate(140%);
+    -webkit-backdrop-filter: blur(18px) saturate(140%);
+    border: 1px solid color-mix(in oklab, white 40%, transparent);
+  }
+
+  /* A button whose fill sweeps in from the left on hover. */
+  .sweep {
+    position: relative;
+    isolation: isolate;
+    overflow: hidden;
+  }
+
+  .sweep::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background: var(--sweep, var(--color-blush));
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 600ms var(--ease-expo);
+  }
+
+  .sweep:hover::before {
+    transform: scaleX(1);
   }
 
   /* Film grain over the whole page. Oversized and nudged in steps, so the
@@ -240,7 +300,7 @@
   .field {
     width: 100%;
     border: 0;
-    border-bottom: 1px solid color-mix(in oklab, var(--color-ink) 28%, transparent);
+    border-bottom: 1px solid var(--color-line-strong);
     border-radius: 0;
     background: transparent;
     padding: 0.85rem 0;
@@ -255,7 +315,7 @@
 
   .field:focus {
     outline: none;
-    border-bottom-color: var(--color-ink);
+    border-bottom-color: var(--color-blush);
   }
 
   /* Map tinted towards the palette instead of Google's default colours. */

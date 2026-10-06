@@ -22,7 +22,7 @@ export default async function CartPage() {
     <>
       <section className="bg-cream pt-36 pb-24 text-ink sm:pb-36 lg:pt-44">
         <div className="mx-auto max-w-[100rem] px-6 sm:px-10">
-          <p className="eyebrow text-clay">Shop</p>
+          <p className="eyebrow text-stone">Shop</p>
           <SplitText
             as="h1"
             text="Winkelmand"
@@ -36,7 +36,7 @@ export default async function CartPage() {
         </div>
       </section>
 
-      <Band tone="white" compact className="border-t border-ink/10">
+      <Band tone="white" compact className="border-t border-line">
         <ul className="flex flex-col items-center justify-center gap-x-14 gap-y-4 md:flex-row">
           {promises.map((promise, index) => (
             <li key={promise} className="flex items-center gap-x-14">

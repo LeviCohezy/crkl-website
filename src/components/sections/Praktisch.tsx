@@ -35,7 +35,7 @@ export function Praktisch({ tone = "white", eyebrow = "Praktisch", title = "Tot 
             className="font-display mt-6 text-[clamp(2.4rem,5vw,4.75rem)] leading-[1.06] font-light"
           />
 
-          <Reveal delay={0.1} className="mt-12 border border-ink/20 p-6 sm:p-8">
+          <Reveal delay={0.1} className="glass mt-12 rounded-3xl p-6 sm:p-8">
             <dl>
               {site.hours.week.map((day, index) => (
                 <div
@@ -83,7 +83,7 @@ export function Praktisch({ tone = "white", eyebrow = "Praktisch", title = "Tot 
 
           <Reveal delay={0.25} className="relative mt-12">
             <Square className="-right-5 -bottom-5 h-full w-full" />
-            <div className="relative aspect-[16/10] overflow-hidden bg-petal">
+            <div className="relative aspect-[16/10] overflow-hidden rounded-3xl bg-petal">
               <iframe
                 title="Kaart met de ligging van CRKL"
                 src={`https://www.google.com/maps?q=${mapQuery}&z=15&output=embed`}

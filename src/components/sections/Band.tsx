@@ -12,10 +12,10 @@ import { DrawRule, Reveal, SplitText } from "@/components/motion/Reveal";
 export type Tone = "white" | "tint" | "dark" | "brand";
 
 export const tones: Record<Tone, { band: string; muted: string; rule: string; accent: string }> = {
-  white: { band: "bg-mist text-ink", muted: "text-ink-soft", rule: "border-ink/12", accent: "text-ink-soft" },
-  tint: { band: "bg-petal text-ink", muted: "text-ink-soft", rule: "border-ink/12", accent: "text-ink-soft" },
-  dark: { band: "bg-ink text-cream", muted: "text-cream/70", rule: "border-cream/20", accent: "text-blush" },
-  brand: { band: "bg-blush text-ink", muted: "text-ink-soft", rule: "border-ink/15", accent: "text-rosewood" },
+  white: { band: "bg-cream text-ink", muted: "text-ink-soft", rule: "border-line", accent: "text-stone" },
+  tint: { band: "bg-petal text-ink", muted: "text-ink-soft", rule: "border-line-strong", accent: "text-stone" },
+  dark: { band: "bg-blush text-ink", muted: "text-ink-soft", rule: "border-white/60", accent: "text-stone" },
+  brand: { band: "bg-blush text-ink", muted: "text-ink-soft", rule: "border-white/60", accent: "text-stone" },
 };
 
 type BandProps = {
@@ -90,7 +90,7 @@ export function Head({
       } ${className}`}
     >
       <div className={centred || right ? "" : "max-w-3xl"}>
-        {!centred && !right ? <DrawRule className="mb-8 w-16 opacity-40" /> : null}
+        {!centred && !right ? <DrawRule className="mb-8 w-16" /> : null}
         {eyebrow ? (
           <Reveal>
             <Eyebrow className={`${t.accent} ${centred ? "justify-center" : right ? "justify-end" : ""}`}>

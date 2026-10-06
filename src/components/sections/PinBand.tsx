@@ -78,7 +78,7 @@ export function PinBand({ tone = "white", eyebrow, title, intro, photos, caption
             <div ref={track} className="flex h-[66svh] w-max items-stretch gap-[6vw] px-6 will-change-transform sm:gap-[5vw] sm:px-10">
               {photos.map((photo, index) => (
                 <figure key={photo.src} className={`shrink-0 ${frames[index % frames.length]}`}>
-                  <div className="h-full w-full overflow-hidden">
+                  <div className="h-full w-full overflow-hidden rounded-2xl">
                     <div data-slide className="h-full w-full scale-[1.16]">
                       <MediaImage src={photo.src} alt={photo.alt} aspect="h-full" sizes="(min-width: 640px) 26vw, 64vw" focus={photo.focus} />
                     </div>

@@ -27,7 +27,7 @@ export function ProductCard({ product, buyable = false, delay = 0 }: ProductCard
             fallbackLabel={product.name}
           />
         </Unveil>
-        <div className="mt-6 flex items-baseline justify-between gap-6 border-b border-ink/15 pb-5">
+        <div className="mt-6 flex items-baseline justify-between gap-6 border-b border-line pb-5">
           <h3 className="font-display text-3xl leading-tight font-light">{product.name}</h3>
           <p className="font-display text-xl font-light whitespace-nowrap tabular-nums">
             {product.commerce ? formatPrice(product.commerce.priceCents) : "Waarde naar keuze"}
@@ -45,7 +45,7 @@ export function ProductCard({ product, buyable = false, delay = 0 }: ProductCard
               href={product.externalUrl}
               target="_blank"
               rel="noreferrer noopener"
-              className="eyebrow inline-flex h-12 items-center bg-ink px-7 text-cream transition-colors duration-500 hover:bg-rosewood"
+              className="eyebrow sweep inline-flex h-12 items-center rounded-full bg-blush px-7 text-ink [--sweep:var(--color-line-strong)]"
             >
               Bestel de bon
             </a>

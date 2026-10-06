@@ -31,7 +31,7 @@ type FormBandProps = {
 function Direct({ className = "" }: { className?: string }) {
   return (
     <div className={`text-sm leading-relaxed ${className}`}>
-      <p className="eyebrow text-rosewood">Liever rechtstreeks</p>
+      <p className="eyebrow text-stone">Liever rechtstreeks</p>
       <p className="mt-3">
         <a href={`tel:${site.contact.phoneHref}`} className="link-line tabular-nums">
           {site.contact.phone}
@@ -55,7 +55,7 @@ export function FormBand({ id, eyebrow, title, intro, before, form, photo, varia
     return (
       <section id={id} className="relative scroll-mt-20 overflow-hidden bg-blush text-ink">
         <div className="absolute inset-0 opacity-70">
-          <MediaImage src={photo.src} alt="" aspect="h-full" sizes="100vw" imageClassName="scale-110 blur-sm" focus={photo.focus} />
+          <MediaImage src={photo.src} alt="" aspect="h-full" sizes="100vw" imageClassName="scale-110 blur-sm" focus={photo.focus} radius="rounded-none" />
           <div aria-hidden className="absolute inset-0 bg-blush/55" />
         </div>
 
@@ -64,7 +64,7 @@ export function FormBand({ id, eyebrow, title, intro, before, form, photo, varia
           <Reveal className="hidden lg:col-span-3 lg:flex lg:justify-center">
             <div className="relative flex aspect-square w-72 flex-col items-center justify-center text-center">
               <Ring className="inset-0" dot={215} />
-              <p className="eyebrow text-rosewood">Openingsuren</p>
+              <p className="eyebrow text-stone">Openingsuren</p>
               <dl className="mt-5 space-y-2 text-sm">
                 <div>
                   <dt className="text-ink-soft">Lunch · {site.hours.lunch.days}</dt>
@@ -79,7 +79,7 @@ export function FormBand({ id, eyebrow, title, intro, before, form, photo, varia
           </Reveal>
 
           <Reveal delay={0.1} className="lg:col-span-6 lg:col-start-4">
-            <div className="bg-cream px-6 py-12 sm:px-12 sm:py-16">
+            <div className="rounded-3xl bg-cream/95 px-6 py-12 shadow-[0_30px_80px_-40px_rgb(42_28_26/0.25)] sm:px-12 sm:py-16">
               <div className="text-center">
                 <Eyebrow className="justify-center text-ink-soft">{eyebrow}</Eyebrow>
                 <SplitText
@@ -99,7 +99,7 @@ export function FormBand({ id, eyebrow, title, intro, before, form, photo, varia
           <Reveal delay={0.2} className="hidden lg:col-span-3 lg:col-start-10 lg:flex lg:justify-center">
             <div className="relative flex aspect-square w-72 flex-col items-center justify-center text-center">
               <Ring className="inset-0" dot={40} />
-              <p className="eyebrow text-rosewood">Liever rechtstreeks</p>
+              <p className="eyebrow text-stone">Liever rechtstreeks</p>
               <p className="font-display mt-5 text-2xl tabular-nums">
                 <a href={`tel:${site.contact.phoneHref}`}>{site.contact.phone}</a>
               </p>
@@ -121,7 +121,7 @@ export function FormBand({ id, eyebrow, title, intro, before, form, photo, varia
       <Band tone="brand" id={id}>
         <div className="mx-auto max-w-3xl text-center">
           <Reveal>
-            <Eyebrow className="justify-center text-rosewood">{eyebrow}</Eyebrow>
+            <Eyebrow className="justify-center text-stone">{eyebrow}</Eyebrow>
           </Reveal>
           <SplitText
             text={title}
@@ -141,21 +141,21 @@ export function FormBand({ id, eyebrow, title, intro, before, form, photo, varia
           </Reveal>
           <Reveal delay={0.2} className="relative lg:col-span-4 lg:col-start-9">
             <Square className="-top-4 -right-4 h-full w-full" />
-            <div className="relative border border-ink/25 p-6 sm:p-8">
+            <div className="relative rounded-3xl border border-white/70 bg-white/40 p-6 sm:p-8">
               {photo ? (
                 <MediaImage src={photo.src} alt={photo.alt} aspect="aspect-[4/5]" sizes="(min-width: 1024px) 30vw, 100vw" focus={photo.focus} />
               ) : null}
-              <dl className="mt-8 divide-y divide-ink/15 text-sm">
+              <dl className="mt-8 divide-y divide-line text-sm">
                 <div className="flex items-baseline justify-between gap-6 py-3">
-                  <dt className="eyebrow text-rosewood">Telefoon</dt>
+                  <dt className="eyebrow text-stone">Telefoon</dt>
                   <dd className="tabular-nums"><a href={`tel:${site.contact.phoneHref}`} className="link-line">{site.contact.phone}</a></dd>
                 </div>
                 <div className="flex items-baseline justify-between gap-6 py-3">
-                  <dt className="eyebrow text-rosewood">E-mail</dt>
+                  <dt className="eyebrow text-stone">E-mail</dt>
                   <dd><a href={`mailto:${site.contact.email}`} className="link-line">{site.contact.email}</a></dd>
                 </div>
                 <div className="flex items-baseline justify-between gap-6 py-3">
-                  <dt className="eyebrow text-rosewood">Adres</dt>
+                  <dt className="eyebrow text-stone">Adres</dt>
                   <dd className="text-right">{site.contact.street}, {site.contact.city}</dd>
                 </div>
               </dl>
@@ -172,7 +172,7 @@ export function FormBand({ id, eyebrow, title, intro, before, form, photo, varia
       <div className="grid gap-16 lg:grid-cols-12 lg:gap-8">
         <div className="lg:col-span-4">
           <Reveal>
-            <Eyebrow className="text-rosewood">{eyebrow}</Eyebrow>
+            <Eyebrow className="text-stone">{eyebrow}</Eyebrow>
           </Reveal>
           <SplitText
             text={title}
@@ -184,7 +184,7 @@ export function FormBand({ id, eyebrow, title, intro, before, form, photo, varia
             </Reveal>
           ) : null}
           <Reveal delay={0.2}>
-            <Direct className="mt-10 border-t border-ink/20 pt-7" />
+            <Direct className="mt-10 border-t border-line-strong pt-7" />
           </Reveal>
         </div>
         <Reveal delay={0.1} className="lg:col-span-7 lg:col-start-6">

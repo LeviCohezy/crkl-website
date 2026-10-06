@@ -34,7 +34,7 @@ export function Ring({ className, dot }: RingProps) {
 }
 
 export function Square({ className }: { className: string }) {
-  return <span aria-hidden className={`frame pointer-events-none absolute ${className}`} />;
+  return <span aria-hidden className={`frame pointer-events-none absolute rounded-2xl ${className}`} />;
 }
 
 export function Eyebrow({
@@ -47,7 +47,7 @@ export function Eyebrow({
   return (
     <p className={`eyebrow flex items-center gap-3 ${className}`}>
       <span aria-hidden className="flex items-center">
-        <span className="h-px w-8 bg-current opacity-50" />
+        <span className="h-px w-8 bg-line-strong" />
         <span className="ring h-2 w-2 shrink-0" />
       </span>
       <span>{children}</span>

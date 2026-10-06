@@ -51,7 +51,7 @@ export function OrderConfirmation() {
     return (
       <section className="bg-blush pt-36 pb-24 text-ink sm:pb-32 lg:pt-44">
         <div className="mx-auto max-w-[100rem] px-6 sm:px-10">
-          <p className="eyebrow text-rosewood">Bestelling</p>
+          <p className="eyebrow text-stone">Bestelling</p>
           <h1 className="font-display mt-7 max-w-4xl text-[clamp(2.75rem,6.4vw,6rem)] leading-[1.02] font-light">
             We vinden hier geen <em>recente bestelling</em>
           </h1>
@@ -72,7 +72,7 @@ export function OrderConfirmation() {
     <>
       <section className="bg-blush pt-36 pb-24 text-ink sm:pb-32 lg:pt-44">
         <div className="mx-auto max-w-[100rem] px-6 sm:px-10">
-          <p className="eyebrow text-rosewood">Bestelling #{order.number}</p>
+          <p className="eyebrow text-stone">Bestelling #{order.number}</p>
           <h1 className="font-display mt-7 max-w-4xl text-[clamp(2.75rem,6.4vw,6rem)] leading-[1.02] font-light">
             Bedankt! Uw bestelling is <em>bevestigd</em>
           </h1>
@@ -84,10 +84,10 @@ export function OrderConfirmation() {
 
       <section className="bg-cream py-24 text-ink sm:py-32">
         <div className="mx-auto max-w-3xl px-6 sm:px-10">
-          <h2 className="eyebrow text-clay">Overzicht</h2>
-          <ul className="mt-6 border-t border-ink/15">
+          <h2 className="eyebrow text-stone">Overzicht</h2>
+          <ul className="mt-6 border-t border-line">
             {order.lines.map((line) => (
-              <li key={line.name} className="flex justify-between gap-6 border-b border-ink/15 py-4">
+              <li key={line.name} className="flex justify-between gap-6 border-b border-line py-4">
                 <span>
                   {line.quantity} × {line.name}
                 </span>
@@ -106,7 +106,7 @@ export function OrderConfirmation() {
                 <dd className="text-right">{order.address}</dd>
               </div>
             ) : null}
-            <div className="flex items-baseline justify-between gap-6 border-t border-ink/15 pt-5">
+            <div className="flex items-baseline justify-between gap-6 border-t border-line pt-5">
               <dt>Totaal</dt>
               <dd className="font-display text-4xl font-light tabular-nums">
                 {formatPrice(order.totalCents)}

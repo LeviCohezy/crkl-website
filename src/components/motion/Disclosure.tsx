@@ -15,7 +15,7 @@ export type DisclosureItem = { title: string; summary: string; body: string[] };
 export function Disclosure({ items, tone = "light" }: { items: DisclosureItem[]; tone?: "light" | "dark" }) {
   const [open, setOpen] = useState<number | null>(null);
   const id = useId();
-  const rule = tone === "dark" ? "border-cream/20" : "border-ink/15";
+  const rule = tone === "dark" ? "border-white/40" : "border-line";
   const muted = tone === "dark" ? "text-cream/70" : "text-ink-soft";
 
   return (
@@ -36,8 +36,8 @@ export function Disclosure({ items, tone = "light" }: { items: DisclosureItem[];
                 <span className={`mt-1 block text-sm ${muted}`}>{item.summary}</span>
               </span>
               <span aria-hidden className="relative mt-2 block h-3 w-3 justify-self-end">
-                <span className="absolute inset-x-0 top-1/2 h-px bg-current" />
-                <span className={`absolute inset-y-0 left-1/2 w-px bg-current transition-transform duration-500 ease-expo ${active ? "scale-y-0" : ""}`} />
+                <span className="absolute inset-x-0 top-1/2 h-px bg-blush" />
+                <span className={`absolute inset-y-0 left-1/2 w-px bg-blush transition-transform duration-500 ease-expo ${active ? "scale-y-0" : ""}`} />
               </span>
             </button>
             <AnimatePresence initial={false}>
@@ -77,7 +77,7 @@ export function Pills({ items, className = "" }: { items: string[]; className?: 
   return (
     <ul className={`flex flex-wrap gap-2.5 ${className}`}>
       {items.map((item) => (
-        <li key={item} className="eyebrow border border-ink/25 px-4 py-2.5 tracking-[0.16em]">
+        <li key={item} className="eyebrow rounded-full border border-line-strong px-4 py-2.5 tracking-[0.16em]">
           {item}
         </li>
       ))}
@@ -101,7 +101,7 @@ export function Tabs({ tabs }: { tabs: { label: string; content: ReactNode }[] }
 
   return (
     <div>
-      <div role="tablist" className="flex gap-8 border-b border-ink/15">
+      <div role="tablist" className="flex gap-8 border-b border-line">
         {tabs.map((tab, index) => (
           <button
             key={tab.label}
@@ -115,7 +115,7 @@ export function Tabs({ tabs }: { tabs: { label: string; content: ReactNode }[] }
           >
             {tab.label}
             {index === active ? (
-              <motion.span layoutId={`${id}-marker`} className="absolute inset-x-0 -bottom-px h-px bg-clay" transition={{ duration: 0.6, ease: EXPO }} />
+              <motion.span layoutId={`${id}-marker`} className="absolute inset-x-0 -bottom-px h-px bg-blush" transition={{ duration: 0.6, ease: EXPO }} />
             ) : null}
           </button>
         ))}

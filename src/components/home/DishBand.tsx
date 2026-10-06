@@ -79,7 +79,7 @@ export function DishBand() {
             className="flex h-[70svh] w-max items-stretch gap-[6vw] px-6 will-change-transform sm:gap-[5vw] sm:px-10"
           >
             <div className="flex w-[78vw] shrink-0 flex-col justify-center sm:w-[30vw]">
-              <p className="eyebrow text-clay">Gerechten</p>
+              <p className="eyebrow text-stone">Gerechten</p>
               <h2 className="font-display mt-6 text-[clamp(2.4rem,5vw,4.75rem)] leading-[1.06] font-light">
                 Wat het seizoen
                 <br />
@@ -94,7 +94,7 @@ export function DishBand() {
             {dishes.map((dish, index) => (
               <div
                 key={dish.src}
-                className={`shrink-0 overflow-hidden ${frames[index % frames.length]}`}
+                className={`shrink-0 overflow-hidden rounded-2xl ${frames[index % frames.length]}`}
               >
                 <div data-slide className="h-full w-full scale-[1.16]">
                   <MediaImage

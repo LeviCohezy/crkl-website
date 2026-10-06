@@ -15,7 +15,7 @@ export default function AccountPage() {
     <>
       <section className="bg-cream pt-36 pb-24 text-ink sm:pb-36 lg:pt-44">
         <div className="mx-auto max-w-[100rem] px-6 sm:px-10">
-          <p className="eyebrow text-clay">Shop</p>
+          <p className="eyebrow text-stone">Shop</p>
           <SplitText
             as="h1"
             text={"Uw *account*"}

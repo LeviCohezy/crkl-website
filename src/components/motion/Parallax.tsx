@@ -8,6 +8,8 @@ type ParallaxProps = {
   /** How far the content travels inside its frame, in percent of its height. */
   amount?: number;
   className?: string;
+  /** Corner radius of the frame; "rounded-none" for a picture that meets the edges. */
+  radius?: string;
 };
 
 /**
@@ -15,7 +17,7 @@ type ParallaxProps = {
  * scrolls. The content is oversized by the same amount it travels, so the
  * frame never shows an edge.
  */
-export function Parallax({ children, amount = 9, className = "" }: ParallaxProps) {
+export function Parallax({ children, amount = 9, className = "", radius = "rounded-2xl" }: ParallaxProps) {
   const frame = useRef<HTMLDivElement>(null);
   const inner = useRef<HTMLDivElement>(null);
 
@@ -43,7 +45,7 @@ export function Parallax({ children, amount = 9, className = "" }: ParallaxProps
   );
 
   return (
-    <div ref={frame} className={`overflow-hidden ${className}`}>
+    <div ref={frame} className={`overflow-hidden ${radius} ${className}`}>
       <div
         ref={inner}
         className="h-full w-full will-change-transform"

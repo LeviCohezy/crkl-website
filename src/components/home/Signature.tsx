@@ -92,7 +92,7 @@ export function Signature() {
           data-word
           className="pointer-events-none absolute inset-x-0 top-[17svh] px-6 text-center"
         >
-          <p className="eyebrow text-rosewood">Van de chef</p>
+          <p className="eyebrow text-stone">Van de chef</p>
           <p
             aria-hidden
             className="font-display mt-5 text-[clamp(3.75rem,13vw,13rem)] leading-[0.9] font-light italic"

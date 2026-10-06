@@ -41,7 +41,7 @@ export default async function ProductPage(props: PageProps<"/shop/[slug]">) {
   return (
     <div className="bg-cream pt-32 pb-24 text-ink sm:pb-36 lg:pt-40">
       <div className="mx-auto max-w-[100rem] px-6 sm:px-10">
-        <TransitionLink href="/shop" className="eyebrow link-line pb-1.5 text-clay">
+        <TransitionLink href="/shop" className="eyebrow link-line pb-1.5 text-stone">
           ← Shop
         </TransitionLink>
 
@@ -58,7 +58,7 @@ export default async function ProductPage(props: PageProps<"/shop/[slug]">) {
           </div>
 
           <div className="lg:col-span-5 lg:col-start-8 lg:py-6">
-            <p className="eyebrow text-clay">{categoryLabels[product.category]}</p>
+            <p className="eyebrow text-stone">{categoryLabels[product.category]}</p>
             <SplitText
               as="h1"
               text={product.name}
@@ -75,7 +75,7 @@ export default async function ProductPage(props: PageProps<"/shop/[slug]">) {
             {/* Commerce block. The price comes from the catalogue; the
                 button adds to the browser-side cart. Payment itself is not
                 connected yet — see docs/ECOMMERCE-ROADMAP.md. */}
-            <div className="mt-10 border-y border-ink/15 py-8">
+            <div className="mt-10 border-y border-line py-8">
               {product.commerce ? (
                 <>
                   <p className="font-display text-4xl font-light tabular-nums">
@@ -97,10 +97,10 @@ export default async function ProductPage(props: PageProps<"/shop/[slug]">) {
               {product.description}
             </p>
 
-            <p className="eyebrow mt-12 text-clay">Wat zit erin</p>
-            <ul className="mt-4 border-t border-ink/15">
+            <p className="eyebrow mt-12 text-stone">Wat zit erin</p>
+            <ul className="mt-4 border-t border-line">
               {product.contents.map((item) => (
-                <li key={item} className="border-b border-ink/15 py-3.5">
+                <li key={item} className="border-b border-line py-3.5">
                   {item}
                 </li>
               ))}

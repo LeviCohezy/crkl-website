@@ -75,7 +75,7 @@ export function CardFan({ tone = "white", eyebrow, title, intro, cards }: CardFa
               <li
                 key={card.title}
                 data-card
-                className="bg-cream p-4 lg:absolute lg:top-24 lg:left-1/2 lg:w-[22rem] lg:origin-bottom lg:will-change-transform"
+                className="rounded-3xl bg-cream p-4 shadow-[0_30px_80px_-40px_rgb(42_28_26/0.3)] lg:absolute lg:top-24 lg:left-1/2 lg:w-[22rem] lg:origin-bottom lg:will-change-transform"
                 style={{ zIndex: index }}
               >
                 <MediaImage src={card.photo.src} alt={card.photo.alt} aspect="aspect-[4/5]" sizes="(min-width: 1024px) 22rem, 100vw" focus={card.photo.focus} />

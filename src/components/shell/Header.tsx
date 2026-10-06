@@ -77,10 +77,8 @@ export function Header() {
   return (
     <>
       <header
-        className={`fixed inset-x-0 top-0 z-[70] border-b transition-colors duration-700 ${
-          clear
-            ? "border-transparent text-white"
-            : "border-ink/10 bg-cream/90 text-ink backdrop-blur-md"
+        className={`fixed inset-x-0 top-0 z-[70] transition-colors duration-700 ${
+          clear ? "text-white" : "glass text-ink"
         }`}
       >
         <div className="mx-auto flex h-16 max-w-[100rem] items-center justify-between gap-6 px-6 sm:px-10 lg:h-20">
@@ -122,10 +120,10 @@ export function Header() {
             ) : null}
             <TransitionLink
               href={reserve}
-              className={`eyebrow hidden h-10 items-center px-5 transition-colors duration-500 sm:flex ${
+              className={`eyebrow sweep hidden h-10 items-center rounded-full px-5 transition-colors duration-500 sm:flex ${
                 clear
-                  ? "bg-white text-ink hover:bg-cream"
-                  : "bg-ink text-cream hover:bg-rosewood"
+                  ? "glass-dark text-white [--sweep:rgb(255_255_255/0.22)]"
+                  : "bg-blush text-ink [--sweep:var(--color-line-strong)]"
               }`}
             >
               Reserveer
@@ -200,7 +198,7 @@ export function Header() {
               </nav>
 
               <motion.div
-                className="mt-10 border-t border-ink/15 pt-8"
+                className="mt-10 border-t border-line pt-8"
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ duration: 0.9, delay: 0.55 }}
@@ -233,7 +231,7 @@ export function Header() {
       <TransitionLink
         href={reserve}
         onClick={() => closeAfterCover(reserve)}
-        className="eyebrow fixed inset-x-0 bottom-0 z-[65] flex h-14 items-center justify-center bg-ink text-cream sm:hidden"
+        className="eyebrow glass fixed inset-x-3 bottom-3 z-[65] flex h-14 items-center justify-center rounded-full text-ink sm:hidden"
       >
         Reserveer een tafel
       </TransitionLink>

@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Cormorant_Garamond, Inter } from "next/font/google";
+import { Fraunces, Inter } from "next/font/google";
 import "./globals.css";
 import { Cursor } from "@/components/shell/Cursor";
 import { PageTransition } from "@/components/shell/PageTransition";
@@ -8,11 +8,17 @@ import { ScrollProgress } from "@/components/shell/ScrollProgress";
 import { SmoothScroll } from "@/components/shell/SmoothScroll";
 import { site, siteUrl } from "@/lib/site";
 
-const display = Cormorant_Garamond({
+/**
+ * Fraunces, at its lightest and softest: a serif with the warmth of the old
+ * faces and none of their stiffness. The optical-size axis sets the large
+ * headings in their own cut.
+ */
+const display = Fraunces({
   variable: "--font-display",
   subsets: ["latin"],
-  weight: ["300", "400", "500"],
+  weight: "variable",
   style: ["normal", "italic"],
+  axes: ["opsz", "SOFT"],
   display: "swap",
 });
 

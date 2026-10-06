@@ -32,7 +32,7 @@ export function ShopGrid({ products }: { products: Product[] }) {
 
   return (
     <div>
-      <div role="tablist" aria-label="Filter de shop" className="flex flex-wrap gap-x-9 gap-y-3 border-b border-ink/15">
+      <div role="tablist" aria-label="Filter de shop" className="flex flex-wrap gap-x-9 gap-y-3 border-b border-line">
         {filters.map((item) => {
           const selected = item.id === filter;
           return (
@@ -50,7 +50,7 @@ export function ShopGrid({ products }: { products: Product[] }) {
               {selected ? (
                 <motion.span
                   layoutId="shop-filter"
-                  className="absolute inset-x-0 -bottom-px h-px bg-ink"
+                  className="absolute inset-x-0 -bottom-px h-px bg-blush"
                   transition={{ duration: 0.7, ease: EXPO }}
                 />
               ) : null}
@@ -76,7 +76,7 @@ export function ShopGrid({ products }: { products: Product[] }) {
                 transition={{ duration: 0.8, ease: EXPO }}
               >
                 <TransitionLink href={`/shop/${product.slug}`} className="group block">
-                  <div className="relative aspect-[4/5] overflow-hidden bg-petal">
+                  <div className="relative aspect-[4/5] overflow-hidden rounded-2xl bg-petal">
                     <Image
                       src={imageUrl(product.image)}
                       alt={product.imageAlt}
@@ -85,7 +85,7 @@ export function ShopGrid({ products }: { products: Product[] }) {
                       className="object-cover transition-transform duration-[1600ms] ease-expo group-hover:scale-[1.04]"
                     />
                   </div>
-                  <div className="mt-6 flex items-baseline justify-between gap-6 border-b border-ink/15 pb-5">
+                  <div className="mt-6 flex items-baseline justify-between gap-6 border-b border-line pb-5">
                     <h2 className="font-display text-3xl leading-tight font-light">
                       {product.name}
                     </h2>

@@ -221,7 +221,7 @@ export default function TheRoomPage() {
                   <CountUp value={item.n} />
                 </dt>
                 <dd className="mt-1">
-                  <span className="eyebrow text-rosewood">{item.unit}</span>
+                  <span className="eyebrow text-stone">{item.unit}</span>
                   <span className="mt-1 block text-sm leading-snug text-ink-soft">{item.line}</span>
                 </dd>
               </div>

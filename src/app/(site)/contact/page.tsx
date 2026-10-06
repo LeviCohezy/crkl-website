@@ -19,7 +19,7 @@ export default function ContactPage() {
     <>
       <section className="bg-cream pt-36 pb-20 text-ink lg:pt-44">
         <div className="mx-auto max-w-[100rem] px-6 sm:px-10">
-          <p className="eyebrow text-clay">Contact</p>
+          <p className="eyebrow text-stone">Contact</p>
           <SplitText
             as="h1"
             text={"Tot\n*binnenkort*"}
@@ -44,7 +44,7 @@ export default function ContactPage() {
         title={"Een vraag,\n*een idee*"}
         intro={`Of bel ons op ${site.contact.phone}.`}
         before={
-          <p className="flex flex-wrap items-baseline gap-x-6 gap-y-3 border-b border-ink/20 pb-8">
+          <p className="flex flex-wrap items-baseline gap-x-6 gap-y-3 border-b border-line-strong pb-8">
             <span className="font-display text-2xl font-light">Wilt u een tafel?</span>
             <ArrowLink href={reserveHref("/contact")}>Reserveer hier</ArrowLink>
           </p>

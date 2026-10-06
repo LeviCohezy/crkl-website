@@ -25,7 +25,7 @@ export default async function CheckoutPage() {
         </Suspense>
       </div>
 
-      <ul className="mt-20 flex flex-wrap gap-x-10 gap-y-3 border-t border-ink/15 pt-8">
+      <ul className="mt-20 flex flex-wrap gap-x-10 gap-y-3 border-t border-line pt-8">
         {trust.map((item) => (
           <li key={item} className="eyebrow text-ink-soft">
             {item}

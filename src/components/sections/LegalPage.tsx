@@ -28,7 +28,7 @@ export function LegalPage({ title, updated, sections, children }: LegalPageProps
   return (
     <div className="bg-cream text-ink">
       <header className="mx-auto max-w-[100rem] px-6 pt-36 pb-14 sm:px-10 lg:pt-44">
-        <p className="eyebrow text-clay">Juridisch</p>
+        <p className="eyebrow text-stone">Juridisch</p>
         <h1 className="font-display mt-7 text-[clamp(2.75rem,6vw,5.5rem)] leading-[1.02] font-light">
           {title}
         </h1>
@@ -38,7 +38,7 @@ export function LegalPage({ title, updated, sections, children }: LegalPageProps
         {children ? <div className="mt-8">{children}</div> : null}
       </header>
 
-      <div className="border-y border-ink/10 bg-petal lg:sticky lg:top-20 lg:z-30">
+      <div className="border-y border-line bg-petal lg:sticky lg:top-20 lg:z-30">
         <nav aria-label="Op deze pagina" className="mx-auto max-w-[100rem] px-6 sm:px-10">
           <ol className="flex flex-wrap gap-x-9 gap-y-2 py-5">
             {sections.map((section, index) => (
@@ -53,7 +53,7 @@ export function LegalPage({ title, updated, sections, children }: LegalPageProps
       </div>
 
       <div className="mx-auto max-w-3xl px-6 py-20 sm:px-10 sm:py-28">
-        <p className="border border-dashed border-ink/30 p-6 text-sm leading-relaxed text-ink-soft">
+        <p className="rounded-2xl border border-dashed border-line-strong p-6 text-sm leading-relaxed text-ink-soft">
           Deze tekst is een voorlopige versie en heeft geen juridische waarde.
           De definitieve versie volgt. Vragen? Mail naar{" "}
           <a href={`mailto:${site.contact.email}`} className="link-line text-ink">

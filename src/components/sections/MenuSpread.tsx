@@ -145,7 +145,7 @@ export function MenuSpread() {
               {line.label}
               {line.note ? <span className="ml-2 font-normal tracking-normal text-stone normal-case">{line.note}</span> : null}
             </dt>
-            <span aria-hidden className="mb-1 flex-1 border-b border-dotted border-ink/35" />
+            <span aria-hidden className="mb-1 flex-1 border-b border-dotted border-line-strong" />
             <dd className="font-display text-xl font-light whitespace-nowrap tabular-nums">
               {line.supplement ? "+ " : ""}
               {formatPrice(line.priceCents)}
@@ -160,7 +160,7 @@ export function MenuSpread() {
     <div className="relative h-full p-6 sm:p-10 lg:p-16">
       <div className="relative h-full">
         <Square className={`top-5 h-full w-full ${flipped ? "-left-5" : "-right-5"}`} />
-        <div className="relative h-full overflow-hidden bg-petal">
+        <div className="relative h-full overflow-hidden rounded-2xl bg-petal">
           <Image
             src={imageUrl(spread.photo.src)}
             alt={spread.photo.alt}
@@ -230,7 +230,7 @@ export function MenuSpread() {
             type="button"
             onClick={() => go(-1)}
             aria-label="Vorige"
-            className="ring flex h-11 w-11 items-center justify-center bg-cream/80 transition-transform duration-500 ease-expo hover:scale-105"
+            className="ring glass flex h-11 w-11 items-center justify-center transition-transform duration-500 ease-expo hover:scale-105"
           >
             ←
           </button>
@@ -255,7 +255,7 @@ export function MenuSpread() {
             type="button"
             onClick={() => go(1)}
             aria-label="Volgende"
-            className="ring flex h-11 w-11 items-center justify-center bg-cream/80 transition-transform duration-500 ease-expo hover:scale-105"
+            className="ring glass flex h-11 w-11 items-center justify-center transition-transform duration-500 ease-expo hover:scale-105"
           >
             →
           </button>

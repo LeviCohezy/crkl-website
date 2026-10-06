@@ -26,6 +26,7 @@ export default function NotFound() {
               aspect="h-full"
               sizes="100vw"
               priority
+              radius="rounded-none"
             />
           </div>
           <div className="relative mx-auto flex min-h-[80svh] max-w-[100rem] flex-col justify-end px-6 pt-40 pb-20 sm:px-10">
@@ -50,7 +51,7 @@ export default function NotFound() {
               <li key={exit.label}>
                 <TransitionLink
                   href={exit.href}
-                  className="group block border-t border-ink/15 pt-6"
+                  className="group block border-t border-line pt-6"
                 >
                   <span className="flex items-baseline justify-between gap-6">
                     <span className="font-display text-4xl font-light">{exit.label}</span>

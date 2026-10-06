@@ -51,7 +51,7 @@ export function Timeline({ tone = "white", eyebrow, title, steps, last }: Timeli
         <Head tone={tone} eyebrow={eyebrow} title={title} align="center" />
         <ol data-list className="relative mx-auto mt-20 max-w-3xl">
           <span aria-hidden className={`absolute top-0 bottom-0 left-6 border-l sm:left-1/2 ${t.rule}`} />
-          <span data-line aria-hidden className="absolute top-0 bottom-0 left-6 w-px origin-top bg-clay sm:left-1/2" />
+          <span data-line aria-hidden className="absolute top-0 bottom-0 left-6 w-px origin-top bg-blush sm:left-1/2" />
           {all.map((step, index) => {
             const left = index % 2 === 0;
             const isLast = index === all.length - 1;

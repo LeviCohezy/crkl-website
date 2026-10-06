@@ -25,7 +25,7 @@ export function AddToCart({ slug, className = "" }: { slug: string; className?: 
           addToCart(slug);
           setAdded(true);
         }}
-        className="eyebrow h-12 bg-ink px-7 text-cream transition-colors duration-500 hover:bg-rosewood"
+        className="eyebrow sweep h-12 rounded-full bg-blush px-7 text-ink [--sweep:var(--color-line-strong)]"
       >
         In winkelmand
       </button>

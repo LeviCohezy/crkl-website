@@ -46,7 +46,7 @@ export default function CookiesPage() {
       <button
         type="button"
         disabled
-        className="eyebrow h-12 border border-ink/30 px-7 disabled:cursor-not-allowed disabled:opacity-50"
+        className="eyebrow h-12 border border-line-strong px-7 disabled:cursor-not-allowed disabled:opacity-50"
       >
         Beheer voorkeuren
       </button>

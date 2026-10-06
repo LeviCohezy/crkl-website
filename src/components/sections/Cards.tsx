@@ -77,8 +77,8 @@ export function Cards({ tone = "white", eyebrow, title, intro, cards, photo, var
               <li key={card.title} className="grid md:grid-cols-2">
                 <div className={`relative ${flip ? "md:order-2" : ""}`}>
                   {card.photo ? (
-                    <Unveil>
-                      <MediaImage src={card.photo.src} alt={card.photo.alt} aspect="aspect-[4/3] md:aspect-auto md:h-full md:min-h-[26rem]" sizes="(min-width: 768px) 50vw, 100vw" focus={card.photo.focus} />
+                    <Unveil radius="rounded-none">
+                      <MediaImage src={card.photo.src} alt={card.photo.alt} aspect="aspect-[4/3] md:aspect-auto md:h-full md:min-h-[26rem]" sizes="(min-width: 768px) 50vw, 100vw" focus={card.photo.focus} radius="rounded-none" />
                     </Unveil>
                   ) : null}
                 </div>

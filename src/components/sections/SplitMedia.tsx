@@ -181,7 +181,7 @@ export function SplitMedia({
     return (
       <Band tone={tone} id={id} bleed className="!py-0">
         <div className="mx-auto max-w-[100rem] px-6 py-24 sm:px-10 sm:py-32 lg:py-40">
-          <div className="relative bg-blush px-6 py-24 sm:px-12 lg:px-20 lg:py-32">
+          <div className="relative rounded-3xl bg-blush px-6 py-24 sm:px-12 lg:px-20 lg:py-32">
             <div className="grid gap-14 lg:grid-cols-12 lg:gap-8">
               <div className={`relative lg:col-span-5 ${flip ? "lg:order-2 lg:col-start-8" : ""}`}>
                 {/* Breaks over the top edge of the panel. */}

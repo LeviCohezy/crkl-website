@@ -37,7 +37,7 @@ export function CartView({ products }: { products: Product[] }) {
 
   if (count === 0) {
     return (
-      <div className="border-t border-ink/15 py-24">
+      <div className="border-t border-line py-24">
         <p className="font-display text-4xl font-light sm:text-5xl">
           Uw winkelmand is <em>leeg</em>
         </p>
@@ -52,13 +52,13 @@ export function CartView({ products }: { products: Product[] }) {
   return (
     <div className="grid gap-14 lg:grid-cols-12 lg:gap-8">
       {/* ── Line items ─────────────────────────────────────────────────── */}
-      <ul className="border-t border-ink/15 lg:col-span-7">
+      <ul className="border-t border-line lg:col-span-7">
         {lines.map(({ product, quantity, priceCents }) => (
           <li
             key={product.slug}
-            className="grid grid-cols-[5.5rem_1fr] gap-x-6 gap-y-4 border-b border-ink/15 py-7 sm:grid-cols-[7rem_1fr_auto] sm:items-center"
+            className="grid grid-cols-[5.5rem_1fr] gap-x-6 gap-y-4 border-b border-line py-7 sm:grid-cols-[7rem_1fr_auto] sm:items-center"
           >
-            <div className="relative aspect-[4/5] overflow-hidden bg-petal">
+            <div className="relative aspect-[4/5] overflow-hidden rounded-xl bg-petal">
               <Image
                 src={imageUrl(product.image)}
                 alt={product.imageAlt}
@@ -78,7 +78,7 @@ export function CartView({ products }: { products: Product[] }) {
                 {formatPrice(priceCents)} per stuk
               </p>
               <div className="mt-4 flex items-center gap-6">
-                <div className="flex items-center border border-ink/20">
+                <div className="flex items-center border border-line-strong">
                   <button
                     type="button"
                     aria-label={`Eén ${product.name} minder`}
@@ -117,8 +117,8 @@ export function CartView({ products }: { products: Product[] }) {
 
       {/* ── Summary ────────────────────────────────────────────────────── */}
       <aside className="lg:col-span-4 lg:col-start-9">
-        <div className="bg-blush p-8 sm:p-10 lg:sticky lg:top-28">
-          <h2 className="eyebrow text-rosewood">Overzicht</h2>
+        <div className="rounded-3xl bg-petal p-8 sm:p-10 lg:sticky lg:top-28">
+          <h2 className="eyebrow text-stone">Overzicht</h2>
 
           <dl className="mt-7 space-y-3">
             <div className="flex justify-between gap-6">
@@ -127,8 +127,8 @@ export function CartView({ products }: { products: Product[] }) {
             </div>
           </dl>
 
-          <fieldset className="mt-7 border-t border-ink/20 pt-6">
-            <legend className="eyebrow text-rosewood">Levering</legend>
+          <fieldset className="mt-7 border-t border-line-strong pt-6">
+            <legend className="eyebrow text-stone">Levering</legend>
             <label className="mt-4 flex cursor-pointer items-baseline justify-between gap-4">
               <span className="flex items-baseline gap-3">
                 <input
@@ -157,7 +157,7 @@ export function CartView({ products }: { products: Product[] }) {
             </label>
           </fieldset>
 
-          <div className="mt-7 flex items-baseline justify-between gap-6 border-t border-ink/20 pt-6">
+          <div className="mt-7 flex items-baseline justify-between gap-6 border-t border-line-strong pt-6">
             <p>Totaal</p>
             <p className="font-display text-4xl font-light tabular-nums">
               {formatPrice(subtotal)}
@@ -176,8 +176,8 @@ export function CartView({ products }: { products: Product[] }) {
 
         {/* ── Cross-sell: one item, and only the voucher ───────────────── */}
         {voucher?.externalUrl ? (
-          <div className="mt-8 flex items-center gap-6 border border-dashed border-ink/25 p-6">
-            <div className="relative aspect-square w-20 shrink-0 overflow-hidden bg-petal">
+          <div className="mt-8 flex items-center gap-6 rounded-2xl border border-dashed border-line-strong p-6">
+            <div className="relative aspect-square w-20 shrink-0 overflow-hidden rounded-xl bg-petal">
               <Image
                 src={imageUrl(voucher.image)}
                 alt={voucher.imageAlt}

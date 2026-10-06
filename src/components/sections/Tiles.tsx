@@ -21,8 +21,8 @@ type TilesProps = {
   intro?: string;
   tiles: Tile[];
   /**
-   * `stagger` hangs the pictures at alternating heights with their captions
-   * above one and below the next (Plénitude, "where every flavor…");
+   * `stagger` is a plain grid of pictures with every name on the same
+   *   baseline, each tile drifting a few pixels at its own pace;
    * `tall` is a row of tall cards with the name set at the top of the
    * picture and the line at the bottom (Ballena).
    */
@@ -38,7 +38,7 @@ export function Tiles({ id, tone = "white", eyebrow, title, intro, tiles, varian
         <ul className="mt-16 grid gap-5 sm:grid-cols-3 lg:gap-8">
           {tiles.map((tile, index) => (
             <li key={tile.label}>
-              <TransitionLink href={tile.href} className="group relative block">
+              <TransitionLink href={tile.href} className="group relative block overflow-hidden rounded-2xl">
                 <Unveil delay={index * 0.1}>
                   <MediaImage
                     src={tile.photo.src}
@@ -68,49 +68,43 @@ export function Tiles({ id, tone = "white", eyebrow, title, intro, tiles, varian
     );
   }
 
-  /* Caption above the raised tiles, below the lowered ones. */
+  /* Six pictures on one grid, every name on the same baseline: the title is
+     one fixed line, the caption one more, so nothing shifts between tiles. */
   return (
     <Band tone={tone} id={id}>
       <Ring className="-right-28 top-24 h-96 w-96" dot={210} />
       <Head tone={tone} eyebrow={eyebrow} title={title} intro={intro} align="center" />
 
-      <ul className="mt-20 grid grid-cols-2 gap-x-5 gap-y-16 sm:gap-x-8 lg:grid-cols-6 lg:gap-x-6">
-        {tiles.map((tile, index) => {
-          const raised = index % 2 === 1;
-          const caption = (
-            <div className={`${raised ? "mb-5" : "mt-5"}`}>
-              <h3 className="font-display text-2xl leading-tight font-light sm:text-3xl">{tile.label}</h3>
-              <p className="mt-1.5 flex items-baseline gap-3 text-sm text-ink-soft">
-                {tile.line}
-                <span aria-hidden className="transition-transform duration-500 ease-expo group-hover:translate-x-1.5">
-                  →
-                </span>
-              </p>
-            </div>
-          );
-          return (
-            <li key={tile.label} className={`lg:col-span-2 ${raised ? "lg:-mt-14" : "lg:mt-6"}`}>
-              <Drift distance={raised ? -14 : 14}>
-                <TransitionLink href={tile.href} className="group block">
-                  {raised ? caption : null}
-                  <Reveal delay={(index % 3) * 0.08}>
-                    <Unveil>
-                      <MediaImage
-                        src={tile.photo.src}
-                        alt={tile.photo.alt}
-                        aspect={raised ? "aspect-[4/5]" : "aspect-[3/4]"}
-                        sizes="(min-width: 1024px) 31vw, 46vw"
-                        imageClassName="transition-transform duration-[1600ms] ease-expo group-hover:scale-[1.04]"
-                        focus={tile.photo.focus}
-                      />
-                    </Unveil>
-                  </Reveal>
-                  {raised ? null : caption}
-                </TransitionLink>
-              </Drift>
-            </li>
-          );
-        })}
+      <ul className="mt-20 grid grid-cols-2 gap-x-5 gap-y-14 sm:gap-x-8 lg:grid-cols-3 lg:gap-x-8">
+        {tiles.map((tile, index) => (
+          <li key={tile.label}>
+            <Drift distance={index % 2 ? -10 : 10}>
+              <TransitionLink href={tile.href} className="group block">
+                <Reveal delay={(index % 3) * 0.08}>
+                  <Unveil>
+                    <MediaImage
+                      src={tile.photo.src}
+                      alt={tile.photo.alt}
+                      aspect="aspect-[4/5]"
+                      sizes="(min-width: 1024px) 31vw, 46vw"
+                      imageClassName="transition-transform duration-[1600ms] ease-expo group-hover:scale-[1.04]"
+                      focus={tile.photo.focus}
+                    />
+                  </Unveil>
+                </Reveal>
+                <div className="mt-5 grid h-[4.5rem] grid-rows-[auto_auto] content-start">
+                  <h3 className="font-display truncate text-2xl leading-none font-light sm:text-3xl">{tile.label}</h3>
+                  <p className="mt-2 flex items-baseline gap-3 truncate text-sm text-ink-soft">
+                    {tile.line}
+                    <span aria-hidden className="transition-transform duration-500 ease-expo group-hover:translate-x-1.5">
+                      →
+                    </span>
+                  </p>
+                </div>
+              </TransitionLink>
+            </Drift>
+          </li>
+        ))}
       </ul>
     </Band>
   );

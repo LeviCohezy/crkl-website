@@ -165,9 +165,10 @@ Rich copy uses `Disclosure` (short line, full paragraphs folded under it but
 always in the page), `Pills`, `PullQuote` and in-section `Tabs` from
 `components/motion/Disclosure.tsx`, and `CountUp` for figures.
 
-`Band` gives each of them one of four backgrounds — white, tinted, dark,
-brand — which is how the page pacing in the wireframe is kept. All three
-light ones are pinks; "dark" is never a full band.
+`Band` gives each of them one of four backgrounds — white, tinted, brand,
+and "dark", which is now the brand pink as well — which is how the page
+pacing in the wireframe is kept. White carries the site, pink is the second
+colour, and no line on the site is dark.
 
 ### Find-it accents
 

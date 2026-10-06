@@ -94,7 +94,7 @@ export function CheckoutFlow({ products }: { products: Product[] }) {
     <div className="grid gap-14 lg:grid-cols-12 lg:gap-8">
       <div className="lg:col-span-6">
         {/* ── Step indicator ───────────────────────────────────────────── */}
-        <ol className="flex items-center gap-4 border-b border-ink/15 pb-6">
+        <ol className="flex items-center gap-4 border-b border-line pb-6">
           {steps.map((label, index) => (
             <li key={label} className="flex items-center gap-4">
               {index > 0 ? <span aria-hidden className="h-px w-6 bg-ink/25 sm:w-10" /> : null}
@@ -148,14 +148,14 @@ export function CheckoutFlow({ products }: { products: Product[] }) {
               <form onSubmit={next} className="space-y-9">
                 <h2 className="font-display text-4xl font-light">Levering</h2>
                 <fieldset className="space-y-4">
-                  <label className="flex cursor-pointer items-baseline justify-between gap-6 border-b border-ink/15 pb-4">
+                  <label className="flex cursor-pointer items-baseline justify-between gap-6 border-b border-line pb-4">
                     <span className="flex items-baseline gap-3">
                       <input type="radio" name="delivery" className="accent-ink" checked={delivery === "ophalen"} onChange={() => setDelivery("ophalen")} />
                       Ophalen in het restaurant
                     </span>
                     <span className="text-sm">Gratis</span>
                   </label>
-                  <label className="flex cursor-pointer items-baseline justify-between gap-6 border-b border-ink/15 pb-4">
+                  <label className="flex cursor-pointer items-baseline justify-between gap-6 border-b border-line pb-4">
                     <span className="flex items-baseline gap-3">
                       <input type="radio" name="delivery" className="accent-ink" checked={delivery === "verzending"} onChange={() => setDelivery("verzending")} />
                       Verzending in België
@@ -187,7 +187,7 @@ export function CheckoutFlow({ products }: { products: Product[] }) {
             {step === 2 ? (
               <div className="space-y-8">
                 <h2 className="font-display text-4xl font-light">Betaling</h2>
-                <div className="border border-ink/20 p-7">
+                <div className="rounded-2xl border border-line-strong p-7">
                   <p className="font-display text-2xl leading-snug font-light">
                     Online betalen is nog niet actief.
                   </p>
@@ -202,7 +202,7 @@ export function CheckoutFlow({ products }: { products: Product[] }) {
                   </p>
                   <a
                     href={mailto}
-                    className="eyebrow mt-7 inline-flex h-14 items-center bg-ink px-9 text-cream transition-colors duration-500 hover:bg-rosewood"
+                    className="eyebrow sweep mt-7 inline-flex h-14 items-center rounded-full bg-blush px-9 text-ink [--sweep:var(--color-line-strong)]"
                   >
                     Bestel per e-mail
                   </a>
@@ -218,8 +218,8 @@ export function CheckoutFlow({ products }: { products: Product[] }) {
 
       {/* ── Order summary ────────────────────────────────────────────── */}
       <aside className="lg:col-span-5 lg:col-start-8">
-        <details open className="bg-petal p-8 sm:p-10 lg:sticky lg:top-28">
-          <summary className="eyebrow flex cursor-pointer items-baseline justify-between text-rosewood">
+        <details open className="rounded-3xl bg-petal p-8 sm:p-10 lg:sticky lg:top-28">
+          <summary className="eyebrow flex cursor-pointer items-baseline justify-between text-stone">
             <span>Uw bestelling ({count})</span>
             <span className="font-display text-2xl tracking-normal text-ink normal-case tabular-nums">
               {formatPrice(subtotal)}
@@ -228,7 +228,7 @@ export function CheckoutFlow({ products }: { products: Product[] }) {
           <ul className="mt-7 space-y-5">
             {lines.map(({ product, quantity, priceCents }) => (
               <li key={product.slug} className="flex items-center gap-5">
-                <div className="relative aspect-square w-16 shrink-0 overflow-hidden bg-blush">
+                <div className="relative aspect-square w-16 shrink-0 overflow-hidden rounded-xl bg-blush">
                   <Image src={imageUrl(product.image)} alt="" fill sizes="4rem" className="object-cover" />
                 </div>
                 <p className="flex-1">
@@ -239,7 +239,7 @@ export function CheckoutFlow({ products }: { products: Product[] }) {
               </li>
             ))}
           </ul>
-          <dl className="mt-7 space-y-2 border-t border-ink/15 pt-6 text-sm">
+          <dl className="mt-7 space-y-2 border-t border-line pt-6 text-sm">
             <div className="flex justify-between">
               <dt>Levering</dt>
               <dd>{delivery === "ophalen" ? "Ophalen — gratis" : "Verzending — prijs volgt"}</dd>

@@ -52,7 +52,7 @@ export function MenuGroupList({ group, index }: { group: MenuGroup; index: numbe
               {line.label}
               {line.note ? <span className="ml-2 font-normal tracking-normal text-stone normal-case">{line.note}</span> : null}
             </dt>
-            <span aria-hidden className="mb-1 flex-1 border-b border-dotted border-ink/35" />
+            <span aria-hidden className="mb-1 flex-1 border-b border-dotted border-line-strong" />
             <dd className="font-display text-xl font-light whitespace-nowrap tabular-nums">
               {line.supplement ? "+ " : ""}
               {formatPrice(line.priceCents)}
@@ -76,7 +76,7 @@ export function MenuTabs() {
 
   return (
     <div>
-      <div role="tablist" aria-label="Menu" className="flex gap-10 border-b border-ink/15">
+      <div role="tablist" aria-label="Menu" className="flex gap-10 border-b border-line">
         {menu.map((item) => {
           const selected = item.id === active;
           return (
@@ -96,7 +96,7 @@ export function MenuTabs() {
               {selected ? (
                 <motion.span
                   layoutId="menu-tab"
-                  className="absolute inset-x-0 -bottom-px h-px bg-clay"
+                  className="absolute inset-x-0 -bottom-px h-px bg-blush"
                   transition={{ duration: 0.7, ease: EXPO }}
                 />
               ) : null}

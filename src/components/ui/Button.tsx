@@ -21,20 +21,22 @@ function Arrow() {
 
 const line: Record<Tone, string> = {
   /** On the light rose backgrounds. */
-  ink: "border-ink/30 text-ink hover:border-ink",
+  ink: "border-line-strong text-ink hover:border-blush",
   /** On the brand pink and over photography. */
   light: "border-white/55 text-white hover:border-white",
 };
 
 const solid: Record<Tone, string> = {
-  ink: "bg-ink text-cream hover:bg-rosewood",
-  light: "bg-white text-ink hover:bg-cream",
+  /** Pink, filling to a deeper pink from the left on hover. */
+  ink: "sweep bg-blush text-ink [--sweep:var(--color-line-strong)]",
+  /** Frosted white, over photography. */
+  light: "sweep glass-dark text-white [--sweep:rgb(255_255_255/0.22)]",
 };
 
 const lineBase =
   "group eyebrow inline-flex items-center gap-4 border-b pb-3 transition-colors duration-500";
 const solidBase =
-  "group eyebrow inline-flex h-14 items-center gap-5 px-9 transition-colors duration-500";
+  "group eyebrow inline-flex h-14 items-center gap-5 rounded-full px-9 transition-colors duration-500";
 
 type LinkProps = {
   href: string;
@@ -55,7 +57,7 @@ function Anchor({
   const external = /^(https?:|mailto:|tel:)/.test(href);
 
   return (
-    <Magnetic strength={0.2}>
+    <Magnetic strength={0.3}>
       {external ? (
         <a
           href={href}
@@ -113,7 +115,7 @@ export function SolidButton({
         {...props}
         className={`${solidBase} ${
           outlined
-            ? "border border-ink text-ink outline outline-1 outline-offset-4 outline-ink/40 hover:bg-ink hover:text-cream"
+            ? "sweep border border-blush text-ink outline outline-1 outline-offset-4 outline-blush/50 [--sweep:var(--color-blush)]"
             : solid[tone]
         } disabled:cursor-not-allowed disabled:opacity-50 ${className}`}
       >

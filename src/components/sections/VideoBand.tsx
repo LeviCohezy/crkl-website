@@ -35,7 +35,7 @@ export function VideoBand({ eyebrow, lines, video, poster }: VideoBandProps) {
   );
 
   return (
-    <section ref={root} className="relative flex h-svh min-h-[34rem] items-center justify-center overflow-hidden bg-ink text-white">
+    <section ref={root} className="hero-grain relative flex h-svh min-h-[34rem] items-center justify-center overflow-hidden bg-ink text-white">
       <div data-film className="absolute inset-0 scale-[1.25] will-change-transform">
         <BackgroundVideo src={video} poster={poster} />
       </div>

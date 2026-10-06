@@ -77,7 +77,7 @@ export function HomeHero() {
   });
 
   return (
-    <section className="relative h-svh min-h-[36rem] overflow-hidden bg-ink text-white">
+    <section className="hero-grain relative h-svh min-h-[36rem] overflow-hidden bg-ink text-white">
       {slides.map((slide, i) => (
         <div
           key={slide.label}
@@ -134,7 +134,7 @@ export function HomeHero() {
           </motion.div>
 
           <motion.div
-            className="mt-12 flex items-center gap-6 border-t border-white/30 pt-5"
+            className="mt-12 flex items-center gap-6 border-t border-white/40 pt-5"
             {...fade(1.1)}
           >
             <p className="eyebrow tabular-nums">

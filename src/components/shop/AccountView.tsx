@@ -23,7 +23,7 @@ export function AccountView() {
 
   return (
     <div>
-      <div role="tablist" aria-label="Account" className="flex flex-wrap gap-x-9 gap-y-3 border-b border-ink/15">
+      <div role="tablist" aria-label="Account" className="flex flex-wrap gap-x-9 gap-y-3 border-b border-line">
         {tabs.map((tab) => {
           const selected = tab === active;
           return (
@@ -41,7 +41,7 @@ export function AccountView() {
               {selected ? (
                 <motion.span
                   layoutId="account-tab"
-                  className="absolute inset-x-0 -bottom-px h-px bg-ink"
+                  className="absolute inset-x-0 -bottom-px h-px bg-blush"
                   transition={{ duration: 0.7, ease: EXPO }}
                 />
               ) : null}
@@ -62,11 +62,11 @@ export function AccountView() {
         </div>
 
         <form
-          className="bg-blush p-8 sm:p-12 lg:col-span-6 lg:col-start-7"
+          className="rounded-3xl bg-petal p-8 sm:p-12 lg:col-span-6 lg:col-start-7"
           onSubmit={(event) => event.preventDefault()}
         >
           <fieldset disabled className="space-y-9 disabled:opacity-60">
-            <legend className="eyebrow text-rosewood">Aanmelden</legend>
+            <legend className="eyebrow text-stone">Aanmelden</legend>
             <label className="block">
               <span className="eyebrow text-ink-soft">E-mail</span>
               <input className="field" type="email" autoComplete="email" />

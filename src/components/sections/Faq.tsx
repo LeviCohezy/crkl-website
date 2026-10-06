@@ -24,11 +24,11 @@ export function Faq({ title = "Goed om te *weten*", items }: { title?: string; i
           <Head eyebrow="Veelgestelde vragen" title={title} />
         </div>
 
-        <ul className="border-t border-ink/15 lg:col-span-7 lg:col-start-6">
+        <ul className="border-t border-line lg:col-span-7 lg:col-start-6">
           {items.map((item, index) => {
             const active = open === index;
             return (
-              <li key={item.question} className="border-b border-ink/15">
+              <li key={item.question} className="border-b border-line">
                 <h3>
                   <button
                     type="button"
@@ -41,9 +41,9 @@ export function Faq({ title = "Goed om te *weten*", items }: { title?: string; i
                       {item.question}
                     </span>
                     <span aria-hidden className="relative block h-3 w-3 shrink-0">
-                      <span className="absolute inset-x-0 top-1/2 h-px bg-current" />
+                      <span className="absolute inset-x-0 top-1/2 h-px bg-blush" />
                       <span
-                        className={`absolute inset-y-0 left-1/2 w-px bg-current transition-transform duration-500 ease-expo ${
+                        className={`absolute inset-y-0 left-1/2 w-px bg-blush transition-transform duration-500 ease-expo ${
                           active ? "scale-y-0" : ""
                         }`}
                       />

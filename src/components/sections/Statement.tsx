@@ -18,7 +18,7 @@ type StatementProps = {
   /** One or two photographs, depending on the variant. */
   photos?: Photo[];
   /**
-   * `inset` — the one dark moment on the page, kept to a panel set in from
+   * `inset` — the key message on the page, on a rounded pink panel set in from
    *           the edges, with a photograph breaking over its corner
    *           (Tuscany, "fresh, seasonal").
    * `type`  — large type on the pink with two photographs tucked behind
@@ -56,7 +56,7 @@ export function Statement({ eyebrow, text, links, photos = [], variant = "inset"
   const actions = links ? (
     <Reveal delay={0.25} className="mt-12 flex flex-wrap gap-x-12 gap-y-6">
       {links.map((link) => (
-        <ArrowLink key={link.href} href={link.href} tone={variant === "inset" ? "light" : "ink"}>
+        <ArrowLink key={link.href} href={link.href}>
           {link.label}
         </ArrowLink>
       ))}
@@ -141,11 +141,11 @@ export function Statement({ eyebrow, text, links, photos = [], variant = "inset"
       <div className="mx-auto max-w-[100rem] px-6 py-24 sm:px-10 sm:py-32 lg:py-40">
         <div className="relative">
           <Ring className="-top-10 -left-6 h-40 w-40" dot={120} />
-          <div className="relative grid bg-ink px-6 py-20 text-cream sm:px-12 lg:grid-cols-12 lg:px-20 lg:py-28">
+          <div className="relative grid rounded-3xl bg-blush px-6 py-20 text-ink sm:px-12 lg:grid-cols-12 lg:px-20 lg:py-28">
             <div className="lg:col-span-7">
               {eyebrow ? (
                 <Reveal>
-                  <Eyebrow className="text-blush">{eyebrow}</Eyebrow>
+                  <Eyebrow className="text-stone">{eyebrow}</Eyebrow>
                 </Reveal>
               ) : null}
               <SplitText

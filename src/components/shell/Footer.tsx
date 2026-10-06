@@ -4,7 +4,7 @@ import { site } from "@/lib/site";
 function Column({ title, children }: { title: string; children: React.ReactNode }) {
   return (
     <div>
-      <p className="eyebrow text-rosewood">{title}</p>
+      <p className="eyebrow text-stone">{title}</p>
       <div className="mt-6 text-sm leading-relaxed">{children}</div>
     </div>
   );
@@ -21,7 +21,7 @@ export function Footer() {
           Waar verfijning en beleving centraal staan.
         </p>
 
-        <div className="mt-16 grid gap-12 border-t border-ink/15 pt-12 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="mt-16 grid gap-12 border-t border-line pt-12 sm:grid-cols-2 lg:grid-cols-4">
           <Column title="Bezoek">
             <p>
               {site.contact.street}
@@ -101,7 +101,7 @@ export function Footer() {
           </Column>
         </div>
 
-        <div className="mt-16 flex flex-col gap-4 border-t border-ink/15 pt-8 text-xs text-ink-soft lg:flex-row lg:items-center lg:justify-between">
+        <div className="mt-16 flex flex-col gap-4 border-t border-line pt-8 text-xs text-ink-soft lg:flex-row lg:items-center lg:justify-between">
           <p>
             © {new Date().getFullYear()} {site.name} · {site.contact.vat} · Fotografie HABLAR
           </p>

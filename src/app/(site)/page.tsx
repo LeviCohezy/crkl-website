@@ -108,6 +108,7 @@ export default function HomePage() {
 
       <Tiles
         id="ontdek"
+        tone="brand"
         eyebrow="Mogelijkheden"
         title={"Eén huis,\n*zes* manieren om te komen"}
         tiles={experiences}

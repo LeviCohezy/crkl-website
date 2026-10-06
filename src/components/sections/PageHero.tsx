@@ -127,11 +127,11 @@ export function PageHero(props: PageHeroProps) {
         </div>
 
         <motion.div
-          className="relative mt-10 h-[62svh] min-h-[24rem] md:-mt-[calc(var(--hero)*0.98)]"
+          className="hero-grain relative mt-10 h-[62svh] min-h-[24rem] md:-mt-[calc(var(--hero)*0.98)]"
           style={{ ["--hero" as string]: "clamp(3rem, 7.6vw, 8rem)" }}
           {...unveil(0.5)}
         >
-          <Parallax className="h-full" amount={6}>
+          <Parallax className="h-full" amount={6} radius="rounded-none">
             <MediaImage
               src={props.image.src}
               alt={props.image.alt}
@@ -139,6 +139,7 @@ export function PageHero(props: PageHeroProps) {
               sizes="100vw"
               priority
               focus={props.image.focus}
+              radius="rounded-none"
             />
           </Parallax>
           <div aria-hidden className="absolute inset-0 bg-gradient-to-t from-ink/75 via-ink/15 to-ink/30" />
@@ -170,7 +171,7 @@ export function PageHero(props: PageHeroProps) {
       <section className="overflow-hidden bg-mist text-ink">
         <div className="grid md:min-h-svh md:grid-cols-2">
           <motion.div className="relative min-h-[60svh] md:min-h-0" {...unveil(0.4)}>
-            <Parallax className="h-full" amount={5}>
+            <Parallax className="h-full" amount={5} radius="rounded-none">
               <MediaImage
                 src={props.image.src}
                 alt={props.image.alt}
@@ -178,13 +179,14 @@ export function PageHero(props: PageHeroProps) {
                 sizes="(min-width: 768px) 50vw, 100vw"
                 priority
                 focus={props.image.focus}
+                radius="rounded-none"
               />
             </Parallax>
           </motion.div>
 
           <div className="relative flex flex-col justify-center bg-blush px-6 pt-20 pb-28 sm:px-10 md:px-12 md:pt-40 md:pb-40 lg:px-20">
             <motion.div {...fade(0.4)}>
-              <Eyebrow className="text-rosewood">{props.eyebrow}</Eyebrow>
+              <Eyebrow className="text-stone">{props.eyebrow}</Eyebrow>
             </motion.div>
             <SplitText
               {...titleProps}
@@ -193,7 +195,7 @@ export function PageHero(props: PageHeroProps) {
 
             {/* The card that crosses from the rose onto the photograph. */}
             <motion.div
-              className="relative mt-12 max-w-md bg-cream p-7 sm:p-9 md:-ml-24 lg:-ml-36"
+              className="glass relative mt-12 max-w-md rounded-3xl p-7 sm:p-9 md:-ml-24 lg:-ml-36"
               {...fade(0.95)}
             >
               <Square className="-top-3 -left-3 h-full w-full" />

@@ -71,7 +71,7 @@ export function Cinematic({ tone = "white", eyebrow, title, intro, feature, vide
               {video ? (
                 <BackgroundVideo src={video} poster={feature.src} />
               ) : (
-                <MediaImage src={feature.src} alt={feature.alt} aspect="h-full" sizes="100vw" focus={feature.focus} />
+                <MediaImage src={feature.src} alt={feature.alt} aspect="h-full" sizes="100vw" focus={feature.focus} radius="rounded-none" />
               )}
               <div aria-hidden className="absolute inset-0 bg-ink/25" />
             </div>
@@ -92,8 +92,8 @@ export function Cinematic({ tone = "white", eyebrow, title, intro, feature, vide
         <ul className="grid grid-cols-2 lg:grid-cols-4">
           {photos.slice(0, 4).map((photo, index) => (
             <li key={photo.src} className="relative">
-              <Unveil delay={index * 0.08}>
-                <MediaImage src={photo.src} alt={photo.alt} aspect="aspect-[3/4]" sizes="(min-width: 1024px) 25vw, 50vw" focus={photo.focus} />
+              <Unveil delay={index * 0.08} radius="rounded-none">
+                <MediaImage src={photo.src} alt={photo.alt} aspect="aspect-[3/4]" sizes="(min-width: 1024px) 25vw, 50vw" focus={photo.focus} radius="rounded-none" />
               </Unveil>
               {captions?.[index] ? (
                 <p className="eyebrow pointer-events-none absolute bottom-6 left-6 text-white drop-shadow">{captions[index]}</p>
