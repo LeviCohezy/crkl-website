@@ -25,7 +25,7 @@ export function Steps({ tone = "white", eyebrow, title, steps, last }: StepsProp
     <Band tone={tone}>
       <Head tone={tone} eyebrow={eyebrow} title={title} align="center" />
 
-      <ol className="relative mt-20 grid gap-y-14 sm:grid-cols-2 lg:grid-cols-4 lg:gap-x-8">
+      <ol className="relative mt-20 grid gap-y-16 sm:grid-cols-2 lg:grid-cols-4 lg:gap-x-8">
         <span aria-hidden className={`absolute top-6 right-[12%] left-[12%] hidden border-t lg:block ${t.rule}`} />
         {all.map((step, index) => (
           <li key={step.title} className="relative lg:text-center">
@@ -34,7 +34,7 @@ export function Steps({ tone = "white", eyebrow, title, steps, last }: StepsProp
                 {index + 1}
               </span>
               <h3 className={`font-display mt-6 text-3xl font-light ${step.cta ? "italic" : ""}`}>{step.title}</h3>
-              {step.body ? <p className={`mx-auto mt-3 max-w-xs leading-relaxed ${t.muted}`}>{step.body}</p> : null}
+              {step.body ? <p className={`mx-auto mt-4 max-w-xs leading-relaxed ${t.muted}`}>{step.body}</p> : null}
               {step.cta ? (
                 <div className="mt-6 lg:flex lg:justify-center">
                   <ArrowLink href={step.cta.href}>{step.cta.label}</ArrowLink>

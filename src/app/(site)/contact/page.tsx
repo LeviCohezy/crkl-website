@@ -18,7 +18,7 @@ export default function ContactPage() {
   return (
     <>
       <section className="bg-cream pt-36 pb-20 text-ink lg:pt-44">
-        <div className="mx-auto max-w-[100rem] px-6 sm:px-10">
+        <div className="mx-auto max-w-[100rem] px-7 sm:px-10">
           <p className="eyebrow text-stone">Contact</p>
           <SplitText
             as="h1"

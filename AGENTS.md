@@ -28,8 +28,15 @@ This block is written and re-added by `next dev` — verify at `node_modules/nex
   border, divider, leader and button outline uses `line` / `line-strong`
   (pale pinks) or white — never ink, never black. `clay` appears only in the
   hairline accents (`Ring`, `Square`, `Hollow`), two or three per page; ink
-  is for type. Primary buttons are pink pills with a sweep fill; the nav,
-  the reserve pill and floating cards are frosted glass (`.glass`).
+  is for type. Primary buttons are pink with a sweep fill; the nav, the
+  reserve bar and floating cards are frosted glass (`.glass`).
+- **Sharp edges.** No `rounded-*` on photographs, cards, panels, buttons,
+  overlays, the map or cart rows. The only circles are the ones meant as
+  circles: the `Ring` accent, the cursor and the signature-dish window.
+- **Air on phones.** Below `sm`, sections pad `py-32`, stacked grids are one
+  column with `gap-y-16/20`, body copy runs at `line-height: 1.8` and the
+  nav and reserve bar float with an inset. Desktop keeps its own scale —
+  write mobile values first and override at `sm:`.
   Photographs have 16 px corners unless they meet the viewport edge.
 - Build pages from `src/components/sections/`; give each section a `Band`
   tone (white / tint / dark / brand) to keep the wireframe's pacing.

@@ -18,8 +18,6 @@ type MediaImageProps = {
   fallbackLabel?: string;
   /** CSS object-position, for a crop far from the photograph's own ratio. */
   focus?: string;
-  /** Corner radius; pass "rounded-none" for a picture that meets the edges. */
-  radius?: string;
 };
 
 /**
@@ -39,12 +37,11 @@ export function MediaImage({
   imageClassName = "",
   fallbackLabel,
   focus,
-  radius = "rounded-2xl",
 }: MediaImageProps) {
   const [failed, setFailed] = useState(false);
 
   return (
-    <div className={`relative overflow-hidden bg-petal ${radius} ${aspect} ${className}`}>
+    <div className={`relative overflow-hidden bg-petal ${aspect} ${className}`}>
       {!failed ? (
         <Image
           src={imageUrl(src)}

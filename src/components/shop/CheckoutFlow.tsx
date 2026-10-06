@@ -123,7 +123,7 @@ export function CheckoutFlow({ products }: { products: Product[] }) {
             className="pt-12"
           >
             {step === 0 ? (
-              <form onSubmit={next} className="space-y-9">
+              <form onSubmit={next} className="space-y-11 sm:space-y-9">
                 <h2 className="font-display text-4xl font-light">Uw gegevens</h2>
                 <label className="block">
                   <span className="eyebrow text-ink-soft">Naam</span>
@@ -145,7 +145,7 @@ export function CheckoutFlow({ products }: { products: Product[] }) {
             ) : null}
 
             {step === 1 ? (
-              <form onSubmit={next} className="space-y-9">
+              <form onSubmit={next} className="space-y-11 sm:space-y-9">
                 <h2 className="font-display text-4xl font-light">Levering</h2>
                 <fieldset className="space-y-4">
                   <label className="flex cursor-pointer items-baseline justify-between gap-6 border-b border-line pb-4">
@@ -187,7 +187,7 @@ export function CheckoutFlow({ products }: { products: Product[] }) {
             {step === 2 ? (
               <div className="space-y-8">
                 <h2 className="font-display text-4xl font-light">Betaling</h2>
-                <div className="rounded-2xl border border-line-strong p-7">
+                <div className=" border border-line-strong p-7">
                   <p className="font-display text-2xl leading-snug font-light">
                     Online betalen is nog niet actief.
                   </p>
@@ -202,7 +202,7 @@ export function CheckoutFlow({ products }: { products: Product[] }) {
                   </p>
                   <a
                     href={mailto}
-                    className="eyebrow sweep mt-7 inline-flex h-14 items-center rounded-full bg-blush px-9 text-ink [--sweep:var(--color-line-strong)]"
+                    className="eyebrow sweep mt-7 inline-flex h-14 items-center bg-blush px-9 text-ink [--sweep:var(--color-line-strong)]"
                   >
                     Bestel per e-mail
                   </a>
@@ -218,7 +218,7 @@ export function CheckoutFlow({ products }: { products: Product[] }) {
 
       {/* ── Order summary ────────────────────────────────────────────── */}
       <aside className="lg:col-span-5 lg:col-start-8">
-        <details open className="rounded-3xl bg-petal p-8 sm:p-10 lg:sticky lg:top-28">
+        <details open className=" bg-petal p-8 sm:p-10 lg:sticky lg:top-28">
           <summary className="eyebrow flex cursor-pointer items-baseline justify-between text-stone">
             <span>Uw bestelling ({count})</span>
             <span className="font-display text-2xl tracking-normal text-ink normal-case tabular-nums">
@@ -228,7 +228,7 @@ export function CheckoutFlow({ products }: { products: Product[] }) {
           <ul className="mt-7 space-y-5">
             {lines.map(({ product, quantity, priceCents }) => (
               <li key={product.slug} className="flex items-center gap-5">
-                <div className="relative aspect-square w-16 shrink-0 overflow-hidden rounded-xl bg-blush">
+                <div className="relative aspect-square w-16 shrink-0 overflow-hidden bg-blush">
                   <Image src={imageUrl(product.image)} alt="" fill sizes="4rem" className="object-cover" />
                 </div>
                 <p className="flex-1">

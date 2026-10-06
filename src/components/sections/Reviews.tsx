@@ -27,7 +27,7 @@ export function Reviews({
   return (
     <Band tone={tone}>
       <Head tone={tone} eyebrow={eyebrow} title={title} />
-      <ul className={`mt-16 grid gap-x-12 gap-y-14 border-t pt-12 md:grid-cols-3 ${t.rule}`}>
+      <ul className={`mt-16 grid gap-x-12 gap-y-16 border-t pt-14 md:grid-cols-3 md:gap-y-14 md:pt-12 ${t.rule}`}>
         {reviews.slice(0, 3).map((review, index) => (
           <li key={review.name}>
             <Reveal delay={index * 0.1}>

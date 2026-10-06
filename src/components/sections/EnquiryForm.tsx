@@ -115,7 +115,7 @@ export function EnquiryForm({
             {state.mailto ? (
               <a
                 href={state.mailto}
-                className="eyebrow sweep mt-8 inline-flex h-14 items-center rounded-full bg-blush px-9 text-ink [--sweep:var(--color-line-strong)]"
+                className="eyebrow sweep mt-8 inline-flex h-14 items-center bg-blush px-9 text-ink [--sweep:var(--color-line-strong)]"
               >
                 Open de e-mail
               </a>
@@ -150,7 +150,7 @@ export function EnquiryForm({
       {/* Both steps stay in the form so one submit carries every field. */}
       {booking ? (
         /* The table, as the reference lays it out: who, how many, when. */
-        <div className="grid gap-x-8 gap-y-9 sm:grid-cols-2">
+        <div className="grid gap-x-8 gap-y-11 sm:grid-cols-2 sm:gap-y-9">
           <Field label="Naam" name="name" error={errors.name} className="sm:col-span-2">
             <input id="name" name="name" type="text" autoComplete="name" required className="field" />
           </Field>
@@ -199,7 +199,7 @@ export function EnquiryForm({
           </Field>
         </div>
       ) : (
-        <div className={`grid gap-x-8 gap-y-9 sm:grid-cols-2 ${first ? "" : "hidden"}`}>
+        <div className={`grid gap-x-8 gap-y-11 sm:grid-cols-2 sm:gap-y-9 ${first ? "" : "hidden"}`}>
           {dated ? (
             <>
               <Field label="Datum" name="date" error={errors.date}>
@@ -226,7 +226,7 @@ export function EnquiryForm({
         {!booking && (!steps || !first) ? (
           <motion.div
             key="details"
-            className={`grid gap-x-8 gap-y-9 sm:grid-cols-2 ${steps ? "" : dated ? "mt-9" : ""}`}
+            className={`grid gap-x-8 gap-y-11 sm:grid-cols-2 sm:gap-y-9 ${steps ? "" : dated ? "mt-9" : ""}`}
             initial={steps ? { opacity: 0, y: 20 } : false}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, ease: EXPO }}
@@ -256,7 +256,7 @@ export function EnquiryForm({
         ) : null}
       </AnimatePresence>
 
-      <div className="mt-12 flex flex-wrap items-center gap-x-8 gap-y-5">
+      <div className="mt-14 flex flex-wrap items-center gap-x-8 gap-y-6">
         {steps && first ? (
           <SolidButton type="button" onClick={() => setStep(2)}>
             Volgende

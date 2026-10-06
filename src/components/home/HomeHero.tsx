@@ -112,7 +112,7 @@ export function HomeHero() {
       />
 
       <div className="absolute inset-x-0 bottom-0 z-20">
-        <div className="mx-auto max-w-[100rem] px-6 pb-24 sm:px-10 sm:pb-16">
+        <div className="mx-auto max-w-[100rem] px-7 pb-32 sm:px-10 sm:pb-16">
           <motion.p className="eyebrow" {...fade(0.3)}>
             {site.tagline}
           </motion.p>
@@ -124,7 +124,7 @@ export function HomeHero() {
             delay={0.35}
             className="font-display mt-6 max-w-5xl text-[clamp(2.6rem,6.6vw,6.75rem)] leading-[1.02] font-light"
           />
-          <motion.div className="mt-10 flex flex-wrap items-center gap-8" {...fade(0.95)}>
+          <motion.div className="mt-12 flex flex-wrap items-center gap-8 sm:mt-10" {...fade(0.95)}>
             <SolidLink href="#reserveer" tone="light">
               Reserveer een tafel
             </SolidLink>

@@ -117,7 +117,7 @@ export function MenuSpread() {
   };
 
   const menuPanel = (
-    <div className="flex h-full flex-col justify-center px-6 py-16 sm:px-12 lg:px-20">
+    <div className="flex h-full flex-col justify-center px-7 py-20 sm:px-12 sm:py-16 lg:px-20">
       <p className="eyebrow text-ink-soft">
         {spread.service} · {spread.when}
       </p>
@@ -140,7 +140,7 @@ export function MenuSpread() {
       ) : null}
       <dl className="mt-8 max-w-xl">
         {spread.group.lines.map((line) => (
-          <div key={line.label} className="flex items-baseline gap-4 py-3">
+          <div key={line.label} className="flex items-baseline gap-4 py-4 sm:py-3">
             <dt className="eyebrow tracking-[0.18em]">
               {line.label}
               {line.note ? <span className="ml-2 font-normal tracking-normal text-stone normal-case">{line.note}</span> : null}
@@ -160,7 +160,7 @@ export function MenuSpread() {
     <div className="relative h-full p-6 sm:p-10 lg:p-16">
       <div className="relative h-full">
         <Square className={`top-5 h-full w-full ${flipped ? "-left-5" : "-right-5"}`} />
-        <div className="relative h-full overflow-hidden rounded-2xl bg-petal">
+        <div className="relative h-full overflow-hidden bg-petal">
           <Image
             src={imageUrl(spread.photo.src)}
             alt={spread.photo.alt}
@@ -190,7 +190,7 @@ export function MenuSpread() {
         dragConstraints={{ left: 0, right: 0 }}
         dragElastic={0.06}
         onDragEnd={onDragEnd}
-        className="grid min-h-svh cursor-grab grid-rows-[38svh_1fr] active:cursor-grabbing lg:grid-cols-2 lg:grid-rows-none"
+        className="grid min-h-svh cursor-grab grid-rows-[42svh_1fr] active:cursor-grabbing lg:grid-cols-2 lg:grid-rows-none"
       >
         {(["left", "right"] as const).map((side) => (
           <div
@@ -218,7 +218,7 @@ export function MenuSpread() {
       </motion.div>
 
       {/* ── Chrome: phone, arrows, page numbers ──────────────────────── */}
-      <div className="pointer-events-none absolute inset-x-0 bottom-0 z-10 flex items-end justify-between px-6 pb-6 sm:px-10">
+      <div className="pointer-events-none absolute inset-x-0 bottom-0 z-10 flex items-end justify-between px-7 pb-7 sm:px-10 sm:pb-6">
         <p className="eyebrow hidden text-ink-soft tabular-nums sm:block">
           Reserveren ·{" "}
           <a href={`tel:${site.contact.phoneHref}`} className="pointer-events-auto link-line text-ink">
@@ -230,7 +230,7 @@ export function MenuSpread() {
             type="button"
             onClick={() => go(-1)}
             aria-label="Vorige"
-            className="ring glass flex h-11 w-11 items-center justify-center transition-transform duration-500 ease-expo hover:scale-105"
+            className="frame glass flex h-11 w-11 items-center justify-center transition-transform duration-500 ease-expo hover:scale-105"
           >
             ←
           </button>
@@ -255,7 +255,7 @@ export function MenuSpread() {
             type="button"
             onClick={() => go(1)}
             aria-label="Volgende"
-            className="ring glass flex h-11 w-11 items-center justify-center transition-transform duration-500 ease-expo hover:scale-105"
+            className="frame glass flex h-11 w-11 items-center justify-center transition-transform duration-500 ease-expo hover:scale-105"
           >
             →
           </button>

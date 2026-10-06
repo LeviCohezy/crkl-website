@@ -77,11 +77,11 @@ export function Header() {
   return (
     <>
       <header
-        className={`fixed inset-x-0 top-0 z-[70] transition-colors duration-700 ${
+        className={`fixed z-[70] transition-colors duration-700 max-sm:inset-x-4 max-sm:top-4 sm:inset-x-0 sm:top-0 ${
           clear ? "text-white" : "glass text-ink"
         }`}
       >
-        <div className="mx-auto flex h-16 max-w-[100rem] items-center justify-between gap-6 px-6 sm:px-10 lg:h-20">
+        <div className="mx-auto flex h-16 max-w-[100rem] items-center justify-between gap-6 px-7 sm:px-10 lg:h-20">
           <TransitionLink
             href="/"
             aria-label="CRKL — naar de startpagina"
@@ -120,7 +120,7 @@ export function Header() {
             ) : null}
             <TransitionLink
               href={reserve}
-              className={`eyebrow sweep hidden h-10 items-center rounded-full px-5 transition-colors duration-500 sm:flex ${
+              className={`eyebrow sweep hidden h-10 items-center px-5 transition-colors duration-500 sm:flex ${
                 clear
                   ? "glass-dark text-white [--sweep:rgb(255_255_255/0.22)]"
                   : "bg-blush text-ink [--sweep:var(--color-line-strong)]"
@@ -167,7 +167,7 @@ export function Header() {
             exit={{ clipPath: "inset(0% 0% 100% 0%)" }}
             transition={{ duration: 0.85, ease: SWEEP }}
           >
-            <div className="flex min-h-full flex-col px-6 pt-28 pb-28 sm:px-10">
+            <div className="flex min-h-full flex-col px-8 pt-32 pb-32 sm:px-10">
               <nav aria-label="Hoofdnavigatie">
                 <ul>
                   {site.nav.map((item, index) => (
@@ -185,7 +185,7 @@ export function Header() {
                           href={item.href}
                           aria-current={pathname === item.href ? "page" : undefined}
                           onClick={() => closeAfterCover(item.href)}
-                          className={`font-display block py-1.5 text-[clamp(2.25rem,9vw,3.5rem)] leading-[1.1] font-light ${
+                          className={`font-display block py-2.5 text-[clamp(2.25rem,9vw,3.5rem)] leading-[1.1] font-light ${
                             pathname === item.href ? "italic" : ""
                           }`}
                         >
@@ -231,7 +231,7 @@ export function Header() {
       <TransitionLink
         href={reserve}
         onClick={() => closeAfterCover(reserve)}
-        className="eyebrow glass fixed inset-x-3 bottom-3 z-[65] flex h-14 items-center justify-center rounded-full text-ink sm:hidden"
+        className="eyebrow glass fixed inset-x-6 bottom-6 z-[65] flex h-14 items-center justify-center text-ink sm:hidden"
       >
         Reserveer een tafel
       </TransitionLink>

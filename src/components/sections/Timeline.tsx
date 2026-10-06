@@ -56,7 +56,7 @@ export function Timeline({ tone = "white", eyebrow, title, steps, last }: Timeli
             const left = index % 2 === 0;
             const isLast = index === all.length - 1;
             return (
-              <li key={step.title} data-moment className="relative grid gap-4 py-10 pl-16 sm:grid-cols-2 sm:pl-0">
+              <li key={step.title} data-moment className="relative grid gap-4 py-12 pl-16 sm:grid-cols-2 sm:py-10 sm:pl-0">
                 <span data-dot className={`ring absolute top-10 left-6 flex h-12 w-12 -translate-x-1/2 items-center justify-center font-display text-lg tabular-nums sm:left-1/2 ${tone === "tint" ? "bg-petal" : "bg-mist"}`}>
                   {index + 1}
                 </span>

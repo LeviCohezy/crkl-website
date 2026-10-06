@@ -16,12 +16,12 @@ export function Footer() {
   return (
     <footer className="relative overflow-hidden bg-blush pb-14 text-ink sm:pb-0">
       <span aria-hidden className="ring pointer-events-none absolute -top-40 -right-32 h-[30rem] w-[30rem]" />
-      <div className="relative mx-auto max-w-[100rem] px-6 py-20 sm:px-10 sm:py-28">
+      <div className="relative mx-auto max-w-[100rem] px-7 py-28 sm:px-10">
         <p className="font-display max-w-2xl text-3xl leading-snug font-light sm:text-4xl">
           Waar verfijning en beleving centraal staan.
         </p>
 
-        <div className="mt-16 grid gap-12 border-t border-line pt-12 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="mt-16 grid gap-14 border-t border-line pt-14 sm:grid-cols-2 sm:gap-12 lg:grid-cols-4">
           <Column title="Bezoek">
             <p>
               {site.contact.street}
@@ -101,7 +101,7 @@ export function Footer() {
           </Column>
         </div>
 
-        <div className="mt-16 flex flex-col gap-4 border-t border-line pt-8 text-xs text-ink-soft lg:flex-row lg:items-center lg:justify-between">
+        <div className="mt-16 flex flex-col gap-6 border-t border-line pt-10 sm:gap-4 sm:pt-8 text-xs text-ink-soft lg:flex-row lg:items-center lg:justify-between">
           <p>
             © {new Date().getFullYear()} {site.name} · {site.contact.vat} · Fotografie HABLAR
           </p>

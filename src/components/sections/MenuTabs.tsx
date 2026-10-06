@@ -47,7 +47,7 @@ export function MenuGroupList({ group, index }: { group: MenuGroup; index: numbe
 
       <dl className="mt-8">
         {group.lines.map((line) => (
-          <div key={line.label} className="flex items-baseline gap-4 py-3">
+          <div key={line.label} className="flex items-baseline gap-4 py-4 sm:py-3">
             <dt className="eyebrow tracking-[0.18em]">
               {line.label}
               {line.note ? <span className="ml-2 font-normal tracking-normal text-stone normal-case">{line.note}</span> : null}

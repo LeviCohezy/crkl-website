@@ -31,7 +31,7 @@ export function MenuExcerpt({ tab, tone = "white", eyebrow, title, photo, varian
     return (
       <Band tone={tone}>
         <Head tone={tone} eyebrow={eyebrow} title={title} aside={link} />
-        <div className="mt-16 grid gap-14 lg:grid-cols-12 lg:gap-8">
+        <div className="mt-16 grid gap-20 sm:gap-14 lg:grid-cols-12 lg:gap-8">
           <div className="space-y-16 lg:col-span-6">
             {data.groups.map((group, index) => (
               <Reveal key={group.name} delay={index * 0.1}>

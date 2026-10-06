@@ -55,11 +55,11 @@ export function FormBand({ id, eyebrow, title, intro, before, form, photo, varia
     return (
       <section id={id} className="relative scroll-mt-20 overflow-hidden bg-blush text-ink">
         <div className="absolute inset-0 opacity-70">
-          <MediaImage src={photo.src} alt="" aspect="h-full" sizes="100vw" imageClassName="scale-110 blur-sm" focus={photo.focus} radius="rounded-none" />
+          <MediaImage src={photo.src} alt="" aspect="h-full" sizes="100vw" imageClassName="scale-110 blur-sm" focus={photo.focus} />
           <div aria-hidden className="absolute inset-0 bg-blush/55" />
         </div>
 
-        <div className="relative mx-auto grid max-w-[100rem] items-center gap-12 px-6 py-24 sm:px-10 sm:py-32 lg:grid-cols-12 lg:gap-8 lg:py-40">
+        <div className="relative mx-auto grid max-w-[100rem] items-center gap-20 px-7 py-32 sm:gap-12 sm:px-10 lg:grid-cols-12 lg:gap-8 lg:py-40">
           {/* Hours, in a ring. */}
           <Reveal className="hidden lg:col-span-3 lg:flex lg:justify-center">
             <div className="relative flex aspect-square w-72 flex-col items-center justify-center text-center">
@@ -79,7 +79,7 @@ export function FormBand({ id, eyebrow, title, intro, before, form, photo, varia
           </Reveal>
 
           <Reveal delay={0.1} className="lg:col-span-6 lg:col-start-4">
-            <div className="rounded-3xl bg-cream/95 px-6 py-12 shadow-[0_30px_80px_-40px_rgb(42_28_26/0.25)] sm:px-12 sm:py-16">
+            <div className="bg-cream/95 px-7 py-16 shadow-[0_30px_80px_-40px_rgb(42_28_26/0.25)] sm:px-12 sm:py-16">
               <div className="text-center">
                 <Eyebrow className="justify-center text-ink-soft">{eyebrow}</Eyebrow>
                 <SplitText
@@ -134,14 +134,14 @@ export function FormBand({ id, eyebrow, title, intro, before, form, photo, varia
           ) : null}
         </div>
 
-        <div className="mt-20 grid gap-14 lg:grid-cols-12 lg:gap-8">
+        <div className="mt-20 grid gap-20 sm:gap-14 lg:grid-cols-12 lg:gap-8">
           <Reveal delay={0.1} className="lg:col-span-7">
             {before ? <div className="mb-10">{before}</div> : null}
             <EnquiryForm {...form} />
           </Reveal>
           <Reveal delay={0.2} className="relative lg:col-span-4 lg:col-start-9">
             <Square className="-top-4 -right-4 h-full w-full" />
-            <div className="relative rounded-3xl border border-white/70 bg-white/40 p-6 sm:p-8">
+            <div className="relative border border-white/70 bg-white/40 p-6 sm:p-8">
               {photo ? (
                 <MediaImage src={photo.src} alt={photo.alt} aspect="aspect-[4/5]" sizes="(min-width: 1024px) 30vw, 100vw" focus={photo.focus} />
               ) : null}
@@ -169,7 +169,7 @@ export function FormBand({ id, eyebrow, title, intro, before, form, photo, varia
   /* ── plain ──────────────────────────────────────────────────────────── */
   return (
     <Band tone="brand" id={id}>
-      <div className="grid gap-16 lg:grid-cols-12 lg:gap-8">
+      <div className="grid gap-20 sm:gap-16 lg:grid-cols-12 lg:gap-8">
         <div className="lg:col-span-4">
           <Reveal>
             <Eyebrow className="text-stone">{eyebrow}</Eyebrow>

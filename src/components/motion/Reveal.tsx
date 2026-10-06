@@ -122,8 +122,6 @@ type UnveilProps = {
   shape?: "block" | "circle";
   delay?: number;
   className?: string;
-  /** Corner radius; "rounded-none" for a picture that meets the edges. */
-  radius?: string;
 };
 
 /**
@@ -139,7 +137,6 @@ export function Unveil({
   shape = "block",
   delay = 0,
   className = "",
-  radius = "rounded-2xl",
 }: UnveilProps) {
   const ref = useRef<HTMLDivElement>(null);
   const seen = useInView(ref, { once: true, margin: "0px 0px -10% 0px" });
@@ -150,7 +147,7 @@ export function Unveil({
     shape === "circle" ? "circle(75% at 50% 50%)" : "inset(0% 0% 0% 0%)";
 
   return (
-    <div ref={ref} className={`overflow-hidden ${radius} ${className}`}>
+    <div ref={ref} className={`overflow-hidden ${className}`}>
       <motion.div
         className="h-full w-full"
         initial={{ clipPath: hidden }}

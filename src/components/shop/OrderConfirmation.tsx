@@ -50,7 +50,7 @@ export function OrderConfirmation() {
   if (!order) {
     return (
       <section className="bg-blush pt-36 pb-24 text-ink sm:pb-32 lg:pt-44">
-        <div className="mx-auto max-w-[100rem] px-6 sm:px-10">
+        <div className="mx-auto max-w-[100rem] px-7 sm:px-10">
           <p className="eyebrow text-stone">Bestelling</p>
           <h1 className="font-display mt-7 max-w-4xl text-[clamp(2.75rem,6.4vw,6rem)] leading-[1.02] font-light">
             We vinden hier geen <em>recente bestelling</em>
@@ -71,7 +71,7 @@ export function OrderConfirmation() {
   return (
     <>
       <section className="bg-blush pt-36 pb-24 text-ink sm:pb-32 lg:pt-44">
-        <div className="mx-auto max-w-[100rem] px-6 sm:px-10">
+        <div className="mx-auto max-w-[100rem] px-7 sm:px-10">
           <p className="eyebrow text-stone">Bestelling #{order.number}</p>
           <h1 className="font-display mt-7 max-w-4xl text-[clamp(2.75rem,6.4vw,6rem)] leading-[1.02] font-light">
             Bedankt! Uw bestelling is <em>bevestigd</em>
@@ -83,7 +83,7 @@ export function OrderConfirmation() {
       </section>
 
       <section className="bg-cream py-24 text-ink sm:py-32">
-        <div className="mx-auto max-w-3xl px-6 sm:px-10">
+        <div className="mx-auto max-w-3xl px-7 sm:px-10">
           <h2 className="eyebrow text-stone">Overzicht</h2>
           <ul className="mt-6 border-t border-line">
             {order.lines.map((line) => (

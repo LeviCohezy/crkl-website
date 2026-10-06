@@ -100,7 +100,7 @@ export function PageHero(props: PageHeroProps) {
       <section className="relative overflow-hidden bg-mist text-ink">
         <Ring className="-top-24 -right-20 h-80 w-80" />
         <div
-          className="relative mx-auto max-w-[100rem] px-6 pt-32 sm:px-10 lg:pt-44"
+          className="relative mx-auto max-w-[100rem] px-7 pt-36 sm:px-10 lg:pt-44"
           style={{ ["--hero" as string]: "clamp(3rem, 7.6vw, 8rem)" }}
         >
           <motion.div {...fade(0.4)}>
@@ -127,11 +127,11 @@ export function PageHero(props: PageHeroProps) {
         </div>
 
         <motion.div
-          className="hero-grain relative mt-10 h-[62svh] min-h-[24rem] md:-mt-[calc(var(--hero)*0.98)]"
+          className="hero-grain relative mt-14 h-[62svh] min-h-[24rem] sm:mt-10 md:-mt-[calc(var(--hero)*0.98)]"
           style={{ ["--hero" as string]: "clamp(3rem, 7.6vw, 8rem)" }}
           {...unveil(0.5)}
         >
-          <Parallax className="h-full" amount={6} radius="rounded-none">
+          <Parallax className="h-full" amount={6}>
             <MediaImage
               src={props.image.src}
               alt={props.image.alt}
@@ -139,12 +139,11 @@ export function PageHero(props: PageHeroProps) {
               sizes="100vw"
               priority
               focus={props.image.focus}
-              radius="rounded-none"
             />
           </Parallax>
           <div aria-hidden className="absolute inset-0 bg-gradient-to-t from-ink/75 via-ink/15 to-ink/30" />
           <div className="absolute inset-x-0 bottom-0">
-            <div className="mx-auto flex max-w-[100rem] flex-col gap-8 px-6 pb-10 sm:px-10 md:flex-row md:items-end md:justify-between">
+            <div className="mx-auto flex max-w-[100rem] flex-col gap-10 px-7 pb-12 sm:px-10 sm:pb-10 md:flex-row md:items-end md:justify-between">
               <div className="space-y-5 text-white">
                 {intro(0.9, "text-white/90")}
                 {props.chips ? (
@@ -171,7 +170,7 @@ export function PageHero(props: PageHeroProps) {
       <section className="overflow-hidden bg-mist text-ink">
         <div className="grid md:min-h-svh md:grid-cols-2">
           <motion.div className="relative min-h-[60svh] md:min-h-0" {...unveil(0.4)}>
-            <Parallax className="h-full" amount={5} radius="rounded-none">
+            <Parallax className="h-full" amount={5}>
               <MediaImage
                 src={props.image.src}
                 alt={props.image.alt}
@@ -179,12 +178,11 @@ export function PageHero(props: PageHeroProps) {
                 sizes="(min-width: 768px) 50vw, 100vw"
                 priority
                 focus={props.image.focus}
-                radius="rounded-none"
               />
             </Parallax>
           </motion.div>
 
-          <div className="relative flex flex-col justify-center bg-blush px-6 pt-20 pb-28 sm:px-10 md:px-12 md:pt-40 md:pb-40 lg:px-20">
+          <div className="relative flex flex-col justify-center bg-blush px-7 pt-24 pb-32 sm:px-10 md:px-12 md:pt-40 md:pb-40 lg:px-20">
             <motion.div {...fade(0.4)}>
               <Eyebrow className="text-stone">{props.eyebrow}</Eyebrow>
             </motion.div>
@@ -195,7 +193,7 @@ export function PageHero(props: PageHeroProps) {
 
             {/* The card that crosses from the rose onto the photograph. */}
             <motion.div
-              className="glass relative mt-12 max-w-md rounded-3xl p-7 sm:p-9 md:-ml-24 lg:-ml-36"
+              className="glass relative mt-12 max-w-md p-7 sm:p-9 md:-ml-24 lg:-ml-36"
               {...fade(0.95)}
             >
               <Square className="-top-3 -left-3 h-full w-full" />
@@ -216,8 +214,8 @@ export function PageHero(props: PageHeroProps) {
     const [second, third] = props.photos ?? [props.image, props.image];
     return (
       <section className="relative overflow-hidden bg-mist text-ink">
-        <div className="mx-auto max-w-[100rem] px-6 pt-32 pb-20 sm:px-10 lg:pt-44 lg:pb-28">
-          <div className="grid gap-12 lg:grid-cols-12 lg:gap-8">
+        <div className="mx-auto max-w-[100rem] px-7 pt-36 pb-24 sm:px-10 sm:pb-20 lg:pt-44 lg:pb-28">
+          <div className="grid gap-16 sm:gap-12 lg:grid-cols-12 lg:gap-8">
             <div className="lg:col-span-7">
               <motion.div {...fade(0.4)}>
                 <Eyebrow className="text-ink-soft">{props.eyebrow}</Eyebrow>
@@ -236,7 +234,7 @@ export function PageHero(props: PageHeroProps) {
             </div>
           </div>
 
-          <div className="relative mt-16 grid grid-cols-12 gap-4 sm:gap-6 lg:mt-24 lg:gap-8">
+          <div className="relative mt-20 grid grid-cols-12 gap-5 sm:mt-16 sm:gap-6 lg:mt-24 lg:gap-8">
             <Ring className="-left-20 bottom-0 h-64 w-64" dot={300} />
             <motion.div className="col-span-5 mt-20 lg:col-span-3 lg:col-start-2 lg:mt-32" {...unveil(0.5)}>
               <MediaImage src={third.src} alt={third.alt} aspect="aspect-[4/5]" sizes="(min-width: 1024px) 25vw, 42vw" focus={third.focus} />
@@ -257,7 +255,7 @@ export function PageHero(props: PageHeroProps) {
   if (variant === "centered") {
     return (
       <section className="relative isolate overflow-hidden bg-mist text-ink">
-        <div className="mx-auto max-w-[100rem] px-6 pt-32 pb-20 sm:px-10 lg:pt-44 lg:pb-28">
+        <div className="mx-auto max-w-[100rem] px-7 pt-36 pb-24 sm:px-10 sm:pb-20 lg:pt-44 lg:pb-28">
           <motion.div className="flex justify-center" {...fade(0.4)}>
             <Eyebrow className="text-ink-soft">{props.eyebrow}</Eyebrow>
           </motion.div>
@@ -295,7 +293,7 @@ export function PageHero(props: PageHeroProps) {
   const small = props.photos?.[0];
   return (
     <section className="relative overflow-hidden bg-mist text-ink">
-      <div className="mx-auto max-w-[100rem] px-6 pt-32 pb-20 sm:px-10 lg:pt-44 lg:pb-28">
+      <div className="mx-auto max-w-[100rem] px-7 pt-36 pb-24 sm:px-10 sm:pb-20 lg:pt-44 lg:pb-28">
         <div className="grid gap-8 lg:grid-cols-12">
           <motion.div className="lg:col-span-3" {...fade(0.4)}>
             <Eyebrow className="text-ink-soft">{props.eyebrow}</Eyebrow>

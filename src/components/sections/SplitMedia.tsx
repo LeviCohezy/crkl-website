@@ -96,7 +96,7 @@ export function SplitMedia({
         text={title}
         className="font-display mt-6 text-[clamp(2.3rem,4.4vw,4.25rem)] leading-[1.06] font-light"
       />
-      <Reveal delay={0.15} className={`mt-8 max-w-md space-y-5 text-lg leading-relaxed ${t.muted}`}>
+      <Reveal delay={0.15} className={`mt-9 max-w-md space-y-6 text-lg leading-relaxed ${t.muted}`}>
         {body.map((paragraph) => (
           <p key={paragraph}>{paragraph}</p>
         ))}
@@ -121,7 +121,7 @@ export function SplitMedia({
     const front = photos[0] ?? photo;
     return (
       <Band tone={tone} id={id}>
-        <div className="grid items-center gap-16 lg:grid-cols-12 lg:gap-8">
+        <div className="grid items-center gap-20 sm:gap-16 lg:grid-cols-12 lg:gap-8">
           <div className={`relative lg:col-span-6 ${flip ? "lg:order-2 lg:col-start-7" : ""}`}>
             <div className="ml-auto w-[78%] lg:w-[72%]">
               <Unveil>
@@ -146,7 +146,7 @@ export function SplitMedia({
     const [second, third] = [photos[0] ?? photo, photos[1] ?? photo];
     return (
       <Band tone={tone} id={id}>
-        <div className="grid gap-12 lg:grid-cols-12 lg:gap-8">
+        <div className="grid gap-20 sm:gap-12 lg:grid-cols-12 lg:gap-8">
           <div className={`lg:col-span-5 ${flip ? "lg:order-3 lg:col-start-8" : ""}`}>
             {words}
             <div className="mt-14 w-[72%] lg:mt-20">
@@ -180,9 +180,9 @@ export function SplitMedia({
     const second = photos[0];
     return (
       <Band tone={tone} id={id} bleed className="!py-0">
-        <div className="mx-auto max-w-[100rem] px-6 py-24 sm:px-10 sm:py-32 lg:py-40">
-          <div className="relative rounded-3xl bg-blush px-6 py-24 sm:px-12 lg:px-20 lg:py-32">
-            <div className="grid gap-14 lg:grid-cols-12 lg:gap-8">
+        <div className="mx-auto max-w-[100rem] px-7 py-32 sm:px-10 sm:py-32 lg:py-40">
+          <div className="relative bg-blush px-7 py-28 sm:px-12 sm:py-24 lg:px-20 lg:py-32">
+            <div className="grid gap-20 sm:gap-14 lg:grid-cols-12 lg:gap-8">
               <div className={`relative lg:col-span-5 ${flip ? "lg:order-2 lg:col-start-8" : ""}`}>
                 {/* Breaks over the top edge of the panel. */}
                 <div className="lg:-mt-48">
@@ -191,7 +191,7 @@ export function SplitMedia({
                   </Unveil>
                 </div>
                 {second ? (
-                  <div className="mt-6 ml-auto w-[42%] lg:absolute lg:-right-10 lg:-bottom-44 lg:mt-0">
+                  <div className="mt-8 ml-auto w-[42%] lg:absolute lg:-right-10 lg:-bottom-44 lg:mt-0">
                     <Unveil delay={0.2}>
                       <MediaImage src={second.src} alt={second.alt} aspect="aspect-[4/5]" sizes="(min-width: 1024px) 16vw, 42vw" focus={second.focus} />
                     </Unveil>
@@ -211,7 +211,7 @@ export function SplitMedia({
   /* ── simple ─────────────────────────────────────────────────────────── */
   return (
     <Band tone={tone} id={id}>
-      <div className="grid items-center gap-14 lg:grid-cols-12 lg:gap-8">
+      <div className="grid items-center gap-20 sm:gap-14 lg:grid-cols-12 lg:gap-8">
         <div className={`relative lg:col-span-6 ${flip ? "lg:order-2 lg:col-start-7" : ""}`}>
           <Square className="-top-5 -left-5 h-full w-full hidden lg:block" />
           <Unveil>

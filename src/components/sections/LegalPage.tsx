@@ -27,7 +27,7 @@ type LegalPageProps = {
 export function LegalPage({ title, updated, sections, children }: LegalPageProps) {
   return (
     <div className="bg-cream text-ink">
-      <header className="mx-auto max-w-[100rem] px-6 pt-36 pb-14 sm:px-10 lg:pt-44">
+      <header className="mx-auto max-w-[100rem] px-7 pt-40 pb-16 sm:px-10 sm:pt-36 sm:pb-14 lg:pt-44">
         <p className="eyebrow text-stone">Juridisch</p>
         <h1 className="font-display mt-7 text-[clamp(2.75rem,6vw,5.5rem)] leading-[1.02] font-light">
           {title}
@@ -39,7 +39,7 @@ export function LegalPage({ title, updated, sections, children }: LegalPageProps
       </header>
 
       <div className="border-y border-line bg-petal lg:sticky lg:top-20 lg:z-30">
-        <nav aria-label="Op deze pagina" className="mx-auto max-w-[100rem] px-6 sm:px-10">
+        <nav aria-label="Op deze pagina" className="mx-auto max-w-[100rem] px-7 sm:px-10">
           <ol className="flex flex-wrap gap-x-9 gap-y-2 py-5">
             {sections.map((section, index) => (
               <li key={section.id}>
@@ -52,8 +52,8 @@ export function LegalPage({ title, updated, sections, children }: LegalPageProps
         </nav>
       </div>
 
-      <div className="mx-auto max-w-3xl px-6 py-20 sm:px-10 sm:py-28">
-        <p className="rounded-2xl border border-dashed border-line-strong p-6 text-sm leading-relaxed text-ink-soft">
+      <div className="mx-auto max-w-3xl px-7 py-28 sm:px-10">
+        <p className=" border border-dashed border-line-strong p-6 text-sm leading-relaxed text-ink-soft">
           Deze tekst is een voorlopige versie en heeft geen juridische waarde.
           De definitieve versie volgt. Vragen? Mail naar{" "}
           <a href={`mailto:${site.contact.email}`} className="link-line text-ink">

@@ -58,7 +58,7 @@ export function CartView({ products }: { products: Product[] }) {
             key={product.slug}
             className="grid grid-cols-[5.5rem_1fr] gap-x-6 gap-y-4 border-b border-line py-7 sm:grid-cols-[7rem_1fr_auto] sm:items-center"
           >
-            <div className="relative aspect-[4/5] overflow-hidden rounded-xl bg-petal">
+            <div className="relative aspect-[4/5] overflow-hidden bg-petal">
               <Image
                 src={imageUrl(product.image)}
                 alt={product.imageAlt}
@@ -117,10 +117,10 @@ export function CartView({ products }: { products: Product[] }) {
 
       {/* ── Summary ────────────────────────────────────────────────────── */}
       <aside className="lg:col-span-4 lg:col-start-9">
-        <div className="rounded-3xl bg-petal p-8 sm:p-10 lg:sticky lg:top-28">
+        <div className=" bg-petal p-8 sm:p-10 lg:sticky lg:top-28">
           <h2 className="eyebrow text-stone">Overzicht</h2>
 
-          <dl className="mt-7 space-y-3">
+          <dl className="mt-7 space-y-4">
             <div className="flex justify-between gap-6">
               <dt>Subtotaal</dt>
               <dd className="tabular-nums">{formatPrice(subtotal)}</dd>
@@ -176,8 +176,8 @@ export function CartView({ products }: { products: Product[] }) {
 
         {/* ── Cross-sell: one item, and only the voucher ───────────────── */}
         {voucher?.externalUrl ? (
-          <div className="mt-8 flex items-center gap-6 rounded-2xl border border-dashed border-line-strong p-6">
-            <div className="relative aspect-square w-20 shrink-0 overflow-hidden rounded-xl bg-petal">
+          <div className="mt-8 flex items-center gap-6 border border-dashed border-line-strong p-6">
+            <div className="relative aspect-square w-20 shrink-0 overflow-hidden bg-petal">
               <Image
                 src={imageUrl(voucher.image)}
                 alt={voucher.imageAlt}

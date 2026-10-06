@@ -18,7 +18,7 @@ export function Faq({ title = "Goed om te *weten*", items }: { title?: string; i
 
   return (
     <Band tone="white">
-      <div className="grid gap-14 lg:grid-cols-12 lg:gap-8">
+      <div className="grid gap-20 sm:gap-14 lg:grid-cols-12 lg:gap-8">
         <div className="relative lg:col-span-4">
           <Square className="-top-10 -left-8 h-40 w-40 hidden lg:block" />
           <Head eyebrow="Veelgestelde vragen" title={title} />
@@ -35,7 +35,7 @@ export function Faq({ title = "Goed om te *weten*", items }: { title?: string; i
                     onClick={() => setOpen(active ? null : index)}
                     aria-expanded={active}
                     aria-controls={`faq-${index}`}
-                    className="group flex w-full items-baseline justify-between gap-8 py-7 text-left"
+                    className="group flex w-full items-baseline justify-between gap-8 py-8 text-left sm:py-7"
                   >
                     <span className="font-display text-2xl leading-snug font-light sm:text-[1.75rem]">
                       {item.question}
@@ -60,7 +60,7 @@ export function Faq({ title = "Goed om te *weten*", items }: { title?: string; i
                       transition={{ duration: 0.7, ease: EXPO }}
                       className="overflow-hidden"
                     >
-                      <p className="max-w-xl pb-8 text-lg leading-relaxed text-ink-soft">
+                      <p className="max-w-xl pb-10 text-lg leading-relaxed text-ink-soft sm:pb-8">
                         {item.answer}
                       </p>
                     </motion.div>

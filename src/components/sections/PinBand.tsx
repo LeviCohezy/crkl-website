@@ -70,15 +70,15 @@ export function PinBand({ tone = "white", eyebrow, title, intro, photos, caption
   return (
     <Band tone={tone} bleed className="!py-0">
       <section ref={root}>
-        <div className="mx-auto max-w-[100rem] px-6 pt-24 sm:px-10 sm:pt-36 lg:pt-44">
+        <div className="mx-auto max-w-[100rem] px-7 pt-32 sm:px-10 sm:pt-36 lg:pt-44">
           <Head tone={tone} eyebrow={eyebrow} title={title} intro={intro} aside={link ? <ArrowLink href={link.href}>{link.label}</ArrowLink> : undefined} />
         </div>
         <div data-stage className="flex h-svh min-h-[34rem] flex-col justify-center">
           <div className="motion-reduce:overflow-x-auto">
-            <div ref={track} className="flex h-[66svh] w-max items-stretch gap-[6vw] px-6 will-change-transform sm:gap-[5vw] sm:px-10">
+            <div ref={track} className="flex h-[66svh] w-max items-stretch gap-[6vw] px-7 will-change-transform sm:gap-[5vw] sm:px-10">
               {photos.map((photo, index) => (
                 <figure key={photo.src} className={`shrink-0 ${frames[index % frames.length]}`}>
-                  <div className="h-full w-full overflow-hidden rounded-2xl">
+                  <div className="h-full w-full overflow-hidden">
                     <div data-slide className="h-full w-full scale-[1.16]">
                       <MediaImage src={photo.src} alt={photo.alt} aspect="h-full" sizes="(min-width: 640px) 26vw, 64vw" focus={photo.focus} />
                     </div>

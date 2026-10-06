@@ -26,10 +26,9 @@ export default function NotFound() {
               aspect="h-full"
               sizes="100vw"
               priority
-              radius="rounded-none"
             />
           </div>
-          <div className="relative mx-auto flex min-h-[80svh] max-w-[100rem] flex-col justify-end px-6 pt-40 pb-20 sm:px-10">
+          <div className="relative mx-auto flex min-h-[80svh] max-w-[100rem] flex-col justify-end px-7 pt-44 pb-28 sm:px-10 sm:pb-20">
             <p className="eyebrow text-blush">404</p>
             <h1 className="font-display mt-7 max-w-4xl text-[clamp(2.75rem,7vw,7rem)] leading-[1.02] font-light">
               Deze pagina staat niet <em>op het menu</em>
@@ -46,7 +45,7 @@ export default function NotFound() {
         </section>
 
         <section className="bg-cream py-24 text-ink sm:py-32">
-          <ul className="mx-auto grid max-w-[100rem] gap-x-8 gap-y-10 px-6 sm:grid-cols-2 sm:px-10 lg:grid-cols-4">
+          <ul className="mx-auto grid max-w-[100rem] gap-x-8 gap-y-12 px-7 sm:grid-cols-2 sm:gap-y-10 sm:px-10 lg:grid-cols-4">
             {exits.map((exit) => (
               <li key={exit.label}>
                 <TransitionLink

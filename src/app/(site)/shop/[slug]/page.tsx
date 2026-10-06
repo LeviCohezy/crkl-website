@@ -40,7 +40,7 @@ export default async function ProductPage(props: PageProps<"/shop/[slug]">) {
 
   return (
     <div className="bg-cream pt-32 pb-24 text-ink sm:pb-36 lg:pt-40">
-      <div className="mx-auto max-w-[100rem] px-6 sm:px-10">
+      <div className="mx-auto max-w-[100rem] px-7 sm:px-10">
         <TransitionLink href="/shop" className="eyebrow link-line pb-1.5 text-stone">
           ← Shop
         </TransitionLink>

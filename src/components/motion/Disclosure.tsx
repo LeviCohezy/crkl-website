@@ -29,7 +29,7 @@ export function Disclosure({ items, tone = "light" }: { items: DisclosureItem[];
               onClick={() => setOpen(active ? null : index)}
               aria-expanded={active}
               aria-controls={`${id}-${index}`}
-              className="group grid w-full gap-x-6 py-5 text-left sm:grid-cols-[1fr_auto]"
+              className="group grid w-full gap-x-6 py-7 text-left sm:grid-cols-[1fr_auto] sm:py-5"
             >
               <span>
                 <span className="font-display block text-2xl leading-snug font-light">{item.title}</span>
@@ -50,7 +50,7 @@ export function Disclosure({ items, tone = "light" }: { items: DisclosureItem[];
                   transition={{ duration: 0.7, ease: EXPO }}
                   className="overflow-hidden"
                 >
-                  <div id={`${id}-${index}`} className={`max-w-xl space-y-4 pb-7 leading-relaxed ${muted}`}>
+                  <div id={`${id}-${index}`} className={`max-w-xl space-y-5 pb-9 leading-relaxed sm:pb-7 ${muted}`}>
                     {item.body.map((paragraph) => (
                       <p key={paragraph}>{paragraph}</p>
                     ))}
@@ -75,9 +75,9 @@ export function Disclosure({ items, tone = "light" }: { items: DisclosureItem[];
 /** A row of short use cases, set as hairline pills. */
 export function Pills({ items, className = "" }: { items: string[]; className?: string }) {
   return (
-    <ul className={`flex flex-wrap gap-2.5 ${className}`}>
+    <ul className={`flex flex-wrap gap-3 ${className}`}>
       {items.map((item) => (
-        <li key={item} className="eyebrow rounded-full border border-line-strong px-4 py-2.5 tracking-[0.16em]">
+        <li key={item} className="eyebrow border border-line-strong px-4 py-3 tracking-[0.16em]">
           {item}
         </li>
       ))}
@@ -127,7 +127,7 @@ export function Tabs({ tabs }: { tabs: { label: string; content: ReactNode }[] }
           id={`${id}-panel-${index}`}
           aria-labelledby={`${id}-tab-${index}`}
           hidden={index !== active}
-          className="pt-8"
+          className="pt-10 sm:pt-8"
         >
           {tab.content}
         </div>

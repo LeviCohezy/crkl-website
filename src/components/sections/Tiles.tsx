@@ -35,10 +35,10 @@ export function Tiles({ id, tone = "white", eyebrow, title, intro, tiles, varian
     return (
       <Band tone={tone} id={id}>
         <Head tone={tone} eyebrow={eyebrow} title={title} intro={intro} />
-        <ul className="mt-16 grid gap-5 sm:grid-cols-3 lg:gap-8">
+        <ul className="mt-16 grid gap-10 sm:grid-cols-3 sm:gap-5 lg:gap-8">
           {tiles.map((tile, index) => (
             <li key={tile.label}>
-              <TransitionLink href={tile.href} className="group relative block overflow-hidden rounded-2xl">
+              <TransitionLink href={tile.href} className="group relative block overflow-hidden">
                 <Unveil delay={index * 0.1}>
                   <MediaImage
                     src={tile.photo.src}
@@ -75,7 +75,7 @@ export function Tiles({ id, tone = "white", eyebrow, title, intro, tiles, varian
       <Ring className="-right-28 top-24 h-96 w-96" dot={210} />
       <Head tone={tone} eyebrow={eyebrow} title={title} intro={intro} align="center" />
 
-      <ul className="mt-20 grid grid-cols-2 gap-x-5 gap-y-14 sm:gap-x-8 lg:grid-cols-3 lg:gap-x-8">
+      <ul className="mt-20 grid gap-y-20 sm:grid-cols-2 sm:gap-x-8 sm:gap-y-14 lg:grid-cols-3">
         {tiles.map((tile, index) => (
           <li key={tile.label}>
             <Drift distance={index % 2 ? -10 : 10}>

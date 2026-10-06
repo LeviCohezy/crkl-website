@@ -54,7 +54,7 @@ export function Statement({ eyebrow, text, links, photos = [], variant = "inset"
   );
 
   const actions = links ? (
-    <Reveal delay={0.25} className="mt-12 flex flex-wrap gap-x-12 gap-y-6">
+    <Reveal delay={0.25} className="mt-14 flex flex-wrap gap-x-12 gap-y-8 sm:mt-12 sm:gap-y-6">
       {links.map((link) => (
         <ArrowLink key={link.href} href={link.href}>
           {link.label}
@@ -138,10 +138,10 @@ export function Statement({ eyebrow, text, links, photos = [], variant = "inset"
   const photo = photos[0];
   return (
     <Band tone="white" bleed className="!py-0">
-      <div className="mx-auto max-w-[100rem] px-6 py-24 sm:px-10 sm:py-32 lg:py-40">
+      <div className="mx-auto max-w-[100rem] px-7 py-32 sm:px-10 sm:py-32 lg:py-40">
         <div className="relative">
           <Ring className="-top-10 -left-6 h-40 w-40" dot={120} />
-          <div className="relative grid rounded-3xl bg-blush px-6 py-20 text-ink sm:px-12 lg:grid-cols-12 lg:px-20 lg:py-28">
+          <div className="relative grid bg-blush px-7 py-28 text-ink sm:px-12 sm:py-20 lg:grid-cols-12 lg:px-20 lg:py-28">
             <div className="lg:col-span-7">
               {eyebrow ? (
                 <Reveal>

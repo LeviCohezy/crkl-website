@@ -32,7 +32,7 @@ export function ShopGrid({ products }: { products: Product[] }) {
 
   return (
     <div>
-      <div role="tablist" aria-label="Filter de shop" className="flex flex-wrap gap-x-9 gap-y-3 border-b border-line">
+      <div role="tablist" aria-label="Filter de shop" className="flex flex-wrap gap-x-9 gap-y-4 border-b border-line">
         {filters.map((item) => {
           const selected = item.id === filter;
           return (
@@ -76,7 +76,7 @@ export function ShopGrid({ products }: { products: Product[] }) {
                 transition={{ duration: 0.8, ease: EXPO }}
               >
                 <TransitionLink href={`/shop/${product.slug}`} className="group block">
-                  <div className="relative aspect-[4/5] overflow-hidden rounded-2xl bg-petal">
+                  <div className="relative aspect-[4/5] overflow-hidden bg-petal">
                     <Image
                       src={imageUrl(product.image)}
                       alt={product.imageAlt}

@@ -76,7 +76,7 @@ export function DishBand() {
         <div className="motion-reduce:overflow-x-auto">
           <div
             ref={track}
-            className="flex h-[70svh] w-max items-stretch gap-[6vw] px-6 will-change-transform sm:gap-[5vw] sm:px-10"
+            className="flex h-[70svh] w-max items-stretch gap-[6vw] px-7 will-change-transform sm:gap-[5vw] sm:px-10"
           >
             <div className="flex w-[78vw] shrink-0 flex-col justify-center sm:w-[30vw]">
               <p className="eyebrow text-stone">Gerechten</p>
@@ -94,7 +94,7 @@ export function DishBand() {
             {dishes.map((dish, index) => (
               <div
                 key={dish.src}
-                className={`shrink-0 overflow-hidden rounded-2xl ${frames[index % frames.length]}`}
+                className={`shrink-0 overflow-hidden ${frames[index % frames.length]}`}
               >
                 <div data-slide className="h-full w-full scale-[1.16]">
                   <MediaImage

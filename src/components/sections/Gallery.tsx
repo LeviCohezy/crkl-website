@@ -47,13 +47,13 @@ export function Gallery({
   if (variant === "strip") {
     return (
       <Band tone={tone} bleed className="!py-0">
-        <div className="mx-auto max-w-[100rem] px-6 pt-24 pb-14 sm:px-10 sm:pt-36 lg:pt-44">
+        <div className="mx-auto max-w-[100rem] px-7 pt-32 pb-16 sm:px-10 sm:pt-36 lg:pt-44">
           <Head tone={tone} eyebrow={eyebrow} title={title} intro={intro} aside={link ? <ArrowLink href={link.href} tone={linkTone}>{link.label}</ArrowLink> : undefined} />
         </div>
         <ul className="grid grid-cols-2 lg:grid-cols-4">
           {photos.slice(0, 4).map((photo, index) => (
             <li key={photo.src} className="group relative">
-              <Unveil delay={index * 0.08} radius="rounded-none">
+              <Unveil delay={index * 0.08}>
                 <MediaImage
                   src={photo.src}
                   alt={photo.alt}
@@ -61,7 +61,6 @@ export function Gallery({
                   sizes="(min-width: 1024px) 25vw, 50vw"
                   imageClassName="transition-transform duration-[1800ms] ease-expo group-hover:scale-[1.04]"
                   focus={photo.focus}
-                  radius="rounded-none"
                 />
               </Unveil>
               {captions?.[index] ? (
@@ -90,7 +89,7 @@ export function Gallery({
               </Reveal>
             ) : null}
           </div>
-          <div className="relative grid grid-cols-12 gap-4 lg:col-span-7 lg:col-start-6 lg:gap-6">
+          <div className="relative grid grid-cols-12 gap-5 lg:col-span-7 lg:col-start-6 lg:gap-6">
             <Ring className="-top-12 -left-10 h-32 w-32" />
             <div className="col-span-4 pt-12">
               <Unveil><MediaImage src={a.src} alt={a.alt} aspect="aspect-[3/4]" sizes="(min-width: 1024px) 18vw, 33vw" focus={a.focus} /></Unveil>
@@ -125,7 +124,7 @@ export function Gallery({
         ) : null}
       </div>
 
-      <ul className={`mt-16 grid gap-5 sm:gap-6 lg:mt-24 lg:gap-8 ${count === 3 ? "grid-cols-3" : count === 5 ? "grid-cols-5" : "grid-cols-2 lg:grid-cols-4"}`}>
+      <ul className={`mt-16 grid gap-10 sm:gap-6 lg:mt-24 lg:gap-8 ${count === 3 ? "sm:grid-cols-3" : count === 5 ? "sm:grid-cols-5" : "sm:grid-cols-2 lg:grid-cols-4"}`}>
         {photos.map((photo, index) => (
           <li key={photo.src} className={index % 2 ? "lg:mt-20" : ""}>
             <Drift distance={index % 2 ? -16 : 16}>

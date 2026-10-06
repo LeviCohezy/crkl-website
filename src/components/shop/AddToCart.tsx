@@ -18,14 +18,14 @@ export function AddToCart({ slug, className = "" }: { slug: string; className?: 
   }, [added]);
 
   return (
-    <div className={`flex flex-wrap items-center gap-x-6 gap-y-3 ${className}`}>
+    <div className={`flex flex-wrap items-center gap-x-6 gap-y-5 ${className}`}>
       <button
         type="button"
         onClick={() => {
           addToCart(slug);
           setAdded(true);
         }}
-        className="eyebrow sweep h-12 rounded-full bg-blush px-7 text-ink [--sweep:var(--color-line-strong)]"
+        className="eyebrow sweep h-12 bg-blush px-7 text-ink [--sweep:var(--color-line-strong)]"
       >
         In winkelmand
       </button>

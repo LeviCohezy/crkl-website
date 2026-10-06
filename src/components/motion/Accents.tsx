@@ -34,7 +34,7 @@ export function Ring({ className, dot }: RingProps) {
 }
 
 export function Square({ className }: { className: string }) {
-  return <span aria-hidden className={`frame pointer-events-none absolute rounded-2xl ${className}`} />;
+  return <span aria-hidden className={`frame pointer-events-none absolute ${className}`} />;
 }
 
 export function Eyebrow({

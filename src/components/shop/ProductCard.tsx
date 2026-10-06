@@ -45,7 +45,7 @@ export function ProductCard({ product, buyable = false, delay = 0 }: ProductCard
               href={product.externalUrl}
               target="_blank"
               rel="noreferrer noopener"
-              className="eyebrow sweep inline-flex h-12 items-center rounded-full bg-blush px-7 text-ink [--sweep:var(--color-line-strong)]"
+              className="eyebrow sweep inline-flex h-12 items-center bg-blush px-7 text-ink [--sweep:var(--color-line-strong)]"
             >
               Bestel de bon
             </a>

@@ -36,7 +36,7 @@ const solid: Record<Tone, string> = {
 const lineBase =
   "group eyebrow inline-flex items-center gap-4 border-b pb-3 transition-colors duration-500";
 const solidBase =
-  "group eyebrow inline-flex h-14 items-center gap-5 rounded-full px-9 transition-colors duration-500";
+  "group eyebrow inline-flex h-14 items-center gap-5 px-9 transition-colors duration-500";
 
 type LinkProps = {
   href: string;

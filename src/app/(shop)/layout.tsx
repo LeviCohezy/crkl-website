@@ -10,7 +10,7 @@ export default function CheckoutLayout({ children }: { children: ReactNode }) {
   return (
     <>
       <header className="border-b border-line bg-cream text-ink">
-        <div className="mx-auto flex h-16 max-w-[100rem] items-center justify-between px-6 sm:px-10 lg:h-20">
+        <div className="mx-auto flex h-16 max-w-[100rem] items-center justify-between px-7 sm:px-10 lg:h-20">
           <TransitionLink href="/" aria-label="CRKL — naar de startpagina">
             <span
               aria-hidden
@@ -31,7 +31,7 @@ export default function CheckoutLayout({ children }: { children: ReactNode }) {
       <main className="flex-1 bg-cream text-ink">{children}</main>
 
       <footer className="border-t border-line bg-cream text-ink-soft">
-        <ul className="mx-auto flex max-w-[100rem] flex-wrap gap-x-6 gap-y-2 px-6 py-6 text-xs sm:px-10">
+        <ul className="mx-auto flex max-w-[100rem] flex-wrap gap-x-6 gap-y-2 px-7 py-6 text-xs sm:px-10">
           {site.legal.map((item) => (
             <li key={item.href}>
               <TransitionLink href={item.href} className="link-line">

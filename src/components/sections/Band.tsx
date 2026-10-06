@@ -42,10 +42,10 @@ export function Band({
     <section
       id={id}
       className={`relative scroll-mt-20 overflow-hidden ${tones[tone].band} ${
-        compact ? "py-10 sm:py-12" : "py-24 sm:py-36 lg:py-44"
+        compact ? "py-14 sm:py-12" : "py-32 sm:py-36 lg:py-44"
       } ${className}`}
     >
-      {bleed ? children : <div className="mx-auto max-w-[100rem] px-6 sm:px-10">{children}</div>}
+      {bleed ? children : <div className="mx-auto max-w-[100rem] px-7 sm:px-10">{children}</div>}
     </section>
   );
 }
@@ -90,7 +90,7 @@ export function Head({
       } ${className}`}
     >
       <div className={centred || right ? "" : "max-w-3xl"}>
-        {!centred && !right ? <DrawRule className="mb-8 w-16" /> : null}
+        {!centred && !right ? <DrawRule className="mb-10 w-16 sm:mb-8" /> : null}
         {eyebrow ? (
           <Reveal>
             <Eyebrow className={`${t.accent} ${centred ? "justify-center" : right ? "justify-end" : ""}`}>
@@ -109,7 +109,7 @@ export function Head({
         {intro ? (
           <Reveal delay={0.15}>
             <p
-              className={`mt-7 max-w-xl text-lg leading-relaxed ${t.muted} ${
+              className={`mt-9 max-w-xl text-lg leading-relaxed sm:mt-7 ${t.muted} ${
                 centred ? "mx-auto" : right ? "ml-auto" : ""
               }`}
             >

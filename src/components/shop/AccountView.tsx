@@ -23,7 +23,7 @@ export function AccountView() {
 
   return (
     <div>
-      <div role="tablist" aria-label="Account" className="flex flex-wrap gap-x-9 gap-y-3 border-b border-line">
+      <div role="tablist" aria-label="Account" className="flex flex-wrap gap-x-9 gap-y-4 border-b border-line">
         {tabs.map((tab) => {
           const selected = tab === active;
           return (
@@ -62,7 +62,7 @@ export function AccountView() {
         </div>
 
         <form
-          className="rounded-3xl bg-petal p-8 sm:p-12 lg:col-span-6 lg:col-start-7"
+          className=" bg-petal p-8 sm:p-12 lg:col-span-6 lg:col-start-7"
           onSubmit={(event) => event.preventDefault()}
         >
           <fieldset disabled className="space-y-9 disabled:opacity-60">

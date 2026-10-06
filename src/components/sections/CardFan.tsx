@@ -65,17 +65,17 @@ export function CardFan({ tone = "white", eyebrow, title, intro, cards }: CardFa
   return (
     <Band tone={tone} bleed className="!py-0">
       <section ref={root}>
-        <div className="mx-auto max-w-[100rem] px-6 pt-24 sm:px-10 sm:pt-36 lg:pt-44">
+        <div className="mx-auto max-w-[100rem] px-7 pt-32 sm:px-10 sm:pt-36 lg:pt-44">
           <Head tone={tone} eyebrow={eyebrow} title={title} intro={intro} align="center" />
         </div>
 
-        <div data-stage className="relative mx-auto max-w-[100rem] px-6 pt-16 pb-24 sm:px-10 lg:h-svh lg:pt-20 lg:pb-0">
-          <ul className="grid gap-8 md:grid-cols-3 lg:block">
+        <div data-stage className="relative mx-auto max-w-[100rem] px-7 pt-20 pb-32 sm:px-10 sm:pt-16 sm:pb-24 lg:h-svh lg:pt-20 lg:pb-0">
+          <ul className="grid gap-12 md:grid-cols-3 md:gap-8 lg:block">
             {cards.map((card, index) => (
               <li
                 key={card.title}
                 data-card
-                className="rounded-3xl bg-cream p-4 shadow-[0_30px_80px_-40px_rgb(42_28_26/0.3)] lg:absolute lg:top-24 lg:left-1/2 lg:w-[22rem] lg:origin-bottom lg:will-change-transform"
+                className=" bg-cream p-4 shadow-[0_30px_80px_-40px_rgb(42_28_26/0.3)] lg:absolute lg:top-24 lg:left-1/2 lg:w-[22rem] lg:origin-bottom lg:will-change-transform"
                 style={{ zIndex: index }}
               >
                 <MediaImage src={card.photo.src} alt={card.photo.alt} aspect="aspect-[4/5]" sizes="(min-width: 1024px) 22rem, 100vw" focus={card.photo.focus} />

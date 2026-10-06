@@ -13,7 +13,7 @@ export function TrustBand() {
   return (
     <Band tone="tint" compact>
       <Reveal>
-        <ul className="flex flex-col items-center justify-center gap-x-14 gap-y-4 text-center md:flex-row">
+        <ul className="flex flex-col items-center justify-center gap-x-14 gap-y-7 text-center md:flex-row md:gap-y-4">
           {site.credentials.map((item, index) => (
             <li key={item.href} className="flex items-center gap-x-14">
               {index > 0 ? (
