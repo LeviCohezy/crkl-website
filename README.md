@@ -136,9 +136,18 @@ a layout. The compositions come from the references in `public/inspiration/`.
 | `Cards` | `columns` (outlined numerals), `flanked` (one picture in the middle, items either side, a thin arc behind), `checker` (rows of picture and words, alternating sides), `photos` |
 | `Steps` | one hairline, four rings with numbers, the last step is the call to action |
 | `FormBand` | `card` (form in a cream card over a softened photo, hours and phone each in a thin ring), `split` (title centred, form left, framed box right), `plain` |
-| `MenuTabs` | a spread per tab: photo in a slipped frame on one side, numbered menus with dotted leaders on the other; sides swap per tab |
+| `MenuSpread` | the menu as a book: swipe, arrow keys, trackpad flick, arrows or page numbers turn the page — the left half rises out while the right half sinks, and the next spread arrives with the menu and the photograph on the other sides (Blanquette) |
+| `CardFan` | three cards that start as one stack and fan out as the section pins |
+| `Cinematic` | the section pins while a picture (or film) opens from a slit at its centre to the full screen, then a row of four |
+| `VideoBand` | a full-screen looping film with two lines of letterspaced capitals drifting over it |
+| `PinBand` | a gallery that scrolls sideways while the section pins |
+| `Timeline` | a hairline that draws itself down the page, lighting up each moment |
 | `MenuExcerpt` | `columns`, `framed` |
 | `TrustBand`, `Reviews`, `Spotlight`, `Praktisch`, `Faq`, `LegalPage` | one composition each |
+
+Rich copy uses `Disclosure` (short line, full paragraphs folded under it but
+always in the page), `Pills`, `PullQuote` and in-section `Tabs` from
+`components/motion/Disclosure.tsx`, and `CountUp` for figures.
 
 `Band` gives each of them one of four backgrounds — white, tinted, dark,
 brand — which is how the page pacing in the wireframe is kept. All three
@@ -163,6 +172,7 @@ Deliberately few moves, repeated:
 | Hero: four slides that wipe over one another and drift | `components/home/HomeHero.tsx` |
 | Dishes: a pinned row that scrolls sideways | `components/home/DishBand.tsx` |
 | Signature dish: a round window that opens to the full photograph — the one circle on the site | `components/home/Signature.tsx` |
+| One larger scene per page: menu swipe (Menu), slit reveal (Lunch, Over ons), full-screen film (Diner), card fan (The Room), sideways band (Events), drawn timeline (Trouwen), word-fade (Champagne Pompadour) | `components/sections/` |
 | Statement: a tilted film with a two-colour line across it | `components/home/VideoStatement.tsx` |
 | Headings that rise word by word, images uncovered from their bottom edge, parallax, links that lean to the pointer | `components/motion/` |
 | Cursor ring, scroll-progress hairline, grain | `components/shell/`, `.grain-layer` in `globals.css` |
