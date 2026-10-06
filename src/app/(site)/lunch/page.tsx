@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Faq } from "@/components/sections/Faq";
 import { ReservationBand } from "@/components/sections/FormBand";
-import { Gallery } from "@/components/sections/Gallery";
+import { Cinematic } from "@/components/sections/Cinematic";
 import { MenuExcerpt } from "@/components/sections/MenuExcerpt";
 import { PageHero } from "@/components/sections/PageHero";
 import { Reviews } from "@/components/sections/Reviews";
@@ -52,10 +52,11 @@ export default function LunchPage() {
 
       <MenuExcerpt tab="lunch" tone="tint" eyebrow="Lunchmenu" title={"Wat er 's middags\n*op tafel komt*"} variant="columns" />
 
-      <Gallery
-        variant="strip"
+      <Cinematic
         eyebrow="Gerechten"
         title={"De lunch,\n*in beeld*"}
+        feature={{ src: shoot.mei25(16), alt: "Asperge met citroen op een bed van venkel", focus: "50% 45%" }}
+        lines={["Dagvers,", "op de middag"]}
         photos={[
           { src: shoot.mei25(22), alt: "Witte asperge met citroen en dille" },
           { src: shoot.mei25(47), alt: "Tartaar met bloemen en kruiden" },
@@ -65,7 +66,7 @@ export default function LunchPage() {
         captions={["Asperge", "Tartaar", "Voorgerecht", "Vis"]}
       />
 
-      <ReservationBand title={"Reserveer\n*uw lunch*"} submitLabel="Reserveer lunch" service="lunch" variant="plain" />
+      <ReservationBand title={"Reserveer\n*uw lunch*"} submitLabel="Reserveer lunch" service="lunch" variant="card" photo={{ src: shoot.juni25(4), alt: "" }} />
       <Faq items={faq.lunch} />
     </>
   );

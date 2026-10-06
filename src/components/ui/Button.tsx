@@ -99,17 +99,23 @@ export function SolidLink({ href, tone = "ink", className = "", children }: Link
   );
 }
 
+/** `outlined`: a hairline button inside a second, slipped hairline. */
 export function SolidButton({
   tone = "ink",
+  outlined = false,
   className = "",
   children,
   ...props
-}: ComponentProps<"button"> & { tone?: Tone }) {
+}: ComponentProps<"button"> & { tone?: Tone; outlined?: boolean }) {
   return (
     <Magnetic strength={0.2}>
       <button
         {...props}
-        className={`${solidBase} ${solid[tone]} disabled:cursor-not-allowed disabled:opacity-50 ${className}`}
+        className={`${solidBase} ${
+          outlined
+            ? "border border-ink text-ink outline outline-1 outline-offset-4 outline-ink/40 hover:bg-ink hover:text-cream"
+            : solid[tone]
+        } disabled:cursor-not-allowed disabled:opacity-50 ${className}`}
       >
         {children}
         <Arrow />

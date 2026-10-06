@@ -6,7 +6,7 @@ import { Gallery } from "@/components/sections/Gallery";
 import { PageHero } from "@/components/sections/PageHero";
 import { Spotlight } from "@/components/sections/Reviews";
 import { SplitMedia } from "@/components/sections/SplitMedia";
-import { Steps } from "@/components/sections/Steps";
+import { Timeline } from "@/components/sections/Timeline";
 import { faq } from "@/lib/faq";
 import { shoot } from "@/lib/photos";
 import { spotlights } from "@/lib/reviews";
@@ -83,7 +83,7 @@ export default function WeddingPage() {
 
       <Spotlight quote={spotlights.trouwen} />
 
-      <Steps
+      <Timeline
         eyebrow="Zo verloopt jullie dag"
         title={"De dag\n*in vier momenten*"}
         steps={[

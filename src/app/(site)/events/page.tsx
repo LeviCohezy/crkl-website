@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Faq } from "@/components/sections/Faq";
 import { FormBand } from "@/components/sections/FormBand";
-import { Gallery } from "@/components/sections/Gallery";
+import { PinBand } from "@/components/sections/PinBand";
 import { PageHero } from "@/components/sections/PageHero";
 import { Spotlight } from "@/components/sections/Reviews";
 import { SplitMedia } from "@/components/sections/SplitMedia";
@@ -73,8 +73,7 @@ export default function EventsPage() {
         flip
       />
 
-      <Gallery
-        variant="strip"
+      <PinBand
         eyebrow="Events in beeld"
         title={"De zaal,\n*klaar voor gasten*"}
         photos={[

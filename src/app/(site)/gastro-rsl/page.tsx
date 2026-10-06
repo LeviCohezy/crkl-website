@@ -64,7 +64,7 @@ export default function GastroRslPage() {
         ]}
       />
 
-      <ReservationBand variant="split" photo={{ src: shoot.leveranciers(91), alt: "De roze stoel in de rijpingskelder" }} />
+      <ReservationBand variant="card" photo={{ src: shoot.leveranciers(91), alt: "" }} />
     </>
   );
 }

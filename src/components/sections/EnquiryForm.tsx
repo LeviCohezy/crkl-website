@@ -70,6 +70,7 @@ export function EnquiryForm({
 }: EnquiryFormProps) {
   const [state, action, pending] = useActionState(sendEnquiry, initial);
   const [step, setStep] = useState(1);
+  const [moment, setMoment] = useState<"lunch" | "diner">(service);
   const errors = state.errors ?? {};
 
   const dated = kind !== "contact";
@@ -147,51 +148,82 @@ export function EnquiryForm({
       ) : null}
 
       {/* Both steps stay in the form so one submit carries every field. */}
-      <div className={`grid gap-x-8 gap-y-9 sm:grid-cols-2 ${first ? "" : "hidden"}`}>
-        {dated ? (
-          <>
-            <Field label="Datum" name="date" error={errors.date}>
-              <input id="date" name="date" type="date" required className="field" />
-            </Field>
-            <Field label="Aantal gasten" name="guests" error={errors.guests}>
-              <input
-                id="guests"
-                name="guests"
-                type="number"
-                min={1}
-                inputMode="numeric"
-                placeholder={booking ? "2" : "12"}
-                required
-                className="field"
-              />
-            </Field>
-          </>
-        ) : null}
-        {booking ? (
-          <Field label="Uur" name="time" error={errors.time} className="sm:col-span-2">
-            <select
-              id="time"
-              name="time"
-              className="field"
-              defaultValue={
-                service === "lunch"
-                  ? `Lunch ${site.hours.lunch.slots[0]}`
-                  : `Diner ${site.hours.dinner.slots[0]}`
-              }
-            >
-              {site.hours.lunch.slots.map((slot) => (
-                <option key={`l${slot}`}>Lunch {slot}</option>
+      {booking ? (
+        /* The table, as the reference lays it out: who, how many, when. */
+        <div className="grid gap-x-8 gap-y-9 sm:grid-cols-2">
+          <Field label="Naam" name="name" error={errors.name} className="sm:col-span-2">
+            <input id="name" name="name" type="text" autoComplete="name" required className="field" />
+          </Field>
+          <Field label="Aantal gasten" name="guests" error={errors.guests}>
+            <select id="guests" name="guests" className="field" defaultValue="2">
+              {Array.from({ length: 12 }, (_, i) => i + 1).map((n) => (
+                <option key={n} value={n}>
+                  {n} {n === 1 ? "persoon" : "personen"}
+                </option>
               ))}
-              {site.hours.dinner.slots.map((slot) => (
-                <option key={`d${slot}`}>Diner {slot}</option>
+              <option value="meer dan 12">Meer dan 12 — The Room</option>
+            </select>
+          </Field>
+          <Field label="Moment" name="service">
+            <select
+              id="service"
+              name="service"
+              className="field"
+              value={moment}
+              onChange={(event) => setMoment(event.target.value === "lunch" ? "lunch" : "diner")}
+            >
+              <option value="lunch">Lunch · {site.hours.lunch.days}</option>
+              <option value="diner">Diner · {site.hours.dinner.days}</option>
+            </select>
+          </Field>
+          <Field label="Datum" name="date" error={errors.date}>
+            <input id="date" name="date" type="date" required className="field" />
+          </Field>
+          <Field label="Uur" name="time" error={errors.time}>
+            <select id="time" name="time" className="field" key={moment}>
+              {(moment === "lunch" ? site.hours.lunch.slots : site.hours.dinner.slots).map((slot) => (
+                <option key={slot}>
+                  {moment === "lunch" ? "Lunch" : "Diner"} {slot}
+                </option>
               ))}
             </select>
           </Field>
-        ) : null}
-      </div>
+          <Field label="E-mail" name="email" error={errors.email}>
+            <input id="email" name="email" type="email" autoComplete="email" required className="field" />
+          </Field>
+          <Field label="Telefoon" name="phone">
+            <input id="phone" name="phone" type="tel" autoComplete="tel" className="field" />
+          </Field>
+          <Field label="Allergieën of wensen" name="message" className="sm:col-span-2">
+            <textarea id="message" name="message" rows={1} className="field resize-none" />
+          </Field>
+        </div>
+      ) : (
+        <div className={`grid gap-x-8 gap-y-9 sm:grid-cols-2 ${first ? "" : "hidden"}`}>
+          {dated ? (
+            <>
+              <Field label="Datum" name="date" error={errors.date}>
+                <input id="date" name="date" type="date" required className="field" />
+              </Field>
+              <Field label="Aantal gasten" name="guests" error={errors.guests}>
+                <input
+                  id="guests"
+                  name="guests"
+                  type="number"
+                  min={1}
+                  inputMode="numeric"
+                  placeholder="12"
+                  required
+                  className="field"
+                />
+              </Field>
+            </>
+          ) : null}
+        </div>
+      )}
 
       <AnimatePresence initial={false}>
-        {!steps || !first ? (
+        {!booking && (!steps || !first) ? (
           <motion.div
             key="details"
             className={`grid gap-x-8 gap-y-9 sm:grid-cols-2 ${steps ? "" : dated ? "mt-9" : ""}`}
@@ -214,21 +246,11 @@ export function EnquiryForm({
             <Field label="E-mail" name="email" error={errors.email}>
               <input id="email" name="email" type="email" autoComplete="email" required className="field" />
             </Field>
-            <Field label="Telefoon" name="phone" className={booking ? "" : "sm:col-span-2"}>
+            <Field label="Telefoon" name="phone" className="sm:col-span-2">
               <input id="phone" name="phone" type="tel" autoComplete="tel" className="field" />
             </Field>
-            <Field
-              label={booking ? "Allergieën of wensen" : "Bericht"}
-              name="message"
-              error={errors.message}
-              className={booking ? "" : "sm:col-span-2"}
-            >
-              <textarea
-                id="message"
-                name="message"
-                rows={booking ? 1 : 3}
-                className="field resize-none"
-              />
+            <Field label="Bericht" name="message" error={errors.message} className="sm:col-span-2">
+              <textarea id="message" name="message" rows={3} className="field resize-none" />
             </Field>
           </motion.div>
         ) : null}
@@ -240,7 +262,7 @@ export function EnquiryForm({
             Volgende
           </SolidButton>
         ) : (
-          <SolidButton type="submit" disabled={pending}>
+          <SolidButton type="submit" disabled={pending} outlined={booking}>
             {pending ? "Even geduld" : submitLabel}
           </SolidButton>
         )}

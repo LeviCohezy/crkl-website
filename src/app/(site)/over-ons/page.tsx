@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Cards } from "@/components/sections/Cards";
 import { FormBand } from "@/components/sections/FormBand";
-import { Gallery } from "@/components/sections/Gallery";
+import { Cinematic } from "@/components/sections/Cinematic";
 import { PageHero } from "@/components/sections/PageHero";
 import { SplitMedia } from "@/components/sections/SplitMedia";
 import { Statement } from "@/components/sections/Statement";
@@ -40,11 +40,13 @@ export default function AboutPage() {
         photos={[{ src: shoot.dec25(20), alt: "Tafel bij het raam, onder de bollamp" }]}
       />
 
-      <Gallery
-        variant="collage"
+      <Cinematic
         tone="tint"
         eyebrow="Keuken & team"
         title={"Echte mensen,\n*een echte keuken*"}
+        feature={{ src: "hero/crkl-pass.jpg", alt: "De pass, tijdens de service" }}
+        video="clips/crkl-pass.mp4"
+        lines={["Achter de pass,", "elke avond"]}
         photos={[
           { src: shoot.okt25(19), alt: "De chef aan de pass, in zwart-wit" },
           { src: shoot.mei25(3), alt: "De chef aan het werk in de keuken" },

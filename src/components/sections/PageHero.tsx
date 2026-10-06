@@ -225,14 +225,16 @@ export function PageHero(props: PageHeroProps) {
                 className="font-display mt-8 text-[clamp(2rem,4.6vw,4.5rem)] leading-[1.14] font-light tracking-[0.2em] uppercase"
               />
             </div>
-            <div className="space-y-6 lg:col-span-4 lg:col-start-9 lg:self-end">
+            {/* Sits above the pictures, never under them: the top-right one
+                only climbs as far as the row below this column. */}
+            <div className="relative z-10 space-y-6 lg:col-span-4 lg:col-start-9 lg:self-end">
               {intro(0.9, "text-ink-soft")}
               {chips(1)}
               {actions("ink", 1.1)}
             </div>
           </div>
 
-          <div className="relative mt-16 grid grid-cols-12 gap-4 sm:gap-6 lg:mt-20 lg:gap-8">
+          <div className="relative mt-16 grid grid-cols-12 gap-4 sm:gap-6 lg:mt-24 lg:gap-8">
             <Ring className="-left-20 bottom-0 h-64 w-64" dot={300} />
             <motion.div className="col-span-5 mt-20 lg:col-span-3 lg:col-start-2 lg:mt-32" {...unveil(0.5)}>
               <MediaImage src={third.src} alt={third.alt} aspect="aspect-[4/5]" sizes="(min-width: 1024px) 25vw, 42vw" focus={third.focus} />
@@ -240,7 +242,7 @@ export function PageHero(props: PageHeroProps) {
             <motion.div className="col-span-7 lg:col-span-4 lg:col-start-6" {...unveil(0.6)}>
               <MediaImage src={props.image.src} alt={props.image.alt} aspect="aspect-[4/5]" sizes="(min-width: 1024px) 33vw, 58vw" priority focus={props.image.focus} />
             </motion.div>
-            <motion.div className="col-span-6 col-start-4 -mt-10 lg:col-span-3 lg:col-start-10 lg:-mt-28" {...unveil(0.7)}>
+            <motion.div className="col-span-6 col-start-4 -mt-10 lg:col-span-3 lg:col-start-10 lg:-mt-6" {...unveil(0.7)}>
               <MediaImage src={second.src} alt={second.alt} aspect="aspect-[3/4]" sizes="(min-width: 1024px) 25vw, 50vw" focus={second.focus} />
             </motion.div>
           </div>

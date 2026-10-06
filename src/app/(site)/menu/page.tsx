@@ -1,10 +1,9 @@
 import type { Metadata } from "next";
-import { Reveal } from "@/components/motion/Reveal";
 import { Band, Head } from "@/components/sections/Band";
 import { Faq } from "@/components/sections/Faq";
 import { ReservationBand } from "@/components/sections/FormBand";
 import { Gallery } from "@/components/sections/Gallery";
-import { MenuTabs } from "@/components/sections/MenuTabs";
+import { MenuSpread } from "@/components/sections/MenuSpread";
 import { PageHero } from "@/components/sections/PageHero";
 import { SplitMedia } from "@/components/sections/SplitMedia";
 import { faq } from "@/lib/faq";
@@ -44,16 +43,14 @@ export default function MenuPage() {
         captions={["Asperge · citroen · dille", "Langoustine · van de grill", "Rund · schorseneer · jus"]}
       />
 
-      <Band tone="white" id="kaart">
+      <Band tone="white" className="!pb-0">
         <Head
           eyebrow="Het menu"
           title={"Lunch, diner\n& *dranken*"}
-          intro="Het menu ligt vast, de gerechten niet: ze volgen wat het seizoen aanreikt."
+          intro="Het menu ligt vast, de gerechten niet: ze volgen wat het seizoen aanreikt. Blader door de formules."
         />
-        <Reveal delay={0.1} className="mt-16">
-          <MenuTabs />
-        </Reveal>
       </Band>
+      <MenuSpread />
 
       <SplitMedia
         variant="inset"
@@ -69,7 +66,7 @@ export default function MenuPage() {
         photos={[{ src: shoot.juli26(65), alt: "Glazen en het CRKL-servet in het zonlicht" }]}
       />
 
-      <ReservationBand variant="split" photo={{ src: shoot.juli26(54), alt: "Ronde tafel op het okeren tapijt" }} />
+      <ReservationBand variant="card" photo={{ src: shoot.juli26(54), alt: "", focus: "50% 40%" }} />
       <Faq items={faq.menu} />
     </>
   );

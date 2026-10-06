@@ -1,6 +1,6 @@
 import type { ReactNode } from "react";
 import { Eyebrow } from "@/components/motion/Accents";
-import { Reveal, SplitText } from "@/components/motion/Reveal";
+import { DrawRule, Reveal, SplitText } from "@/components/motion/Reveal";
 
 /**
  * The backgrounds a section can sit on, as the wireframe paces them — white,
@@ -90,6 +90,7 @@ export function Head({
       } ${className}`}
     >
       <div className={centred || right ? "" : "max-w-3xl"}>
+        {!centred && !right ? <DrawRule className="mb-8 w-16 opacity-40" /> : null}
         {eyebrow ? (
           <Reveal>
             <Eyebrow className={`${t.accent} ${centred ? "justify-center" : right ? "justify-end" : ""}`}>

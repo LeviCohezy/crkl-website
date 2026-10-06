@@ -66,19 +66,31 @@ export const faq: Record<string, FaqItem[]> = {
   "the-room": [
     {
       question: "Voor hoeveel gasten is The Room geschikt?",
-      answer: "De ruimte biedt plaats aan tot 20 personen.",
+      answer:
+        "De ruimte biedt plaats aan tot 20 personen, aan één lange tafel of in een receptie-opstelling. Voor een groter gezelschap bekijken we samen wat kan.",
     },
     {
       question: "Welke menu's zijn mogelijk?",
-      answer: `Dat stemmen we af op uw gezelschap en gelegenheid. ${ask}`,
+      answer: `Menu Carré+ (vier gangen), Menu CRKL+ (vijf gangen) of een lunchformule, telkens met wijnpairing of een aangepast non-alcoholisch sap. Voor een walking dinner stelt de chef een reeks kleinere gerechten samen. ${ask}`,
     },
     {
       question: "Is er audiovisueel materiaal?",
-      answer: "Ja, The Room is uitgerust met audiovisueel materiaal voor meetings en presentaties.",
+      answer:
+        "Ja, The Room is uitgerust met audiovisueel materiaal voor meetings en presentaties. Laat ons vooraf weten wat u meebrengt, dan staat alles klaar en getest.",
     },
     {
       question: "Hebben we de ruimte voor ons alleen?",
-      answer: "The Room is een aparte, exclusieve ruimte: u zit er met uw eigen gezelschap.",
+      answer:
+        "The Room is een aparte, exclusieve ruimte: u zit er met uw eigen gezelschap, los van de zaal.",
+    },
+    {
+      question: "Kan een meeting ook buiten de gewone openingsuren?",
+      answer:
+        "Voor groepen en events openen we ook op dinsdag, zaterdagmiddag en zondag. Vermeld het gewenste moment in uw aanvraag.",
+    },
+    {
+      question: "Hoe snel krijgen we antwoord op een aanvraag?",
+      answer: `Zo snel mogelijk, en vrijblijvend. Dringend? ${ask}`,
     },
   ],
   events: [

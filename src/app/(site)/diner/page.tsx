@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { VideoStatement } from "@/components/home/VideoStatement";
+import { VideoBand } from "@/components/sections/VideoBand";
 import { Faq } from "@/components/sections/Faq";
 import { ReservationBand } from "@/components/sections/FormBand";
 import { Gallery } from "@/components/sections/Gallery";
@@ -32,7 +32,8 @@ export default function DinerPage() {
         image={{ src: shoot.dec25(1), alt: "Doorkijk naar een tafel tussen de gordijnen" }}
       />
 
-      <VideoStatement
+      <VideoBand
+        eyebrow="Filosofie"
         lines={["Moderne visie", "op gastronomie"]}
         video="clips/crkl-dresseren.mp4"
         poster="hero/crkl-dresseren.jpg"
@@ -75,7 +76,7 @@ export default function DinerPage() {
 
       <Reviews reviews={reviews.diner} tone="tint" title={"Een avond\n*om te onthouden*"} />
 
-      <ReservationBand title={"Reserveer\n*uw diner*"} submitLabel="Reserveer diner" service="diner" variant="split" photo={{ src: shoot.okt25(16), alt: "Een tafel bij het gordijn, 's avonds" }} />
+      <ReservationBand title={"Reserveer\n*uw diner*"} submitLabel="Reserveer diner" service="diner" variant="card" photo={{ src: shoot.okt25(16), alt: "" }} />
       <Faq items={faq.diner} />
     </>
   );

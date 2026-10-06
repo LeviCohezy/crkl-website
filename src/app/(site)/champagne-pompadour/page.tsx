@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { ReservationBand } from "@/components/sections/FormBand";
 import { PageHero } from "@/components/sections/PageHero";
 import { Spotlight } from "@/components/sections/Reviews";
-import { SplitMedia } from "@/components/sections/SplitMedia";
+import { Statement } from "@/components/sections/Statement";
 import { shoot } from "@/lib/photos";
 import { spotlights } from "@/lib/reviews";
 
@@ -26,23 +26,19 @@ export default function PompadourPage() {
         photos={[{ src: shoot.juni25(35), alt: "Een coupe in het zonlicht" }]}
       />
 
-      <SplitMedia
-        variant="stack"
-        tone="tint"
+      <Statement
+        variant="fade"
         eyebrow="Het verhaal"
-        title={"Pompadour\n*× CRKL*"}
-        body={[
-          "Maison Pompadour is een champagnehuis uit Reims. Als ambassadeur schenken wij hun champagne zoals ze bedoeld is: gekoeld, in het juiste glas, bij een keuken die erbij past.",
-          "Voor u betekent dat een aperitief om naar uit te kijken — en, wie wil, champagne als rode draad door het menu.",
+        text="Maison Pompadour is een champagnehuis uit Reims. Als ambassadeur schenken wij hun champagne zoals ze bedoeld is: gekoeld, in het juiste glas, bij een keuken die erbij past. Voor u betekent dat een aperitief om naar uit te kijken — en, wie wil, champagne als rode draad door het menu."
+        photos={[
+          { src: shoot.juni25(6), alt: "De sommelier proeft een glas" },
+          { src: shoot.juli26(65), alt: "Glazen en het CRKL-servet in het zonlicht" },
         ]}
-        photo={{ src: shoot.juni25(6), alt: "De sommelier proeft een glas" }}
-        photos={[{ src: shoot.juli26(65), alt: "Glazen en het CRKL-servet in het zonlicht" }]}
-        flip
       />
 
       <Spotlight quote={spotlights.pompadour} />
 
-      <ReservationBand title={"Proef\n*het zelf*"} submitLabel="Reserveer en proef" variant="plain" />
+      <ReservationBand title={"Proef\n*het zelf*"} submitLabel="Reserveer en proef" variant="card" photo={{ src: shoot.juli26(65), alt: "" }} />
     </>
   );
 }
