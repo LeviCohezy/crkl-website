@@ -2,6 +2,7 @@
 
 import { AnimatePresence, motion } from "motion/react";
 import { useState } from "react";
+import { Square } from "@/components/motion/Accents";
 import { Band, Head } from "@/components/sections/Band";
 
 const EXPO = [0.16, 1, 0.3, 1] as const;
@@ -18,7 +19,8 @@ export function Faq({ title = "Goed om te *weten*", items }: { title?: string; i
   return (
     <Band tone="white">
       <div className="grid gap-14 lg:grid-cols-12 lg:gap-8">
-        <div className="lg:col-span-4">
+        <div className="relative lg:col-span-4">
+          <Square className="-top-10 -left-8 h-40 w-40 hidden lg:block" />
           <Head eyebrow="Veelgestelde vragen" title={title} />
         </div>
 

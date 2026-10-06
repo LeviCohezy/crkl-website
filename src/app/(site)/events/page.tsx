@@ -21,14 +21,17 @@ export default function EventsPage() {
   return (
     <>
       <PageHero
+        variant="offset"
         eyebrow="Events"
         title={"Een moment\n*om te vieren*"}
         intro="CRKL is de ideale locatie in Roeselare voor wie een bijzonder moment wil vieren in een stijlvolle en warme setting."
         cta={{ href: "#aanvraag", label: "Plan uw event" }}
         image={{ src: shoot.juni26(5), alt: "De zaal, gedekt voor een gezelschap" }}
+        photos={[{ src: shoot.juli26(75), alt: "Cocktails op de witte tafel" }]}
       />
 
       <Tiles
+        variant="tall"
         eyebrow="Soorten events"
         title={"Voor elk gezelschap\n*een vorm*"}
         tiles={[
@@ -54,6 +57,7 @@ export default function EventsPage() {
       />
 
       <SplitMedia
+        variant="collage"
         tone="tint"
         eyebrow="Onze aanpak"
         title={"Een menu\n*voor uw gezelschap*"}
@@ -62,10 +66,15 @@ export default function EventsPage() {
           "Elk event begint met een gesprek. De chef stelt het menu samen op maat van uw gezelschap en de gelegenheid; wij zorgen voor de rest.",
         ]}
         photo={{ src: shoot.okt25(27), alt: "De chef werkt een gerecht af aan de pass" }}
+        photos={[
+          { src: shoot.okt25(49), alt: "Saus wordt aan tafel bij het gerecht geschonken" },
+          { src: shoot.juli26(1), alt: "Gasten aan tafel in de zaal" },
+        ]}
         flip
       />
 
       <Gallery
+        variant="strip"
         eyebrow="Events in beeld"
         title={"De zaal,\n*klaar voor gasten*"}
         photos={[
@@ -74,12 +83,15 @@ export default function EventsPage() {
           { src: shoot.juli26(18), alt: "Het terras onder de witte luifel" },
           { src: shoot.mei25(11), alt: "Een boeket in de zaal" },
         ]}
+        captions={["De zaal", "Het aperitief", "Het terras", "Bloemen"]}
       />
 
       <Spotlight quote={spotlights.events} />
 
       <FormBand
         id="aanvraag"
+        variant="split"
+        photo={{ src: shoot.juni26(5), alt: "De zaal, gedekt voor een gezelschap" }}
         eyebrow="Aanvraag"
         title={"Vraag\n*uw event* aan"}
         intro="Datum, aantal gasten en de gelegenheid — meer hebben we niet nodig om te beginnen."

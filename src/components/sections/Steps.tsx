@@ -13,39 +13,36 @@ type StepsProps = {
 };
 
 /**
- * A process in four moments along one hairline. The last moment is not a
- * description but the next thing to do.
+ * A process in four moments along one hairline, each marked by a thin ring
+ * with its number inside. The last moment is not a description but the next
+ * thing to do.
  */
 export function Steps({ tone = "white", eyebrow, title, steps, last }: StepsProps) {
   const t = tones[tone];
+  const all = [...steps.map((step) => ({ ...step, cta: null })), { ...last, body: "", cta: last }];
 
   return (
     <Band tone={tone}>
-      <Head tone={tone} eyebrow={eyebrow} title={title} />
+      <Head tone={tone} eyebrow={eyebrow} title={title} align="center" />
 
-      <ol className={`mt-16 grid gap-x-8 gap-y-12 border-t pt-10 sm:grid-cols-2 lg:grid-cols-4 ${t.rule}`}>
-        {steps.map((step, index) => (
-          <li key={step.title}>
-            <Reveal delay={index * 0.08}>
-              <p className={`font-display text-xl tabular-nums ${t.accent}`}>
-                {String(index + 1).padStart(2, "0")}
-              </p>
-              <h3 className="font-display mt-5 text-3xl font-light">{step.title}</h3>
-              <p className={`mt-4 leading-relaxed ${t.muted}`}>{step.body}</p>
+      <ol className="relative mt-20 grid gap-y-14 sm:grid-cols-2 lg:grid-cols-4 lg:gap-x-8">
+        <span aria-hidden className={`absolute top-6 right-[12%] left-[12%] hidden border-t lg:block ${t.rule}`} />
+        {all.map((step, index) => (
+          <li key={step.title} className="relative lg:text-center">
+            <Reveal delay={index * 0.1}>
+              <span className={`ring relative z-10 inline-flex h-12 w-12 items-center justify-center font-display text-lg tabular-nums ${tone === "tint" ? "bg-petal" : "bg-mist"}`}>
+                {index + 1}
+              </span>
+              <h3 className={`font-display mt-6 text-3xl font-light ${step.cta ? "italic" : ""}`}>{step.title}</h3>
+              {step.body ? <p className={`mx-auto mt-3 max-w-xs leading-relaxed ${t.muted}`}>{step.body}</p> : null}
+              {step.cta ? (
+                <div className="mt-6 lg:flex lg:justify-center">
+                  <ArrowLink href={step.cta.href}>{step.cta.label}</ArrowLink>
+                </div>
+              ) : null}
             </Reveal>
           </li>
         ))}
-        <li>
-          <Reveal delay={steps.length * 0.08}>
-            <p className={`font-display text-xl tabular-nums ${t.accent}`}>
-              {String(steps.length + 1).padStart(2, "0")}
-            </p>
-            <h3 className="font-display mt-5 text-3xl font-light italic">{last.title}</h3>
-            <div className="mt-7">
-              <ArrowLink href={last.href}>{last.label}</ArrowLink>
-            </div>
-          </Reveal>
-        </li>
       </ol>
     </Band>
   );

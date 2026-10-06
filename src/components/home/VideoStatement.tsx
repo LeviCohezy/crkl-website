@@ -22,12 +22,12 @@ type VideoStatementProps = {
 };
 
 /**
- * A full-viewport statement on the dark band: one slightly tilted clip with
+ * A full-viewport statement on the pink: one slightly tilted clip with
  * a line of display type laid across it, running wider than the film on both
  * sides.
  *
  * The line changes colour depending on what is behind it — white over the
- * film, rose over the page. That is two copies of the same text: the rose
+ * film, ink over the page. That is two copies of the same text: the ink
  * one sits underneath, and the white one lives *inside* the rotated, clipped
  * film box, counter-rotated by the same angle so it stays upright and lands
  * exactly on its twin. The box's overflow does the masking, so the colour
@@ -99,11 +99,11 @@ export function VideoStatement({ lines, video, poster }: VideoStatementProps) {
   return (
     <section
       ref={sectionRef}
-      className="relative flex h-svh w-full items-center justify-center overflow-hidden bg-ink"
+      className="relative flex h-svh w-full items-center justify-center overflow-hidden bg-petal"
     >
       {/* Rose copy — the real heading, and what shows over the page. */}
       <div className={centred}>
-        <h2 className={`statement-shift ${lineType} text-blush`}>{line}</h2>
+        <h2 className={`statement-shift ${lineType} text-ink`}>{line}</h2>
       </div>
 
       {/* Capped on every axis so the clip always fits the viewport. */}

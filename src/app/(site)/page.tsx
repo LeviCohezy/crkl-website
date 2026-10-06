@@ -114,6 +114,7 @@ export default function HomePage() {
       />
 
       <SplitMedia
+        variant="stack"
         tone="tint"
         eyebrow="De chef"
         title={"Sam, *in* de keuken"}
@@ -124,18 +125,24 @@ export default function HomePage() {
         link={{ href: "/over-ons", label: "Maak kennis met de chef" }}
         photo={{ src: shoot.okt25(27), alt: "De chef werkt een gerecht af aan de pass" }}
         video={{ src: "hero/crkl-hero-keuken.mp4", poster: "hero/crkl-hero-keuken.jpg" }}
+        photos={[{ src: shoot.mei25(52), alt: "Verse aardbeien in de handen van de chef" }]}
       />
 
       <DishBand />
       <Signature />
 
       <Statement
+        variant="inset"
         eyebrow="Het menu"
         text={"Het menu van\n*dit seizoen*"}
         links={[{ href: "/menu", label: "Bekijk het menu van dit seizoen" }]}
+        photos={[{ src: shoot.maart26(50), alt: "Vier borden van bovenaf op de houten vloer" }]}
       />
 
-      <ReservationBand />
+      <ReservationBand
+        variant="card"
+        photo={{ src: shoot.juni26(3), alt: "", focus: "50% 40%" }}
+      />
       <Praktisch />
     </>
   );

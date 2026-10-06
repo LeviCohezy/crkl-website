@@ -21,16 +21,22 @@ export default function TheRoomPage() {
   return (
     <>
       <PageHero
+        variant="cascade"
         eyebrow="Privé dineren"
         title={"The\n*Room*"}
         intro="Voor privédiners, meetings en events kan u terecht in onze exclusieve ruimte."
         chips={["Tot 20 gasten", "Privé", "Audiovisueel materiaal"]}
         cta={{ href: "#aanvraag", label: "Vraag beschikbaarheid" }}
         image={{ src: shoot.okt25(1), alt: "De lange tafel in The Room" }}
+        photos={[
+          { src: shoot.okt25(2), alt: "Glazen, servetten en bestek op de gedekte tafel" },
+          { src: shoot.okt25(5), alt: "Een wijnglas aan het raam" },
+        ]}
       />
 
       <SplitMedia
-        tone="tint"
+        variant="inset"
+        tone="white"
         eyebrow="De ruimte"
         title={"Een tafel\n*voor uzelf*"}
         body={[
@@ -38,9 +44,13 @@ export default function TheRoomPage() {
           "De ruimte biedt plaats aan tot 20 personen en is uitgerust met audiovisueel materiaal. De keuken en de bediening zijn dezelfde als in de zaal.",
         ]}
         photo={{ src: shoot.okt25(4), alt: "Een gedekte plaats aan de lange tafel" }}
+        photos={[{ src: shoot.okt25(3), alt: "Bestek en glazen, in zwart-wit" }]}
+        flip
       />
 
       <Cards
+        variant="flanked"
+        photo={{ src: shoot.okt25(1), alt: "De lange tafel in The Room" }}
         eyebrow="Opstellingen"
         title={"Drie manieren\n*om samen te zitten*"}
         cards={[
@@ -60,6 +70,7 @@ export default function TheRoomPage() {
       />
 
       <Gallery
+        variant="collage"
         tone="tint"
         eyebrow="De ruimte in beeld"
         title={"Zo ziet\n*het eruit*"}
@@ -75,6 +86,8 @@ export default function TheRoomPage() {
 
       <FormBand
         id="aanvraag"
+        variant="split"
+        photo={{ src: shoot.okt25(7), alt: "Tafels bij het raam, met zicht op de tuin" }}
         eyebrow="Aanvraag"
         title={"Vraag\n*The Room* aan"}
         intro="Begin met de datum en het aantal gasten. De rest bespreken we samen."

@@ -6,7 +6,8 @@ Lenis and Motion for the scroll scenes and transitions. The site is in Dutch.
 
 Pages, sections and their order follow the wireframe (`wireframes-crkl-v3`,
 22 July 2026). The visual layout is the site's own: rose, quiet, typographic,
-with photography doing most of the work.
+with photography doing most of the work, and its compositions are drawn from
+the editorial and fine-dining references in `public/inspiration/`.
 
 **Before going live, read [`CONTENT_TODO.md`](CONTENT_TODO.md)** — it lists
 every piece of copy and data that still needs a human check.
@@ -121,28 +122,34 @@ src/
 
 ## Sections
 
-Every page is assembled from the same small set, so a new page is mostly a
-list:
+Every page is assembled from the same small set of section types, and each
+type has a few compositions, so no two neighbouring sections on a page share
+a layout. The compositions come from the references in `public/inspiration/`.
 
-| Component | Wireframe archetype |
+| Component | Compositions |
 | --- | --- |
-| `PageHero` | hero split |
-| `TrustBand` | band |
-| `Reviews`, `Spotlight` | review cards, quote statement |
-| `Tiles` | immersive tiles |
-| `SplitMedia` | split media (photo or film) |
-| `Gallery` | gallery |
-| `Cards` | card grid |
-| `Steps` | steps |
-| `Statement`, `VideoStatement` | statement on the dark band |
-| `MenuTabs`, `MenuExcerpt` | editorial menu |
-| `ReservationBand`, `FormBand` | form on the brand tint |
-| `Praktisch` | hours, address, map |
-| `Faq` | accordion |
-| `LegalPage` | title · contents · text |
+| `PageHero` | `straddle` (title runs on into a full-width photo), `giant` (photo half, rose half with a very large title and a card crossing the seam), `cascade` (letterspaced title, three photos stepping diagonally), `centered` (wide letterspaced title with a tall photo rising into it), `offset` (eyebrow at the edge, title a third of the way in, photo bleeding right) |
+| `Tiles` | `stagger` (pictures at alternating heights, captions above one and below the next), `tall` (tall cards with the name at the top of the picture) |
+| `SplitMedia` | `simple`, `stack` (two overlapping pictures), `collage` (three pictures of different sizes with the words in the cells between), `inset` (a rose panel set in from the edges with pictures breaking over it) |
+| `Gallery` | `stagger` (a row at alternating heights with a centred line under it), `collage` (four sizes set loosely in a square), `strip` (tall pictures butted edge to edge, full width) |
+| `Statement` | `inset` (the one dark moment, as a panel with a photo breaking its corner), `type` (large type with pictures behind and in front), `fade` (a paragraph inking in word by word) |
+| `Cards` | `columns` (outlined numerals), `flanked` (one picture in the middle, items either side, a thin arc behind), `checker` (rows of picture and words, alternating sides), `photos` |
+| `Steps` | one hairline, four rings with numbers, the last step is the call to action |
+| `FormBand` | `card` (form in a cream card over a softened photo, hours and phone each in a thin ring), `split` (title centred, form left, framed box right), `plain` |
+| `MenuTabs` | a spread per tab: photo in a slipped frame on one side, numbered menus with dotted leaders on the other; sides swap per tab |
+| `MenuExcerpt` | `columns`, `framed` |
+| `TrustBand`, `Reviews`, `Spotlight`, `Praktisch`, `Faq`, `LegalPage` | one composition each |
 
 `Band` gives each of them one of four backgrounds — white, tinted, dark,
-brand — which is how the page pacing in the wireframe is kept.
+brand — which is how the page pacing in the wireframe is kept. All three
+light ones are pinks; "dark" is never a full band.
+
+### Find-it accents
+
+`components/motion/Accents.tsx` — a thin `Ring` (sometimes with one dot on
+it), a faint `Square` slipped off a photo or heading, an `Eyebrow` with a
+short rule and a tiny ring, and `Hollow` outlined numerals. At most one per
+section; they are meant to be noticed on the second look.
 
 ## Motion
 

@@ -24,22 +24,26 @@ export default async function GiftBoxPage() {
   return (
     <>
       <PageHero
+        variant="straddle"
         eyebrow="Geschenkbox"
         title={"CRKL,\n*om te geven*"}
         intro="Een stukje van het restaurant in een doos: voor wie iets wil schenken dat ook gedeeld wordt."
         cta={{ href: "#kies", label: "Bestel de box" }}
-        image={{ src: shoot.flessen, alt: "Drie flessen op een witte tafel voor het roze gordijn" }}
+        image={{ src: shoot.juli26(40), alt: "Koffie en zoetigheden voor de roze wand", focus: "50% 60%" }}
       />
 
       <SplitMedia
-        tone="tint"
+        variant="inset"
+        tone="white"
         eyebrow="Wat zit erin"
         title={"Gekozen\n*door het huis*"}
         body={[
           "Elke box wordt samengesteld in het restaurant: een fles uit onze kelder, en iets van de keuken om erbij te proeven.",
           "Wie het echte werk wil schenken, voegt er een cadeaubon voor een avond aan tafel bij.",
         ]}
-        photo={{ src: shoot.juli26(40), alt: "Koffie en zoetigheden voor de roze wand" }}
+        photo={{ src: shoot.flessen, alt: "Drie flessen op een witte tafel voor het roze gordijn" }}
+        photos={[{ src: shoot.juli26(34), alt: "Zoetigheden bij de koffie" }]}
+        flip
       />
 
       <Band tone="white" id="kies">

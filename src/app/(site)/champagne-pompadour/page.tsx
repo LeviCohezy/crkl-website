@@ -18,13 +18,16 @@ export default function PompadourPage() {
   return (
     <>
       <PageHero
+        variant="offset"
         eyebrow="Erkenning"
         title={"Ambassadeur van\n*Champagne Pompadour*"}
         intro="CRKL is een van de huizen die Champagne Pompadour vertegenwoordigen: de champagne staat bij ons op de kaart en hoort bij het aperitief."
-        image={{ src: shoot.juli26(67), alt: "Glazen en een servet op de gedekte tafel" }}
+        image={{ src: shoot.juli26(67), alt: "Glazen en een servet op de gedekte tafel", focus: "50% 40%" }}
+        photos={[{ src: shoot.juni25(35), alt: "Een coupe in het zonlicht" }]}
       />
 
       <SplitMedia
+        variant="stack"
         tone="tint"
         eyebrow="Het verhaal"
         title={"Pompadour\n*× CRKL*"}
@@ -33,11 +36,13 @@ export default function PompadourPage() {
           "Voor u betekent dat een aperitief om naar uit te kijken — en, wie wil, champagne als rode draad door het menu.",
         ]}
         photo={{ src: shoot.juni25(6), alt: "De sommelier proeft een glas" }}
+        photos={[{ src: shoot.juli26(65), alt: "Glazen en het CRKL-servet in het zonlicht" }]}
+        flip
       />
 
       <Spotlight quote={spotlights.pompadour} />
 
-      <ReservationBand title={"Proef\n*het zelf*"} submitLabel="Reserveer en proef" />
+      <ReservationBand title={"Proef\n*het zelf*"} submitLabel="Reserveer en proef" variant="plain" />
     </>
   );
 }

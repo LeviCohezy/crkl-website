@@ -90,8 +90,10 @@ snel mogelijk". Put the originals back once they are true.
   speaks to a couple and says "jullie". Buttons were adapted to match
   ("Plan uw event", "Uw winkelmand is leeg").
 - **Brand colours.** Dusty rose `#DFBBB3` and accent `#B26A5C`, from the
-  wireframe. An earlier pass used a darker pink (`#C59A9A`); it is gone. On
-  the new rose, type is dark — white type would not be readable.
+  wireframe. The three pinks carry the site; the brown accent is kept to
+  hairlines, outlined accents and a few words, and the one dark panel per
+  page is `#2A1C1A`. On the rose, type is dark — white type would not be
+  readable.
 - **Hero.** A slider of four photographs with the headline and reserve button
   fixed over it, as the wireframe asks. The films are portrait phone footage
   and are used in portrait frames further down instead.

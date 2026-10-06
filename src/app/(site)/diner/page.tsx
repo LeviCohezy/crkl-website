@@ -23,12 +23,13 @@ export default function DinerPage() {
   return (
     <>
       <PageHero
+        variant="giant"
         eyebrow="Diner"
         title={"Diner\n*bij CRKL*"}
         intro="Een avond rond het tasting menu van het huis: vijf gangen, in een stijlvolle en rustige setting."
         chips={[site.hours.dinner.days, site.hours.dinner.hours]}
         cta={{ href: "#reserveer", label: "Reserveer diner" }}
-        image={{ src: shoot.jan26(6), alt: "Hoofdgerecht met een glas rode wijn" }}
+        image={{ src: shoot.dec25(1), alt: "Doorkijk naar een tafel tussen de gordijnen" }}
       />
 
       <VideoStatement
@@ -37,9 +38,16 @@ export default function DinerPage() {
         poster="hero/crkl-dresseren.jpg"
       />
 
-      <MenuExcerpt tab="diner" eyebrow="Dinermenu" title={"Vijf gangen,\n*één avond*"} />
+      <MenuExcerpt
+        tab="diner"
+        eyebrow="Dinermenu"
+        title={"Vijf gangen,\n*één avond*"}
+        variant="framed"
+        photo={{ src: shoot.jan26(6), alt: "Hoofdgerecht met een glas rode wijn" }}
+      />
 
       <SplitMedia
+        variant="stack"
         tone="tint"
         eyebrow="Wijnbegeleiding"
         title={"Het glas\n*hoort erbij*"}
@@ -49,9 +57,12 @@ export default function DinerPage() {
         link={{ href: "/champagne-pompadour", label: "Onze champagne" }}
         photo={{ src: shoot.juli26(65), alt: "Glazen en het CRKL-servet in het zonlicht" }}
         video={{ src: "clips/crkl-wijn.mp4", poster: "hero/crkl-wijn.jpg" }}
+        photos={[{ src: shoot.maart26(5), alt: "Schuimwijn wordt uitgeschonken" }]}
+        flip
       />
 
       <Gallery
+        variant="stagger"
         eyebrow="Gerechten"
         title={"Het diner,\n*in beeld*"}
         photos={[
@@ -64,7 +75,7 @@ export default function DinerPage() {
 
       <Reviews reviews={reviews.diner} tone="tint" title={"Een avond\n*om te onthouden*"} />
 
-      <ReservationBand title={"Reserveer\n*uw diner*"} submitLabel="Reserveer diner" service="diner" />
+      <ReservationBand title={"Reserveer\n*uw diner*"} submitLabel="Reserveer diner" service="diner" variant="split" photo={{ src: shoot.okt25(16), alt: "Een tafel bij het gordijn, 's avonds" }} />
       <Faq items={faq.diner} />
     </>
   );

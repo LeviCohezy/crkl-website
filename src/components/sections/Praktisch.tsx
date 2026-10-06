@@ -1,3 +1,4 @@
+import { Eyebrow, Ring, Square } from "@/components/motion/Accents";
 import { Reveal, SplitText } from "@/components/motion/Reveal";
 import { Band, tones, type Tone } from "@/components/sections/Band";
 import { ArrowLink } from "@/components/ui/Button";
@@ -14,34 +15,32 @@ type PraktischProps = {
 };
 
 /**
- * "Are they open tonight?" — the week day by day, the address, parking and
- * a map, tinted towards the palette so it sits in the page.
+ * "Are they open tonight?" — the week day by day in a thin frame, the
+ * address and parking beside it, and the map with a slipped frame of its
+ * own, tinted towards the palette.
  */
-export function Praktisch({
-  tone = "white",
-  eyebrow = "Praktisch",
-  title = "Tot in\n*Roeselare*",
-}: PraktischProps) {
+export function Praktisch({ tone = "white", eyebrow = "Praktisch", title = "Tot in\n*Roeselare*" }: PraktischProps) {
   const t = tones[tone];
 
   return (
     <Band tone={tone} id="praktisch">
+      <Ring className="-top-16 right-[30%] h-56 w-56" dot={160} />
       <div className="grid gap-16 lg:grid-cols-12 lg:gap-8">
         <div className="lg:col-span-5">
           <Reveal>
-            <p className={`eyebrow ${t.accent}`}>{eyebrow}</p>
+            <Eyebrow className={t.accent}>{eyebrow}</Eyebrow>
           </Reveal>
           <SplitText
             text={title}
             className="font-display mt-6 text-[clamp(2.4rem,5vw,4.75rem)] leading-[1.06] font-light"
           />
 
-          <Reveal delay={0.1}>
-            <dl className={`mt-12 border-t ${t.rule}`}>
-              {site.hours.week.map((day) => (
+          <Reveal delay={0.1} className="mt-12 border border-ink/20 p-6 sm:p-8">
+            <dl>
+              {site.hours.week.map((day, index) => (
                 <div
                   key={day.day}
-                  className={`flex items-baseline justify-between gap-6 border-b py-3.5 ${t.rule}`}
+                  className={`flex items-baseline justify-between gap-6 py-3 ${index ? `border-t ${t.rule}` : ""}`}
                 >
                   <dt className="font-display text-xl font-light">{day.day}</dt>
                   <dd className={`text-sm tabular-nums ${day.lunch || day.dinner ? "" : t.muted}`}>
@@ -50,15 +49,17 @@ export function Praktisch({
                 </div>
               ))}
             </dl>
-            <p className={`mt-5 max-w-md text-sm leading-relaxed ${t.muted}`}>
-              {site.hours.note}
-            </p>
           </Reveal>
+          <Reveal delay={0.15}>
+            <p className={`mt-5 max-w-md text-sm leading-relaxed ${t.muted}`}>{site.hours.note}</p>
+          </Reveal>
+        </div>
 
-          <Reveal delay={0.2} className="mt-12 grid gap-10 sm:grid-cols-2">
+        <div className="lg:col-span-6 lg:col-start-7">
+          <Reveal delay={0.2} className="grid gap-10 sm:grid-cols-2">
             <div>
               <p className={`eyebrow ${t.accent}`}>Adres</p>
-              <p className="mt-4 leading-relaxed">
+              <p className="font-display mt-4 text-2xl leading-snug font-light">
                 {site.contact.street}
                 <br />
                 {site.contact.city}
@@ -74,25 +75,25 @@ export function Praktisch({
               <p className={`mt-4 leading-relaxed ${t.muted}`}>
                 Centraal gelegen in Roeselare, met ruime parkeermogelijkheden.
               </p>
+              <div className="mt-5">
+                <ArrowLink href={site.links.route}>Routebeschrijving</ArrowLink>
+              </div>
             </div>
           </Reveal>
 
-          <Reveal delay={0.25} className="mt-10">
-            <ArrowLink href={site.links.route}>Routebeschrijving</ArrowLink>
+          <Reveal delay={0.25} className="relative mt-12">
+            <Square className="-right-5 -bottom-5 h-full w-full" />
+            <div className="relative aspect-[16/10] overflow-hidden bg-petal">
+              <iframe
+                title="Kaart met de ligging van CRKL"
+                src={`https://www.google.com/maps?q=${mapQuery}&z=15&output=embed`}
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+                className="map-tint h-full w-full border-0"
+              />
+            </div>
           </Reveal>
         </div>
-
-        <Reveal delay={0.15} className="lg:col-span-6 lg:col-start-7">
-          <div className="aspect-[4/5] overflow-hidden bg-petal lg:aspect-auto lg:h-full lg:min-h-[36rem]">
-            <iframe
-              title="Kaart met de ligging van CRKL"
-              src={`https://www.google.com/maps?q=${mapQuery}&z=15&output=embed`}
-              loading="lazy"
-              referrerPolicy="no-referrer-when-downgrade"
-              className="map-tint h-full w-full border-0"
-            />
-          </div>
-        </Reveal>
       </div>
     </Band>
   );

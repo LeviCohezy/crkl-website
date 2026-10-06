@@ -17,10 +17,16 @@ This block is written and re-added by `next dev` — verify at `node_modules/nex
   has, and in what order (`wireframes-crkl-v3`, summarised in the README's
   page table). Layout and styling are the site's own. Do not add, drop or
   reorder sections without being asked.
-- **Elegance first.** Whitespace, type and photography do the work. Circles
-  and other shapes are rare accents — today there is one circle on the site
-  (the signature dish on the homepage). Do not add decorative shapes, rounded
-  image masks or rotating badges.
+- **Elegance first, and vary the composition.** Whitespace, type and
+  photography do the work. No two neighbouring sections on a page may share
+  a layout: pick a different composition (`variant`) for each — see the
+  catalog in the README. The "find it" accents (`Ring`, `Square`, `Eyebrow`,
+  `Hollow` in `components/motion/Accents.tsx`) are hairline geometry, at most
+  one per section. No rounded image masks, rotating badges or filled shapes.
+- **Pink dominant, brown sparing.** Backgrounds are the three pinks (mist,
+  petal, blush). `clay` is for hairlines, outlined accents and a few words;
+  `ink` is for type and one small dark panel per page — never a full dark
+  band. The footer is blush.
 - Build pages from `src/components/sections/`; give each section a `Band`
   tone (white / tint / dark / brand) to keep the wireframe's pacing.
 - Never hardcode `/images/...` or `/videos/...` paths. Use `imageUrl()` /

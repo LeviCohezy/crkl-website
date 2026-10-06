@@ -22,17 +22,19 @@ export default function LunchPage() {
   return (
     <>
       <PageHero
+        variant="straddle"
         eyebrow="Lunch"
-        title={"Lunch\n*bij CRKL*"}
+        title={"Lunch bij CRKL,\n*tussen de middag*"}
         intro="Van woensdag tot vrijdagmiddag geniet u bij CRKL van een verfijnde lunch, bereid met dagverse en seizoensgebonden ingrediënten."
         chips={[site.hours.lunch.days, site.hours.lunch.hours]}
         cta={{ href: "#reserveer", label: "Reserveer lunch" }}
-        image={{ src: shoot.mei25(16), alt: "Asperge met citroen op een bed van venkel" }}
+        image={{ src: shoot.juni26(9), alt: "De zaal in het daglicht, met het ronde wandpaneel", focus: "50% 55%" }}
       />
 
       <Reviews reviews={reviews.lunch} tone="tint" title={"Een middag\n*om te onthouden*"} />
 
       <SplitMedia
+        variant="collage"
         tone="white"
         eyebrow="De formule"
         title={"Een middag\n*aan tafel*"}
@@ -42,12 +44,16 @@ export default function LunchPage() {
         ]}
         photo={{ src: shoot.juni25(4), alt: "Een gedekte tafel bij het raam, in het daglicht" }}
         video={{ src: "hero/crkl-hero-tafel.mp4", poster: "hero/crkl-hero-tafel.jpg" }}
-        flip
+        photos={[
+          { src: shoot.mei25(16), alt: "Asperge met citroen op een bed van venkel" },
+          { src: shoot.mei25(31), alt: "Kleurrijk voorgerecht in het zonlicht" },
+        ]}
       />
 
-      <MenuExcerpt tab="lunch" tone="tint" eyebrow="Lunchmenu" title={"Wat er 's middags\n*op tafel komt*"} />
+      <MenuExcerpt tab="lunch" tone="tint" eyebrow="Lunchmenu" title={"Wat er 's middags\n*op tafel komt*"} variant="columns" />
 
       <Gallery
+        variant="strip"
         eyebrow="Gerechten"
         title={"De lunch,\n*in beeld*"}
         photos={[
@@ -56,9 +62,10 @@ export default function LunchPage() {
           { src: shoot.mei25(35), alt: "Kleurrijk voorgerecht op een wit bord" },
           { src: shoot.juni26(20), alt: "Vis in een oranje saus" },
         ]}
+        captions={["Asperge", "Tartaar", "Voorgerecht", "Vis"]}
       />
 
-      <ReservationBand title={"Reserveer\n*uw lunch*"} submitLabel="Reserveer lunch" service="lunch" />
+      <ReservationBand title={"Reserveer\n*uw lunch*"} submitLabel="Reserveer lunch" service="lunch" variant="plain" />
       <Faq items={faq.lunch} />
     </>
   );

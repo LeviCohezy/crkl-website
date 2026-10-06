@@ -17,7 +17,7 @@ export function TrustBand() {
           {site.credentials.map((item, index) => (
             <li key={item.href} className="flex items-center gap-x-14">
               {index > 0 ? (
-                <span aria-hidden className="hidden h-1.5 w-1.5 rounded-full bg-clay md:block" />
+                <span aria-hidden className="ring hidden h-2 w-2 md:block" />
               ) : null}
               <TransitionLink href={item.href} className="eyebrow link-line pb-1.5">
                 {item.label}
@@ -25,7 +25,7 @@ export function TrustBand() {
             </li>
           ))}
           <li className="flex items-center gap-x-14">
-            <span aria-hidden className="hidden h-1.5 w-1.5 rounded-full bg-clay md:block" />
+            <span aria-hidden className="ring hidden h-2 w-2 md:block" />
             {googleRating ? (
               <a
                 href={googleReviews}

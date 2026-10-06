@@ -19,6 +19,7 @@ export default function AboutPage() {
   return (
     <>
       <PageHero
+        variant="giant"
         eyebrow="Over ons"
         title={"Sam &\n*Jolien*"}
         intro="Een creatieve, moderne visie op gastronomie — en een huis waar verfijning en beleving centraal staan."
@@ -26,7 +27,8 @@ export default function AboutPage() {
       />
 
       <SplitMedia
-        tone="tint"
+        variant="inset"
+        tone="white"
         eyebrow="Het verhaal"
         title={"Strak van buiten,\n*zacht* van binnen"}
         body={[
@@ -35,9 +37,12 @@ export default function AboutPage() {
         ]}
         photo={{ src: shoot.mei25(59), alt: "Chef Sam in de zaal van CRKL" }}
         video={{ src: "hero/crkl-hero-zaal.mp4", poster: "hero/crkl-hero-zaal.jpg" }}
+        photos={[{ src: shoot.dec25(20), alt: "Tafel bij het raam, onder de bollamp" }]}
       />
 
       <Gallery
+        variant="collage"
+        tone="tint"
         eyebrow="Keuken & team"
         title={"Echte mensen,\n*een echte keuken*"}
         photos={[
@@ -50,7 +55,8 @@ export default function AboutPage() {
 
       {/* Only the two hosts are named — see CONTENT_TODO.md. */}
       <Cards
-        tone="tint"
+        variant="photos"
+        tone="white"
         eyebrow="Het team"
         title={"Zaal\n*& keuken*"}
         cards={[
@@ -76,12 +82,17 @@ export default function AboutPage() {
       />
 
       <Statement
+        variant="type"
         eyebrow="Erkenning"
         text={"Ambassadeur Champagne Pompadour.\n*Lid van Gastro RSL.*"}
         links={[
           { href: "/champagne-pompadour", label: "Champagne Pompadour" },
           { href: "/gastro-rsl", label: "Gastro RSL" },
           { href: reserveHref("/over-ons"), label: "Reserveer een tafel" },
+        ]}
+        photos={[
+          { src: shoot.juli26(65), alt: "Glazen en het CRKL-servet in het zonlicht" },
+          { src: shoot.juni25(6), alt: "De sommelier proeft een glas witte wijn" },
         ]}
       />
 

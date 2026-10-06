@@ -1,18 +1,21 @@
 import type { ReactNode } from "react";
+import { Eyebrow } from "@/components/motion/Accents";
 import { Reveal, SplitText } from "@/components/motion/Reveal";
 
 /**
- * The four backgrounds a section can sit on, as the wireframe paces them:
- * white and tinted alternate down the page, dark is kept for the one key
- * message, and the brand rose is reserved for the form that converts.
+ * The backgrounds a section can sit on, as the wireframe paces them — white,
+ * tinted, dark, brand. All three light ones are pinks, so the rose carries
+ * the site; the brand rose is reserved for the form that converts; and
+ * "dark" is never a full band but a smaller panel inside a light one (see
+ * Statement), so there is one dark message per page without a brown wall.
  */
 export type Tone = "white" | "tint" | "dark" | "brand";
 
 export const tones: Record<Tone, { band: string; muted: string; rule: string; accent: string }> = {
-  white: { band: "bg-cream text-ink", muted: "text-ink-soft", rule: "border-ink/15", accent: "text-clay" },
-  tint: { band: "bg-petal text-ink", muted: "text-ink-soft", rule: "border-ink/15", accent: "text-rosewood" },
+  white: { band: "bg-mist text-ink", muted: "text-ink-soft", rule: "border-ink/12", accent: "text-ink-soft" },
+  tint: { band: "bg-petal text-ink", muted: "text-ink-soft", rule: "border-ink/12", accent: "text-ink-soft" },
   dark: { band: "bg-ink text-cream", muted: "text-cream/70", rule: "border-cream/20", accent: "text-blush" },
-  brand: { band: "bg-blush text-ink", muted: "text-ink-soft", rule: "border-ink/20", accent: "text-rosewood" },
+  brand: { band: "bg-blush text-ink", muted: "text-ink-soft", rule: "border-ink/15", accent: "text-rosewood" },
 };
 
 type BandProps = {
@@ -20,20 +23,29 @@ type BandProps = {
   id?: string;
   /** Tighter vertical rhythm, for bands that are a single line. */
   compact?: boolean;
+  /** No horizontal gutters — for compositions that reach the edges. */
+  bleed?: boolean;
   className?: string;
   children: ReactNode;
 };
 
 /** A full-width section with the site's gutters and vertical rhythm. */
-export function Band({ tone = "white", id, compact = false, className = "", children }: BandProps) {
+export function Band({
+  tone = "white",
+  id,
+  compact = false,
+  bleed = false,
+  className = "",
+  children,
+}: BandProps) {
   return (
     <section
       id={id}
-      className={`scroll-mt-20 overflow-hidden ${tones[tone].band} ${
+      className={`relative scroll-mt-20 overflow-hidden ${tones[tone].band} ${
         compact ? "py-10 sm:py-12" : "py-24 sm:py-36 lg:py-44"
       } ${className}`}
     >
-      <div className="mx-auto max-w-[100rem] px-6 sm:px-10">{children}</div>
+      {bleed ? children : <div className="mx-auto max-w-[100rem] px-6 sm:px-10">{children}</div>}
     </section>
   );
 }
@@ -41,12 +53,14 @@ export function Band({ tone = "white", id, compact = false, className = "", chil
 type HeadProps = {
   tone?: Tone;
   eyebrow?: string;
-  /** "\n" breaks the line, *asterisks* set a word in italic. */
+  /** "\n" breaks the line, *asterisks* set words in italic. */
   title: string;
   intro?: string;
-  align?: "left" | "center";
+  align?: "left" | "center" | "right";
   /** Something to sit opposite the title on wide screens, usually a link. */
   aside?: ReactNode;
+  /** Letterspaced capitals instead of the usual serif — once per page. */
+  tracked?: boolean;
   className?: string;
 };
 
@@ -58,36 +72,44 @@ export function Head({
   intro,
   align = "left",
   aside,
+  tracked = false,
   className = "",
 }: HeadProps) {
   const t = tones[tone];
   const centred = align === "center";
+  const right = align === "right";
 
   return (
     <div
       className={`${
         centred
           ? "mx-auto max-w-3xl text-center"
-          : "flex flex-wrap items-end justify-between gap-x-16 gap-y-8"
+          : right
+            ? "ml-auto max-w-3xl text-right"
+            : "flex flex-wrap items-end justify-between gap-x-16 gap-y-8"
       } ${className}`}
     >
-      <div className={centred ? "" : "max-w-3xl"}>
+      <div className={centred || right ? "" : "max-w-3xl"}>
         {eyebrow ? (
           <Reveal>
-            <p className={`eyebrow ${t.accent}`}>{eyebrow}</p>
+            <Eyebrow className={`${t.accent} ${centred ? "justify-center" : right ? "justify-end" : ""}`}>
+              {eyebrow}
+            </Eyebrow>
           </Reveal>
         ) : null}
         <SplitText
           text={title}
-          className={`font-display text-[clamp(2.4rem,5vw,4.75rem)] leading-[1.06] font-light ${
-            eyebrow ? "mt-6" : ""
-          }`}
+          className={`font-display font-light ${
+            tracked
+              ? "text-[clamp(1.9rem,4.2vw,4rem)] leading-[1.15] tracking-[0.22em] uppercase"
+              : "text-[clamp(2.4rem,5vw,4.75rem)] leading-[1.06]"
+          } ${eyebrow ? "mt-6" : ""}`}
         />
         {intro ? (
           <Reveal delay={0.15}>
             <p
               className={`mt-7 max-w-xl text-lg leading-relaxed ${t.muted} ${
-                centred ? "mx-auto" : ""
+                centred ? "mx-auto" : right ? "ml-auto" : ""
               }`}
             >
               {intro}

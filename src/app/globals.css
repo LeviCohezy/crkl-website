@@ -6,19 +6,21 @@
    its accent, both as given in the wireframe; the rest are tints of the rose
    plus one warm near-black for type.
 
-   Blush is light — type on it is ink, never white.
+   Blush is light — type on it is ink, never white. The three pinks (mist,
+   petal, blush) carry the site; clay is kept for a few words, hairlines and
+   the outlined accents, and ink for type and one small dark panel per page.
    Every token becomes a utility: --color-blush → bg-blush, text-blush.
 --------------------------------------------------------------------------- */
 @theme {
   --color-blush: #dfbbb3;
   --color-clay: #b26a5c;
   --color-rosewood: #7c463c;
-  --color-petal: #f2e2dd;
-  --color-mist: #faf4f1;
-  --color-cream: #fefcfa;
+  --color-petal: #f1e1dc;
+  --color-mist: #f8eeeb;
+  --color-cream: #fdf8f6;
   --color-ink: #2a1c1a;
-  --color-ink-soft: #57423e;
-  --color-stone: #96827c;
+  --color-ink-soft: #5a4642;
+  --color-stone: #9a8782;
 
   --ease-expo: cubic-bezier(0.16, 1, 0.3, 1);
   --ease-soft: cubic-bezier(0.22, 1, 0.36, 1);
@@ -121,6 +123,23 @@
   .link-line:hover,
   .link-line[aria-current="page"] {
     background-size: 100% 1px;
+  }
+
+  /* ── Find-it accents ──────────────────────────────────────────────────
+     Hairline geometry you have to notice: a thin ring, a faint square,
+     an outlined number. Sparing — see components/motion/Accents.tsx.      */
+  .ring {
+    border: 1px solid color-mix(in oklab, var(--color-clay) 38%, transparent);
+    border-radius: 9999px;
+  }
+
+  .frame {
+    border: 1px solid color-mix(in oklab, var(--color-clay) 32%, transparent);
+  }
+
+  .hollow {
+    -webkit-text-fill-color: transparent;
+    -webkit-text-stroke: 1px color-mix(in oklab, var(--color-clay) 55%, transparent);
   }
 
   /* Film grain over the whole page. Oversized and nudged in steps, so the

@@ -4,7 +4,7 @@ import { site } from "@/lib/site";
 function Column({ title, children }: { title: string; children: React.ReactNode }) {
   return (
     <div>
-      <p className="eyebrow text-cream/55">{title}</p>
+      <p className="eyebrow text-rosewood">{title}</p>
       <div className="mt-6 text-sm leading-relaxed">{children}</div>
     </div>
   );
@@ -14,13 +14,14 @@ export function Footer() {
   const open = site.hours.week.filter((day) => day.lunch || day.dinner);
 
   return (
-    <footer className="bg-ink pb-14 text-cream sm:pb-0">
-      <div className="mx-auto max-w-[100rem] px-6 py-20 sm:px-10 sm:py-28">
+    <footer className="relative overflow-hidden bg-blush pb-14 text-ink sm:pb-0">
+      <span aria-hidden className="ring pointer-events-none absolute -top-40 -right-32 h-[30rem] w-[30rem]" />
+      <div className="relative mx-auto max-w-[100rem] px-6 py-20 sm:px-10 sm:py-28">
         <p className="font-display max-w-2xl text-3xl leading-snug font-light sm:text-4xl">
           Waar verfijning en beleving centraal staan.
         </p>
 
-        <div className="mt-16 grid gap-12 border-t border-cream/15 pt-12 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="mt-16 grid gap-12 border-t border-ink/15 pt-12 sm:grid-cols-2 lg:grid-cols-4">
           <Column title="Bezoek">
             <p>
               {site.contact.street}
@@ -48,7 +49,7 @@ export function Footer() {
               {open.map((day) => (
                 <div key={day.day} className="flex justify-between gap-6 tabular-nums">
                   <dt>{day.day}</dt>
-                  <dd className="text-cream/75">
+                  <dd className="text-ink-soft">
                     {[day.lunch, day.dinner].filter(Boolean).join(" · ")}
                   </dd>
                 </div>
@@ -100,7 +101,7 @@ export function Footer() {
           </Column>
         </div>
 
-        <div className="mt-16 flex flex-col gap-4 border-t border-cream/15 pt-8 text-xs text-cream/55 lg:flex-row lg:items-center lg:justify-between">
+        <div className="mt-16 flex flex-col gap-4 border-t border-ink/15 pt-8 text-xs text-ink-soft lg:flex-row lg:items-center lg:justify-between">
           <p>
             © {new Date().getFullYear()} {site.name} · {site.contact.vat} · Fotografie HABLAR
           </p>

@@ -41,7 +41,7 @@ export default async function CartPage() {
           {promises.map((promise, index) => (
             <li key={promise} className="flex items-center gap-x-14">
               {index > 0 ? (
-                <span aria-hidden className="hidden h-1.5 w-1.5 rounded-full bg-clay md:block" />
+                <span aria-hidden className="ring hidden h-2 w-2 md:block" />
               ) : null}
               <span className="eyebrow">{promise}</span>
             </li>

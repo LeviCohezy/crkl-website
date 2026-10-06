@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
 import { Reveal } from "@/components/motion/Reveal";
 import { Band, Head } from "@/components/sections/Band";
-import { Cards } from "@/components/sections/Cards";
 import { Faq } from "@/components/sections/Faq";
 import { ReservationBand } from "@/components/sections/FormBand";
+import { Gallery } from "@/components/sections/Gallery";
 import { MenuTabs } from "@/components/sections/MenuTabs";
 import { PageHero } from "@/components/sections/PageHero";
 import { SplitMedia } from "@/components/sections/SplitMedia";
@@ -21,6 +21,7 @@ export default function MenuPage() {
   return (
     <>
       <PageHero
+        variant="centered"
         eyebrow="Het menu"
         title={"Het menu van\n*dit seizoen*"}
         intro="Ontdek het tasting menu van CRKL, waar seizoensgebonden ingrediënten en verfijnde smaken centraal staan."
@@ -29,30 +30,18 @@ export default function MenuPage() {
       />
 
       {/* The captions describe the photographs — see CONTENT_TODO.md. */}
-      <Cards
+      <Gallery
+        variant="stagger"
         tone="tint"
         eyebrow="Signature gerechten"
-        title={"Waar de keuken\n*voor staat*"}
-        cards={[
-          {
-            label: "Lente",
-            title: "Asperge",
-            body: "Met citroen, venkel en dille.",
-            photo: { src: shoot.mei25(22), alt: "Witte asperge met citroen en dille" },
-          },
-          {
-            label: "Van de grill",
-            title: "Langoustine",
-            body: "Aan tafel afgewerkt, onder de rook.",
-            photo: { src: shoot.maart26(6), alt: "Langoustine op de grill, rook boven de tafel" },
-          },
-          {
-            label: "Winter",
-            title: "Rund",
-            body: "Met schorseneer, kroket en jus.",
-            photo: { src: shoot.jan26(19), alt: "Rundvlees met schorseneer en jus" },
-          },
+        title={"Waar de keuken\nvoor staat"}
+        intro="Drie borden die terugkomen, in een andere jas per seizoen."
+        photos={[
+          { src: shoot.mei25(22), alt: "Witte asperge met citroen en dille" },
+          { src: shoot.maart26(6), alt: "Langoustine op de grill, rook boven de tafel" },
+          { src: shoot.jan26(19), alt: "Rundvlees met schorseneer en jus" },
         ]}
+        captions={["Asperge · citroen · dille", "Langoustine · van de grill", "Rund · schorseneer · jus"]}
       />
 
       <Band tone="white" id="kaart">
@@ -67,7 +56,8 @@ export default function MenuPage() {
       </Band>
 
       <SplitMedia
-        tone="tint"
+        variant="inset"
+        tone="white"
         eyebrow="Wijn & champagne"
         title={"Bij elke gang\n*het juiste glas*"}
         body={[
@@ -76,9 +66,10 @@ export default function MenuPage() {
         ]}
         link={{ href: "/champagne-pompadour", label: "Ambassadeur Champagne Pompadour" }}
         photo={{ src: shoot.juni25(6), alt: "De sommelier proeft een glas witte wijn" }}
+        photos={[{ src: shoot.juli26(65), alt: "Glazen en het CRKL-servet in het zonlicht" }]}
       />
 
-      <ReservationBand />
+      <ReservationBand variant="split" photo={{ src: shoot.juli26(54), alt: "Ronde tafel op het okeren tapijt" }} />
       <Faq items={faq.menu} />
     </>
   );

@@ -1,3 +1,4 @@
+import { Ring } from "@/components/motion/Accents";
 import { Reveal } from "@/components/motion/Reveal";
 import { Band, Head, tones, type Tone } from "@/components/sections/Band";
 import type { Quote, Review } from "@/lib/reviews";
@@ -55,13 +56,14 @@ export function Spotlight({ quote }: { quote: Quote | null }) {
   if (!quote) return null;
 
   return (
-    <Band tone="dark">
-      <Reveal className="mx-auto max-w-4xl text-center">
+    <Band tone="tint">
+      <Ring className="top-1/2 left-1/2 h-[34rem] w-[34rem] -translate-x-1/2 -translate-y-1/2" />
+      <Reveal className="relative mx-auto max-w-4xl text-center">
         <blockquote>
           <p className="font-display text-[clamp(1.9rem,4vw,3.75rem)] leading-[1.16] font-light">
             “{quote.quote}”
           </p>
-          <footer className="eyebrow mt-10 text-blush">{quote.attribution}</footer>
+          <footer className="eyebrow mt-10 text-rosewood">{quote.attribution}</footer>
         </blockquote>
       </Reveal>
     </Band>

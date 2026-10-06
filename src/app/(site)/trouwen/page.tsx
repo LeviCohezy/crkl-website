@@ -23,6 +23,7 @@ export default function WeddingPage() {
   return (
     <>
       <PageHero
+        variant="centered"
         eyebrow="Trouwen in CRKL"
         title={"Jullie dag,\n*in het klein*"}
         intro="Een kleinschalig huwelijksfeest, met de mensen die ertoe doen, in een stijlvolle en warme setting."
@@ -31,6 +32,7 @@ export default function WeddingPage() {
       />
 
       <SplitMedia
+        variant="stack"
         tone="tint"
         eyebrow="Jullie dag bij CRKL"
         title={"Intiem,\n*en helemaal van jullie*"}
@@ -39,36 +41,43 @@ export default function WeddingPage() {
           "Geen feestzaal, maar een restaurant: een zaal in zachte tinten, een terras in het groen, en een keuken die voor jullie gezelschap kookt.",
         ]}
         photo={{ src: shoot.mei25(11), alt: "Een boeket in de zaal" }}
+        photos={[{ src: shoot.juli26(67), alt: "Glazen en een servet op de gedekte tafel" }]}
+        flip
       />
 
       <Cards
+        variant="checker"
         eyebrow="Wat kan"
         title={"De bouwstenen\n*van de dag*"}
         cards={[
           {
             title: "Ceremonie",
             body: "Een moment voor jullie twee en jullie gasten, voor de dag echt begint.",
+            photo: { src: shoot.juli26(18), alt: "Het terras onder de witte luifel" },
           },
           {
             title: "Receptie",
             body: "Het glas heffen, binnen of op het terras, met hapjes uit de keuken.",
+            photo: { src: shoot.juli26(75), alt: "Cocktails op de witte tafel" },
           },
           {
             title: "Diner",
             body: "Aan tafel, met een menu dat de chef samenstelt voor jullie gezelschap.",
+            photo: { src: shoot.juni26(5), alt: "De zaal, gedekt voor een gezelschap" },
           },
         ]}
       />
 
       <Gallery
+        variant="stagger"
         tone="tint"
         eyebrow="De sfeer in beeld"
         title={"Waar jullie\n*zullen zitten*"}
         photos={[
-          { src: shoot.juli26(18), alt: "Het terras onder de witte luifel" },
           { src: shoot.juni26(8), alt: "Tafels onder het ronde wandpaneel" },
-          { src: shoot.juli26(75), alt: "Cocktails op de witte tafel" },
+          { src: shoot.juni26(11), alt: "Een boeket bij het gordijn" },
           { src: shoot.juli26(65), alt: "Glazen en het CRKL-servet in het zonlicht" },
+          { src: shoot.juli26(54), alt: "Ronde tafel op het okeren tapijt" },
         ]}
       />
 
@@ -91,6 +100,8 @@ export default function WeddingPage() {
 
       <FormBand
         id="aanvraag"
+        variant="split"
+        photo={{ src: shoot.juni26(11), alt: "Een boeket bij het gordijn in de zaal" }}
         eyebrow="Aanvraag"
         title={"Vraag\n*jullie datum* aan"}
         intro="Begin met de datum en het aantal gasten. Daarna plannen we een gesprek."

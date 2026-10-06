@@ -17,13 +17,19 @@ export default function GastroRslPage() {
   return (
     <>
       <PageHero
+        variant="cascade"
         eyebrow="Erkenning"
         title={"Lid van\n*Gastro RSL*"}
         intro="Gastro RSL brengt de gastronomische huizen van Roeselare samen. CRKL is er lid van."
         image={{ src: shoot.leveranciers(229), alt: "De chef met een krat verse kruiden" }}
+        photos={[
+          { src: shoot.leveranciers(160), alt: "De roze stoel tussen de bloemen in de serre" },
+          { src: shoot.leveranciers(31), alt: "De roze stoel tussen de runderen" },
+        ]}
       />
 
       <SplitMedia
+        variant="simple"
         tone="tint"
         eyebrow="Waarom lid"
         title={"Samen voor\n*Roeselare aan tafel*"}
@@ -36,6 +42,7 @@ export default function GastroRslPage() {
       />
 
       <Cards
+        variant="photos"
         eyebrow="Samen sterk"
         title={"Waar het\n*om draait*"}
         cards={[
@@ -57,7 +64,7 @@ export default function GastroRslPage() {
         ]}
       />
 
-      <ReservationBand />
+      <ReservationBand variant="split" photo={{ src: shoot.leveranciers(91), alt: "De roze stoel in de rijpingskelder" }} />
     </>
   );
 }
