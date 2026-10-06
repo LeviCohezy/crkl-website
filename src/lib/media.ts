@@ -1,24 +1,27 @@
 /**
  * Every image and video URL in the app goes through here.
  *
- * By default assets are served from /public (so `images/wines/x.jpg` becomes
- * `/images/wines/x.jpg`). Set NEXT_PUBLIC_MEDIA_BASE_URL and the exact same
- * paths resolve to a CDN or bucket instead, with no component changes.
+ * By default assets are served from /public (so `images/web/x.jpg` becomes
+ * `/images/web/x.jpg`), under the site's base path when it is deployed below
+ * one (GitHub Pages serves it from /crkl-website). Set
+ * NEXT_PUBLIC_MEDIA_BASE_URL and the exact same paths resolve to a CDN or
+ * bucket instead, with no component changes.
  *
  * See docs/MEDIA.md for the folder conventions.
  */
 
-const base = process.env.NEXT_PUBLIC_MEDIA_BASE_URL?.replace(/\/+$/, "") ?? "";
+const cdn = process.env.NEXT_PUBLIC_MEDIA_BASE_URL?.replace(/\/+$/, "") ?? "";
+const base = cdn || (process.env.NEXT_PUBLIC_BASE_PATH ?? "");
 
 function resolve(root: "images" | "videos", path: string): string {
-  const clean = path.replace(/^\/+/, "");
   // Already an absolute URL? Pass it straight through.
   if (/^https?:\/\//.test(path)) return path;
+  const clean = path.replace(/^\/+/, "");
   const prefixed = clean.startsWith(`${root}/`) ? clean : `${root}/${clean}`;
-  return base ? `${base}/${prefixed}` : `/${prefixed}`;
+  return `${base}/${prefixed}`;
 }
 
-/** `imageUrl("wines/bottle.jpg")` → `/images/wines/bottle.jpg` */
+/** `imageUrl("web/bottle.jpg")` → `/images/web/bottle.jpg` */
 export function imageUrl(path: string): string {
   return resolve("images", path);
 }

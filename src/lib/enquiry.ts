@@ -1,5 +1,3 @@
-"use server";
-
 import { site } from "@/lib/site";
 
 export type EnquiryKind =
@@ -50,11 +48,13 @@ function isKind(value: string): value is EnquiryKind {
  * Handles every form on the site: the table reservation, the three event
  * enquiries and the contact form.
  *
- * There is no booking system or mail service wired up yet. Until there is,
- * set ENQUIRY_WEBHOOK_URL and each valid request is POSTed there as JSON
- * (Zapier, Make, a Slack webhook, your own endpoint). Without it the form
- * answers honestly — "unavailable" — and hands the visitor an e-mail with
- * their request already written, so nothing is silently dropped.
+ * The site is a static export, so this runs in the browser. There is no
+ * booking system or mail service wired up yet. Until there is, set
+ * NEXT_PUBLIC_ENQUIRY_WEBHOOK_URL and each valid request is POSTed there as
+ * JSON (Zapier, Make, Formspree — anything that accepts a browser POST).
+ * Without it the form answers honestly — "unavailable" — and hands the
+ * visitor an e-mail with their request already written, so nothing is
+ * silently dropped.
  */
 export async function sendEnquiry(
   _previous: EnquiryState,
@@ -95,7 +95,7 @@ export async function sendEnquiry(
     .filter(([, value]) => value)
     .map(([key, value]) => `${labels[key]}: ${value}`);
 
-  const webhook = process.env.ENQUIRY_WEBHOOK_URL;
+  const webhook = process.env.NEXT_PUBLIC_ENQUIRY_WEBHOOK_URL;
   if (webhook) {
     try {
       const response = await fetch(webhook, {

@@ -1,4 +1,7 @@
 import type { MetadataRoute } from "next";
+
+/** Written to a file at build time — the site is a static export. */
+export const dynamic = "force-static";
 import { getProductSlugs } from "@/lib/catalog";
 import { site, siteUrl } from "@/lib/site";
 
@@ -11,12 +14,12 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   return [
     { url: `${siteUrl}/`, lastModified: now, priority: 1 },
     ...pages.map((page) => ({
-      url: `${siteUrl}${page.href}`,
+      url: `${siteUrl}${page.href}/`,
       lastModified: now,
       priority: 0.8,
     })),
     ...slugs.map((slug) => ({
-      url: `${siteUrl}/shop/${slug}`,
+      url: `${siteUrl}/shop/${slug}/`,
       lastModified: now,
       priority: 0.5,
     })),

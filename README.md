@@ -12,6 +12,22 @@ the editorial and fine-dining references in `public/inspiration/`.
 **Before going live, read [`CONTENT_TODO.md`](CONTENT_TODO.md)** — it lists
 every piece of copy and data that still needs a human check.
 
+## Deploying
+
+The site is a static export (`output: "export"` in `next.config.ts`): every
+page is plain HTML in `out/`, served from any static host. GitHub Pages serves
+it from `/crkl-website`, which the deploy script sets as the base path:
+
+```bash
+./scripts/deploy-pages.sh   # builds out/ and force-pushes it to the gh-pages branch
+```
+
+It uses the `gh-pages` branch rather than a GitHub Actions workflow because
+the local `gh` token has no `workflow` scope. What a static host cannot do:
+deliver forms (they fall back to a pre-written e-mail unless
+`NEXT_PUBLIC_ENQUIRY_WEBHOOK_URL` is set), take payment, or sign anyone in —
+those pages say so.
+
 ## Getting started
 
 Requires Node.js 20.9 or newer.
@@ -31,9 +47,9 @@ npm run lint     # eslint
 npx tsc --noEmit # typecheck
 ```
 
-The photo library (`public/images/all`) is not in git — see
-[`docs/MEDIA.md`](docs/MEDIA.md). Without it, every image frame shows a rose
-placeholder and the site still works.
+The full photo library (`public/images/all`) is not in git; the site serves
+web-sized copies from `public/images/web`, which are — see
+[`docs/MEDIA.md`](docs/MEDIA.md).
 
 ## Pages
 
@@ -185,8 +201,9 @@ layouts, the intro and transitions are skipped, films hold on their poster.
 - **Payment.** The cart is real (browser-side); checkout's last step says
   online payment is not active and offers the order as an e-mail.
 - **Accounts.** `/account` shows the logged-out state with the form disabled.
-- **Form delivery.** Without `ENQUIRY_WEBHOOK_URL`, forms validate and then
-  hand the visitor a pre-written e-mail.
+- **Form delivery.** Without `NEXT_PUBLIC_ENQUIRY_WEBHOOK_URL`, forms validate
+  and then hand the visitor a pre-written e-mail (from the browser — the site
+  is a static export, so there is no server action).
 
 See [`docs/ECOMMERCE-ROADMAP.md`](docs/ECOMMERCE-ROADMAP.md).
 

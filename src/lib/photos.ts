@@ -1,26 +1,28 @@
 /**
  * The HABLAR library, by shoot.
  *
- * Every photograph lives in public/images/all/ under the photographer's own
- * filename. These helpers only spell those filenames out — `shoot.mei25(22)`
- * is `all/CRKL_Mei25_LR©HABLAR-22.jpg` — so a page can name a picture without
- * anyone retyping the © by hand. Paths still resolve through src/lib/media.
+ * The full library lives in public/images/all/ (not in git) under the
+ * photographer's own filenames; public/images/web/ holds a web-sized copy
+ * of every photograph the site uses, under the same names, and that is what
+ * these helpers point at — `shoot.mei25(22)` is
+ * `web/CRKL_Mei25_LR©HABLAR-22.jpg`. Run scripts/export-photos.py after
+ * naming a new photograph here. Paths still resolve through src/lib/media.
  */
 export const shoot = {
-  mei25: (n: number) => `all/CRKL_Mei25_LR©HABLAR-${n}.jpg`,
-  juni25: (n: number) => `all/crkl_juni25_LR_©HABLAR-${n}.jpg`,
-  okt25: (n: number) => `all/CRKL_okt25©HABLAR-${n}.jpg`,
-  dec25: (n: number) => `all/CRKL_dec25©Hablar_lr-${n}.jpg`,
-  jan26: (n: number) => `all/CRKL_Jan26_LR©Hablar-${n}.jpg`,
-  maart26: (n: number) => `all/CRKL_Maart26©Hablar_Lr-${n}.jpg`,
-  april26: (n: number) => `all/CRKL_april26©HABLAR.be-${n}.jpg`,
-  jolien: (n: number) => `all/CRKL_J_april26©HABLAR.be-${n}.jpg`,
-  juni26: (n: number) => `all/crkl_juni26_LR_©HABLAR-${n}.jpg`,
-  juli26: (n: number) => `all/CRKL_Juli26_LR©Hablar-${n}.jpg`,
+  mei25: (n: number) => `web/CRKL_Mei25_LR©HABLAR-${n}.jpg`,
+  juni25: (n: number) => `web/crkl_juni25_LR_©HABLAR-${n}.jpg`,
+  okt25: (n: number) => `web/CRKL_okt25©HABLAR-${n}.jpg`,
+  dec25: (n: number) => `web/CRKL_dec25©Hablar_lr-${n}.jpg`,
+  jan26: (n: number) => `web/CRKL_Jan26_LR©Hablar-${n}.jpg`,
+  maart26: (n: number) => `web/CRKL_Maart26©Hablar_Lr-${n}.jpg`,
+  april26: (n: number) => `web/CRKL_april26©HABLAR.be-${n}.jpg`,
+  jolien: (n: number) => `web/CRKL_J_april26©HABLAR.be-${n}.jpg`,
+  juni26: (n: number) => `web/crkl_juni26_LR_©HABLAR-${n}.jpg`,
+  juli26: (n: number) => `web/CRKL_Juli26_LR©Hablar-${n}.jpg`,
   leveranciers: (n: number) =>
-    `all/CRKL_Leveranciers_Juni26_LR©Hablar-${n}.jpg`,
+    `web/CRKL_Leveranciers_Juni26_LR©Hablar-${n}.jpg`,
   /** The one un-numbered frame of the March shoot: three bottles on a table. */
-  flessen: "all/CRKL_Maart26©Hablar_Lr.jpg",
+  flessen: "web/CRKL_Maart26©Hablar_Lr.jpg",
 } as const;
 
 export type Photo = {

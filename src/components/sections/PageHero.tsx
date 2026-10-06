@@ -271,7 +271,7 @@ export function PageHero(props: PageHeroProps) {
               {chips(1)}
               {actions("ink", 1.1)}
             </div>
-            <motion.div className="order-1 mx-auto w-full max-w-[26rem] lg:order-2 lg:col-span-6 lg:col-start-4 lg:-mt-[5vw] lg:max-w-none lg:px-8" {...unveil(0.55)}>
+            <motion.div className="order-1 mx-auto w-full max-w-[26rem] lg:order-2 lg:col-span-6 lg:col-start-4 lg:-mt-[3vw] lg:max-w-none lg:px-8" {...unveil(0.55)}>
               <Parallax className="aspect-[3/4]" amount={6}>
                 <MediaImage
                   src={props.image.src}

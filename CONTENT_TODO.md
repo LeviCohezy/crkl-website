@@ -100,9 +100,9 @@ snel mogelijk". Put the originals back once they are true.
 - **Photography rights.** All photos are HABLAR's (the © is in the
   filenames). The footer credits "Fotografie HABLAR". Confirm the licence
   covers web use and the credit is worded as agreed.
-- **Media hosting.** The 715-photo library is not in git (see
-  `docs/MEDIA.md`). Until it is on a CDN and `NEXT_PUBLIC_MEDIA_BASE_URL` is
-  set, a deployed site shows rose placeholder frames instead of photographs.
+- **Media hosting.** The site now ships web-sized copies of the 70
+  photographs it uses (`public/images/web`, 1800 px, about 11 MB); the full
+  715-photo library stays out of git (see `docs/MEDIA.md`).
 - **Map.** The practical-info section embeds Google Maps by address, without
   an API key. It sets Google cookies; add a consent step or swap it for a
   static map if the privacy policy requires it.

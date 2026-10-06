@@ -55,6 +55,20 @@ The films are portrait, so they are shown in portrait frames beside text
 (`SplitMedia` with a `video`) rather than stretched across a wide screen. The
 homepage hero is a slider of photographs for the same reason.
 
+## Web-sized copies (what the site actually serves)
+
+The site is a static export with `images.unoptimized`, so there is no image
+optimizer at request time. `scripts/export-photos.py` reads every
+`shoot.<x>(n)` reference in `src/`, finds the original in `images/all/` and
+writes a copy to `images/web/` under the same filename — longest edge
+1800 px, JPEG quality 80, orientation baked in, metadata dropped. That
+folder **is** in git (about 11 MB for 70 photographs) and is what
+`src/lib/photos.ts` points at. After naming a new photograph in `src/`, run:
+
+```bash
+python3 scripts/export-photos.py
+```
+
 ## Rules of thumb
 
 - **Name files after what they are**, lowercase with hyphens: `crkl-blanc.jpg`,
@@ -105,8 +119,9 @@ only grow. That is past the point where it belongs in the repository: it would
 sit in git history forever and ship with every deployment.
 
 `public/images/all`, `public/videos/all` and `public/inspiration` are in
-`.gitignore`. **That means a fresh clone or a deploy has no photographs** until
-one of these is done — the site still renders, with rose placeholder frames:
+`.gitignore`; the deploy script also strips them from the export. The
+web-sized copies in `images/web/` are what ships. If the library should
+ever be served in full from somewhere else:
 
 1. **Host the media elsewhere (recommended).** Upload the two folders to a
    bucket or CDN keeping the same paths, then set:
