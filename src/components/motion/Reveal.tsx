@@ -89,7 +89,7 @@ export function SplitText({
           {line.map((word) => (
             <span
               key={word.order}
-              className="-mb-[0.18em] inline-block overflow-hidden pb-[0.18em] align-bottom"
+              className="-mb-[0.18em] inline-block overflow-hidden pb-[0.18em] align-bottom whitespace-nowrap"
             >
               <motion.span
                 className={`inline-block ${word.italic ? "italic" : ""}`}

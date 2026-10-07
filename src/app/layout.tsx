@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Fraunces, Inter } from "next/font/google";
+import { Inter, Newsreader } from "next/font/google";
 import "./globals.css";
 import { Cursor } from "@/components/shell/Cursor";
 import { PageTransition } from "@/components/shell/PageTransition";
@@ -9,16 +9,16 @@ import { SmoothScroll } from "@/components/shell/SmoothScroll";
 import { site, siteUrl } from "@/lib/site";
 
 /**
- * Fraunces, at its lightest and softest: a serif with the warmth of the old
- * faces and none of their stiffness. The optical-size axis sets the large
- * headings in their own cut.
+ * Newsreader, light: a quiet editorial serif with conventional letterforms
+ * and a restrained italic — nothing playful. The optical-size axis sets the
+ * large headings in their own, finer cut.
  */
-const display = Fraunces({
+const display = Newsreader({
   variable: "--font-display",
   subsets: ["latin"],
   weight: "variable",
   style: ["normal", "italic"],
-  axes: ["opsz", "SOFT"],
+  axes: ["opsz"],
   display: "swap",
 });
 

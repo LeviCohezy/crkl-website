@@ -18,6 +18,31 @@ type Navigate = (href: string) => void;
 
 const TransitionContext = createContext<Navigate | null>(null);
 
+/**
+ * A prefix every internal link under it is rewritten with. Design versions
+ * live under their own path (/v3) but are written with the site's own hrefs
+ * ("/menu", "/#reserveer"), so promoting one to the root is a matter of
+ * removing the provider — nothing in the pages changes.
+ */
+const PrefixContext = createContext("");
+
+export function HrefPrefix({ prefix, children }: { prefix: string; children: ReactNode }) {
+  return <PrefixContext.Provider value={prefix}>{children}</PrefixContext.Provider>;
+}
+
+export function useHrefPrefix(): string {
+  return useContext(PrefixContext);
+}
+
+/** `withPrefix("/v3", "/menu")` → `/v3/menu`; hashes, mail and external URLs pass through. */
+export function withPrefix(prefix: string, href: string): string {
+  if (!prefix || !href.startsWith("/")) return href;
+  if (href === prefix || href.startsWith(`${prefix}/`) || href.startsWith(`${prefix}#`)) return href;
+  if (href === "/") return `${prefix}/`;
+  if (href.startsWith("/#")) return `${prefix}/${href.slice(1)}`;
+  return `${prefix}${href}`;
+}
+
 const LETTERS = ["C", "R", "K", "L"];
 
 /** Bring a #hash target into view, or go to the top when there is none. */
@@ -170,16 +195,18 @@ export function TransitionLink({
   ...props
 }: ComponentProps<typeof Link>) {
   const navigate = useContext(TransitionContext);
+  const prefix = useContext(PrefixContext);
+  const resolved = typeof href === "string" ? withPrefix(prefix, href) : href;
 
   return (
     <Link
-      href={href}
+      href={resolved}
       {...props}
       onNavigate={(event) => {
         onNavigate?.(event);
-        if (!navigate || typeof href !== "string" || href.startsWith("#")) return;
+        if (!navigate || typeof resolved !== "string" || resolved.startsWith("#")) return;
         event.preventDefault();
-        navigate(href);
+        navigate(resolved);
       }}
     />
   );

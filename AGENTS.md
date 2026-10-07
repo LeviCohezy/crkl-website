@@ -59,3 +59,11 @@ This block is written and re-added by `next dev` — verify at `node_modules/nex
   get the page transition. Scroll scenes use GSAP from `src/lib/gsap.ts`,
   wrapped in `gsap.matchMedia()` with `MOTION_OK` so reduced motion gets a
   static layout.
+- **V3** (`src/app/(v3)/v3`, `src/components/v3`) is the design version at
+  `/v3`, built to Levi's brief: soft white first, one soft-rose section per
+  page, straight corners, photographs framed inside the gutters (never
+  full-bleed), as little motion as possible, the `Orbit` text-circle as the
+  only curve, and no eyebrow labels, pills or picture-beside-text blocks.
+  Tables are booked step by step on `/reserveren` (`Reserve.tsx`); every
+  page ends with the contact form. Write its hrefs as the site's own
+  (`/menu`); `HrefPrefix` keeps them under `/v3`. See the README.

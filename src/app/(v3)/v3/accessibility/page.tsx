@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { LegalPage } from "@/components/sections/LegalPage";
+import { Legal } from "@/components/v3/Legal";
 import { legal } from "@/lib/legal";
 
 export const metadata: Metadata = {
@@ -9,5 +9,7 @@ export const metadata: Metadata = {
 };
 
 export default function AccessibilityPage() {
-  return <LegalPage title="Toegankelijkheid" sections={legal.accessibility} />;
+  return (
+    <Legal title="Toegankelijkheid" sections={legal.accessibility} />
+  );
 }

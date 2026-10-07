@@ -28,6 +28,54 @@ deliver forms (they fall back to a pre-written e-mail unless
 `NEXT_PUBLIC_ENQUIRY_WEBHOOK_URL` is set), take payment, or sign anyone in —
 those pages say so.
 
+## V3 — the white version (`/v3`)
+
+A second design of the whole site, built beside the current one so the two
+can be compared: open http://localhost:3000/v3/ (and `/v3/menu`, `/v3/the-room`,
+…). Everything the current site has is there — the content pages, the shop,
+cart, checkout, account and the legal pages — in one language:
+
+- **Soft white, with a soft rose here and there.** The page is `#fcfaf9`
+  (`.v3-scope` overrides `--color-cream`), one `rose` section per page at
+  most, pink hairlines, one pink button. Straight corners everywhere; the
+  only curve is `Orbit`, a line of text on a circle that turns slowly
+  (home, Trouwen and Over ons only).
+- **Tight and still.** Photographs sit inside the page's gutters with white
+  around them, never full-bleed; they drift a few percent inside their
+  frame and nothing else moves. No eyebrows, no pills, no
+  picture-beside-text blocks. Sections alternate a whole screen of words
+  (`Statement`, inking in word by word) with a paragraph you lean into.
+- **Reserving is a tool, not a form.** `/v3/reserveren` books a table the
+  way Zenchef does, one choice per screen: guests → day → time → details
+  (`components/v3/Reserve.tsx`; the calendar reads the opening days and
+  the time slots from `site.ts`). Every "Reserveer" leads there. Each page
+  ends with a plain **contact form** instead (`ContactSection`); The Room,
+  Events and Trouwen keep their own enquiry forms. Swap `Reserve` for the
+  booking system's widget when there is one.
+- **Homepage order as briefed:** what the house is → what kind of house →
+  the dinner menu → the plates → The Room (business) → lunch (rose) →
+  events → the contact form.
+- **The Room** is written for business meetings and private dining;
+  **Events** for corporate, wedding and family occasions; **Trouwen** for
+  the romantic, small wedding with the terrace and garden.
+
+Where it lives: `src/app/(v3)/v3/` (pages, with the glass header and the
+footer in its layout), `src/app/(v3-checkout)/v3/checkout/` (the bare
+checkout tunnel), `src/components/v3/` (the kit: `Hero`, `Statement`,
+`MenuList`, `Visuals`, `Strip`, `Feature`, `IndexRows`, `Columns`, `Figures`,
+`VideoBand`, `Team`, `Practical`, `Reserve`, `ContactSection`,
+`FormSection`/`Form`, `Faq`, `Legal`, `Header`, `Footer`, `Orbit`, `Links`,
+`Section`, `type`). It shares all data (`site.ts`, `menu.ts`, `faq.ts`,
+`photos.ts`, `legal.ts`, the catalogue) and the shop components with the
+current site.
+
+Pages are written with the site's own hrefs (`/menu`, `/reserveren`);
+`HrefPrefix` in the V3 layout keeps them under `/v3`. Its pages carry
+`robots: noindex` while they are a version. **To promote V3:** move the
+pages from `(v3)/v3/` into `(site)/`, drop the `HrefPrefix` providers and the
+`noindex`, point `(site)/layout.tsx` at `components/v3/Header` and `Footer`,
+and fix the `canonical` paths.
+
 ## Getting started
 
 Requires Node.js 20.9 or newer.

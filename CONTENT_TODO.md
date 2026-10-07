@@ -116,3 +116,16 @@ snel mogelijk". Put the originals back once they are true.
   the wireframe. The supplier photographs (the dining-room chair at each
   supplier) are a strong series that now only appears on `/gastro-rsl` —
   worth a place if the sitemap is ever reopened.
+
+## 6. Written for the V3 design (`/v3`) — to confirm
+
+The V3 pages reuse the facts above and add a few sentences of their own:
+
+| What | Where it shows | Note |
+| --- | --- | --- |
+| "Voor grotere gezelschappen openen we ook op dinsdag, zaterdagmiddag en zondag; wat dan kan in de zaal, bespreken we graag met u." | `/v3/events` | Infers from crkl.eu's "voor groepen en events openen we ook op …" that the dining room can be set for a group on those days. Confirm. |
+| The wedding page speaks of "de tuin" (a garden) as well as the terrace, and of a ceremony "als dat bij ons kan". | `/v3/trouwen` | The terrace under the white awning is photographed; a garden ceremony is not confirmed. |
+| "Jolien ontvangt jullie gasten, Sam kookt. Het team weet wie wie is, wie wat niet eet …" | `/v3/trouwen` | Hospitality promise written to a plausible standard. |
+| "Michelin Guide · Gault&Millau" named in the quality line under the homepage statement | `/v3` | Listings only; no score or distinction is claimed. |
+| Alt texts for the two newly exported photographs (`juni26(23)`, `leveranciers(106)`) describe the pictures. | `/v3/menu`, `/v3/gastro-rsl` | — |
+| The reservation tool on `/v3/reserveren` sends the request as an e-mail / webhook like every other form; it does not check availability. | `/v3/reserveren` | Replace `components/v3/Reserve.tsx` with the booking system's widget (Zenchef or the Tablefever flow crkl.eu uses). |
