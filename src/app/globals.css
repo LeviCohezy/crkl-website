@@ -1,26 +1,390 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+/* ---------------------------------------------------------------------------
+   Brand tokens. CRKL is rose: the dining room's two-tone curtains, the chairs,
+   the napkins. Blush (#DFBBB3) is the brand's dusty rose and clay (#B26A5C)
+   its accent, both as given in the wireframe; the rest are tints of the rose
+   plus one warm near-black for type.
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
+   White carries the site; the brand pink (blush) is the second colour and
+   petal its tint. Lines are never dark: every rule, border and leader uses
+   `line` / `line-strong` (pale pinks) or white. Clay is kept for a few
+   hairline accents per page — the thin rings and slipped frames — and ink
+   is for type only. Edges are sharp: nothing is rounded except the ring
+   accents, the cursor and the signature-dish window — circles by intent.
+   Every token becomes a utility: --color-blush → bg-blush, text-blush.
+--------------------------------------------------------------------------- */
+@theme {
+  --color-blush: #dfbbb3;
+  --color-clay: #b26a5c;
+  --color-rosewood: #7c463c;
+  --color-petal: #f7ebe8;
+  --color-rose: #f1dfda;
+  --color-mist: #fcfafa;
+  --color-cream: #ffffff;
+  --color-ink: #2a1c1a;
+  --color-ink-soft: #5a4642;
+  --color-stone: #9d8c88;
+  --color-line: #efe2de;
+  --color-line-strong: #e4cfc9;
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+  --ease-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-soft: cubic-bezier(0.22, 1, 0.36, 1);
+
+  --animate-grain: grain 1.2s steps(6) infinite;
+
+  @keyframes grain {
+    0% {
+      transform: translate(0, 0);
+    }
+    20% {
+      transform: translate(-3%, 2%);
+    }
+    40% {
+      transform: translate(2%, -4%);
+    }
+    60% {
+      transform: translate(-2%, 3%);
+    }
+    80% {
+      transform: translate(4%, -1%);
+    }
+    100% {
+      transform: translate(0, 0);
+    }
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+@theme inline {
+  --font-display: var(--font-display), ui-serif, Georgia, serif;
+  --font-sans: var(--font-sans), ui-sans-serif, system-ui, sans-serif;
+}
+
+@layer base {
+  html {
+    background-color: var(--color-cream);
+  }
+
+  /* Newsreader: optical size left to the browser, a touch tighter when large. */
+  .font-display {
+    font-optical-sizing: auto;
+    letter-spacing: -0.01em;
+  }
+
+  body {
+    background-color: var(--color-cream);
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    overflow-x: clip;
+  }
+
+  ::selection {
+    background-color: var(--color-clay);
+    color: var(--color-cream);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-rosewood);
+    outline-offset: 3px;
+  }
+
+  /* Lenis drives the scroll; these are its required hooks. */
+  html.lenis,
+  html.lenis body {
+    height: auto;
+  }
+
+  .lenis:not(.lenis-autoToggle).lenis-stopped {
+    overflow: clip;
+  }
+
+  .lenis [data-lenis-prevent] {
+    overscroll-behavior: contain;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+}
+
+@layer components {
+  /* Small-caps label used above headings and on buttons. */
+  .eyebrow {
+    font-size: 0.6875rem;
+    font-weight: 500;
+    letter-spacing: 0.26em;
+    text-transform: uppercase;
+  }
+
+  /* A link whose rule draws in from the left on hover. */
+  .link-line {
+    background-image: linear-gradient(var(--color-blush), var(--color-blush));
+    background-position: 0 100%;
+    background-repeat: no-repeat;
+    background-size: 0% 1px;
+    transition: background-size 500ms var(--ease-expo);
+  }
+
+  .link-line:hover,
+  .link-line[aria-current="page"] {
+    background-size: 100% 1px;
+  }
+
+  /* ── Find-it accents ──────────────────────────────────────────────────
+     Hairline geometry you have to notice: a thin ring, a faint square,
+     an outlined number. Sparing — see components/motion/Accents.tsx.      */
+  .ring {
+    border: 1px solid color-mix(in oklab, var(--color-clay) 32%, transparent);
+    border-radius: 9999px;
+  }
+
+  .frame {
+    border: 1px solid color-mix(in oklab, var(--color-clay) 32%, transparent);
+  }
+
+  .hollow {
+    -webkit-text-fill-color: transparent;
+    -webkit-text-stroke: 1px color-mix(in oklab, var(--color-clay) 55%, transparent);
+  }
+
+  /* A little more grain on the heroes, over the photograph. */
+  .hero-grain::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 5;
+    pointer-events: none;
+    opacity: 0.22;
+    mix-blend-mode: overlay;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='180' height='180'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='1.1' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+  }
+
+  /* Frosted glass for things that float over the page. */
+  .glass {
+    background-color: color-mix(in oklab, white 82%, transparent);
+    backdrop-filter: blur(18px) saturate(140%);
+    -webkit-backdrop-filter: blur(18px) saturate(140%);
+    border: 1px solid color-mix(in oklab, white 70%, transparent);
+  }
+
+  .glass-dark {
+    background-color: color-mix(in oklab, white 14%, transparent);
+    backdrop-filter: blur(18px) saturate(140%);
+    -webkit-backdrop-filter: blur(18px) saturate(140%);
+    border: 1px solid color-mix(in oklab, white 40%, transparent);
+  }
+
+  /* A button whose fill sweeps in from the left on hover. */
+  .sweep {
+    position: relative;
+    isolation: isolate;
+    overflow: hidden;
+  }
+
+  .sweep::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background: var(--sweep, var(--color-blush));
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 600ms var(--ease-expo);
+  }
+
+  .sweep:hover::before {
+    transform: scaleX(1);
+  }
+
+  /* Film grain over the whole page. Oversized and nudged in steps, so the
+     texture shimmers without ever repainting the page beneath it. */
+  .grain-layer {
+    position: fixed;
+    inset: -20%;
+    z-index: 80;
+    pointer-events: none;
+    opacity: 0.09;
+    mix-blend-mode: multiply;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='220' height='220'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0.16 0 0 0 0 0.11 0 0 0 0 0.1 0 0 0 0.9 0'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+    animation: var(--animate-grain);
+  }
+
+  /* ── Hero slider ──────────────────────────────────────────────────────
+     Each slide wipes up over the last and then drifts slowly back from a
+     slight zoom for as long as it is on screen.                          */
+  .slide {
+    opacity: 0;
+    z-index: 0;
+  }
+
+  .slide[data-state="prev"] {
+    opacity: 1;
+    z-index: 1;
+  }
+
+  .slide[data-state="active"] {
+    opacity: 1;
+    z-index: 2;
+    animation: slide-in 1.7s var(--ease-expo) both;
+  }
+
+  .slide[data-state="active"] .slide-image {
+    animation: slide-drift 9s linear both;
+  }
+
+  @keyframes slide-in {
+    from {
+      clip-path: inset(100% 0 0 0);
+    }
+    to {
+      clip-path: inset(0 0 0 0);
+    }
+  }
+
+  @keyframes slide-timer {
+    from {
+      transform: scaleX(0);
+    }
+    to {
+      transform: scaleX(1);
+    }
+  }
+
+  @keyframes slide-drift {
+    from {
+      transform: scale(1.12);
+    }
+    to {
+      transform: scale(1);
+    }
+  }
+
+  /* The signature dish is a scroll scene; without motion it is one screen. */
+  .signature-track {
+    height: 260svh;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .signature-track {
+      height: 100svh;
+    }
+  }
+
+  /* Statement parallax — both copies of the line read the same variable, so
+     they drift together and never separate. */
+  .statement-shift {
+    transform: translateY(var(--statement-shift, 0px));
+    will-change: transform;
+  }
+
+  /* ── Preloader ────────────────────────────────────────────────────────
+     Rendered by the server so the page never flashes before the intro.
+     If scripts never run, it removes itself.                             */
+  .preloader {
+    animation: preloader-failsafe 0s linear 6s forwards;
+  }
+
+  @keyframes preloader-failsafe {
+    to {
+      visibility: hidden;
+    }
+  }
+
+  /* ── Forms ────────────────────────────────────────────────────────────── */
+  .field {
+    width: 100%;
+    border: 0;
+    border-bottom: 1px solid var(--color-line-strong);
+    border-radius: 0;
+    background: transparent;
+    padding: 1.1rem 0;
+    font-size: 1rem;
+    color: var(--color-ink);
+    transition: border-color 300ms ease;
+  }
+
+  .field::placeholder {
+    color: color-mix(in oklab, var(--color-ink) 38%, transparent);
+  }
+
+  .field:focus {
+    outline: none;
+    border-bottom-color: var(--color-blush);
+  }
+
+
+  /* ── V3 ───────────────────────────────────────────────────────────────
+     The white version: text on a circle that turns, and nothing else that
+     is not a rectangle.                                                  */
+  .orbit-spin {
+    animation: orbit 80s linear infinite;
+    transform-origin: 50% 50%;
+  }
+
+  @keyframes orbit {
+    to {
+      transform: rotate(360deg);
+    }
+  }
+
+
+  /* The V3 pages sit on a soft white, and carry no grain at all. */
+  .v3-scope {
+    --color-cream: #fcfaf9;
+  }
+
+  main.v3 ~ .grain-layer {
+    display: none;
+  }
+
+  /* A price on a dotted leader: the hairline runs between name and price. */
+  .leader {
+    flex: 1 1 auto;
+    min-width: 2rem;
+    border-bottom: 1px solid var(--color-line-strong);
+    transform: translateY(-0.35em);
+  }
+
+  /* Labels in forms and small notes: plain, never letterspaced capitals. */
+  .label {
+    display: block;
+    font-size: 0.875rem;
+    color: var(--color-stone);
+  }
+
+  /* Map tinted towards the palette instead of Google's default colours. */
+  .map-tint {
+    filter: grayscale(1) sepia(0.28) hue-rotate(-28deg) saturate(1.5)
+      contrast(0.92) brightness(1.04);
+  }
+}
+
+/* Body copy breathes a little more on a phone. */
+@media (max-width: 639px) {
+  .leading-relaxed {
+    line-height: 1.8;
+  }
+}
+
+/* Motion renders through transforms; hide the native cursor only once the
+   custom one has mounted. */
+@media (hover: hover) and (pointer: fine) {
+  html.has-cursor,
+  html.has-cursor a,
+  html.has-cursor button {
+    cursor: none;
+  }
+
+  html.has-cursor input,
+  html.has-cursor textarea,
+  html.has-cursor select {
+    cursor: auto;
+  }
 }
