@@ -200,7 +200,7 @@ a layout. The compositions come from the references in `public/inspiration/`.
 | `Cards` | `columns` (outlined numerals), `flanked` (one picture in the middle, items either side, a thin arc behind), `checker` (rows of picture and words, alternating sides), `photos` |
 | `Steps` | one hairline, four rings with numbers, the last step is the call to action |
 | `FormBand` | `card` (form in a cream card over a softened photo, hours and phone each in a thin ring), `split` (title centred, form left, framed box right), `plain` |
-| `MenuSpread` | the menu as a book: swipe, arrow keys, trackpad flick, arrows or page numbers turn the page — the left half rises out while the right half sinks, and the next spread arrives with the menu and the photograph on the other sides (Blanquette) |
+| `MenuSpread` | the menu as a book you leaf through by scrolling: the section pins and each screen of scroll turns a page — the left half rises out while the right half sinks, and the next spread arrives with the menu and the photograph on the other sides (desktop; phones keep the photograph on top). Arrows and page numbers scroll to a page (Blanquette) |
 | `CardFan` | three cards that start as one stack and fan out as the section pins |
 | `Cinematic` | the section pins while a picture (or film) opens from a slit at its centre to the full screen, then a row of four |
 | `VideoBand` | a full-screen looping film with two lines of letterspaced capitals drifting over it |
@@ -237,7 +237,7 @@ Deliberately few moves, repeated:
 | Hero: four slides that wipe over one another and drift | `components/home/HomeHero.tsx` |
 | Dishes: a pinned row that scrolls sideways | `components/home/DishBand.tsx` |
 | Signature dish: a round window that opens to the full photograph — the one circle on the site | `components/home/Signature.tsx` |
-| One larger scene per page: menu swipe (Menu), slit reveal (Lunch, Over ons), full-screen film (Diner), card fan (The Room), sideways band (Events), drawn timeline (Trouwen), word-fade (Champagne Pompadour) | `components/sections/` |
+| One larger scene per page: scroll-turned menu (Menu), slit reveal (Lunch, Over ons), full-screen film (Diner), card fan (The Room), sideways band (Events), drawn timeline (Trouwen), word-fade (Champagne Pompadour) | `components/sections/` |
 | Statement: a tilted film with a two-colour line across it | `components/home/VideoStatement.tsx` |
 | Headings that rise word by word, images uncovered from their bottom edge, parallax, links that lean to the pointer | `components/motion/` |
 | Cursor ring, scroll-progress hairline, grain | `components/shell/`, `.grain-layer` in `globals.css` |
