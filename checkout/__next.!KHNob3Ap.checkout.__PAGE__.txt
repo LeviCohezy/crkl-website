@@ -1,0 +1,35 @@
+1:"$Sreact.fragment"
+2:"$Sreact.suspense"
+3:I[20778,["/crkl-website/_next/static/chunks/3bulfxdr98ayy.js","/crkl-website/_next/static/chunks/1_9nvrs-2c6r2.js","/crkl-website/_next/static/chunks/11dfjpb8ey-el.js","/crkl-website/_next/static/chunks/3t2dxuysxdey8.js","/crkl-website/_next/static/chunks/1zksp8bpeq_ye.js"],"CheckoutFlow"]
+4:I[97367,["/crkl-website/_next/static/chunks/3bulfxdr98ayy.js","/crkl-website/_next/static/chunks/1_9nvrs-2c6r2.js"],"OutletBoundary"]
+8:I[97367,["/crkl-website/_next/static/chunks/3bulfxdr98ayy.js","/crkl-website/_next/static/chunks/1_9nvrs-2c6r2.js"],"ViewportBoundary"]
+9:I[97367,["/crkl-website/_next/static/chunks/3bulfxdr98ayy.js","/crkl-website/_next/static/chunks/1_9nvrs-2c6r2.js"],"MetadataBoundary"]
+7:X
+1a:X
+1a:C
+0:{"buildId":"EUnEf2DI0hnHkq726v2Cn","data":[{"rsc":["$","$1","c",{"children":[["$","div",null,{"className":"mx-auto max-w-[100rem] px-7 py-24 sm:px-10","children":[["$","h1",null,{"className":"font-display text-[clamp(2.75rem,6vw,5.5rem)] leading-[1] font-light","children":"Afrekenen"}],["$","div",null,{"className":"mt-12","children":["$","$2",null,{"fallback":null,"children":["$","$L3",null,{"products":[{"slug":"geschenkbox-aperitief","name":"Geschenkbox Aperitief","category":"geschenkbox","tagline":"Een fles om te delen en iets om erbij te knabbelen.","description":"De kleinste box van het huis: een fles uit onze kelder met een paar huisgemaakte hapjes voor het aperitief.","contents":["Een fles uit onze kelder","Huisgemaakte aperitiefhapjes"],"image":"web/CRKL_Maart26©Hablar_Lr.jpg","imageAlt":"Drie flessen op een witte tafel voor het roze gordijn","featured":true,"commerce":{"priceCents":4500,"inStock":true}},{"slug":"geschenkbox-tafel","name":"Geschenkbox Tafel","category":"geschenkbox","tagline":"Alles voor een avond aan tafel, thuis.","description":"Een ruimere box met een fles, huisgemaakte lekkernijen en zoetigheden van de keuken om de avond mee af te sluiten.","contents":["Een fles uit onze kelder","Huisgemaakte lekkernijen","Zoetigheden bij de koffie"],"image":"web/CRKL_Juli26_LR©Hablar-40.jpg","imageAlt":"Koffie en zoetigheden voor de roze wand","featured":true,"commerce":{"priceCents":7500,"inStock":true}},{"slug":"geschenkbox-crkl","name":"Geschenkbox CRKL","category":"geschenkbox","tagline":"De box, met een cadeaubon voor het restaurant.","description":"De grote box: wat er in de andere zit, aangevuld met een cadeaubon om het echte werk aan tafel te komen proeven.","contents":["Een fles uit onze kelder","Huisgemaakte lekkernijen","Zoetigheden bij de koffie","Een cadeaubon voor het restaurant"],"image":"web/crkl_juni26_LR_©HABLAR-37.jpg","imageAlt":"Wijnflessen op een houten vat","featured":true,"commerce":{"priceCents":12500,"inStock":true}},{"slug":"cadeaubon","name":"Cadeaubon","category":"cadeaubon","tagline":"Een verfijnde culinaire ervaring, perfect voor elke gelegenheid.","description":"Met de CRKL cadeaubon schenkt u een avond aan tafel. De waarde kiest u volledig zelf en de bon is één jaar geldig.","contents":["Waarde naar keuze","Eén jaar geldig"],"image":"web/CRKL_Juli26_LR©Hablar-65.jpg","imageAlt":"Glazen en het CRKL-servet in het zonlicht","externalUrl":"https://www.tablefever.com/nl/cadeaubon/crkl/9ME69"}]}]}]}],["$","ul",null,{"className":"mt-20 flex flex-wrap gap-x-10 gap-y-3 border-t border-line pt-8","children":[["$","li","Bancontact",{"className":"eyebrow text-ink-soft","children":"Bancontact"}],["$","li","Kredietkaart",{"className":"eyebrow text-ink-soft","children":"Kredietkaart"}],["$","li","Beveiligde betaling",{"className":"eyebrow text-ink-soft","children":"Beveiligde betaling"}],["$","li","14 dagen herroepingsrecht",{"className":"eyebrow text-ink-soft","children":"14 dagen herroepingsrecht"}]]}]]}],[["$","script","script-0",{"src":"/crkl-website/_next/static/chunks/11dfjpb8ey-el.js","async":true}],["$","script","script-1",{"src":"/crkl-website/_next/static/chunks/3t2dxuysxdey8.js","async":true}],["$","script","script-2",{"src":"/crkl-website/_next/static/chunks/1zksp8bpeq_ye.js","async":true}]],["$","$L4",null,{"children":["$","$2",null,{"name":"Next.MetadataOutlet","children":"$@5"}]}]]}],"isPartial":"$@6","staleTime":"$7","varyParams":null},{"rsc":["$","$1","h",{"children":[null,["$","$L8",null,{"children":[["$","meta","0",{"charSet":"utf-8"}],["$","meta","1",{"name":"viewport","content":"width=device-width, initial-scale=1"}],["$","meta","2",{"name":"theme-color","content":"#dfbbb3"}]]}],["$","div",null,{"hidden":true,"children":["$","$L9",null,{"children":["$","$2",null,{"name":"Next.Metadata","children":[["$","title","0",{"children":"Afrekenen · CRKL"}],["$","meta","1",{"name":"description","content":"CRKL is een gastronomisch restaurant in Roeselare waar verfijning en beleving centraal staan. Lunch en diner met dagverse ingrediënten en een creatieve, moderne visie op gastronomie."}],"$La","$Lb","$Lc","$Ld","$Le","$Lf","$L10","$L11","$L12","$L13","$L14","$L15"]}]}]}],"$L16"]}],"isPartial":"$@17","staleTime":"$7","varyParams":null},{"rsc":"$L18","isPartial":"$@19","staleTime":"$7","varyParams":"$1a"}],"isUpgradeableISRFallback":false,"a":"$@1b","rootVaryParams":null,"needsRuntimeRequest":"$@1c"}
+1d:I[27201,["/crkl-website/_next/static/chunks/3bulfxdr98ayy.js","/crkl-website/_next/static/chunks/1_9nvrs-2c6r2.js"],"IconMark"]
+1e:I[39756,["/crkl-website/_next/static/chunks/3bulfxdr98ayy.js","/crkl-website/_next/static/chunks/1_9nvrs-2c6r2.js"],"default"]
+1f:I[37457,["/crkl-website/_next/static/chunks/3bulfxdr98ayy.js","/crkl-website/_next/static/chunks/1_9nvrs-2c6r2.js"],"default"]
+5:null
+a:["$","meta","2",{"name":"robots","content":"noindex, nofollow"}]
+b:["$","meta","3",{"property":"og:title","content":"CRKL — Gastronomisch restaurant in Roeselare"}]
+c:["$","meta","4",{"property":"og:description","content":"CRKL is een gastronomisch restaurant in Roeselare waar verfijning en beleving centraal staan. Lunch en diner met dagverse ingrediënten en een creatieve, moderne visie op gastronomie."}]
+d:["$","meta","5",{"property":"og:url","content":"https://levicohezy.github.io/crkl-website/"}]
+e:["$","meta","6",{"property":"og:site_name","content":"CRKL"}]
+f:["$","meta","7",{"property":"og:locale","content":"nl_BE"}]
+10:["$","meta","8",{"property":"og:type","content":"website"}]
+11:["$","meta","9",{"name":"twitter:card","content":"summary_large_image"}]
+12:["$","meta","10",{"name":"twitter:title","content":"CRKL — Gastronomisch restaurant in Roeselare"}]
+13:["$","meta","11",{"name":"twitter:description","content":"CRKL is een gastronomisch restaurant in Roeselare waar verfijning en beleving centraal staan. Lunch en diner met dagverse ingrediënten en een creatieve, moderne visie op gastronomie."}]
+14:["$","link","12",{"rel":"icon","href":"/crkl-website/favicon.ico?favicon.2vob68tjqpejf.ico","sizes":"256x256","type":"image/x-icon"}]
+15:["$","$L1d","13",{}]
+16:["$","meta",null,{"name":"next-size-adjust","content":""}]
+18:["$","$1","c",{"children":[null,["$","$L1e",null,{"parallelRouterKey":"children","template":["$","$L1f",null,{}]}]]}]
+1c:true
+7:300
+7:C
+1b:0
+17:"$undefined"
+19:"$undefined"
+6:"$undefined"
